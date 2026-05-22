@@ -2,20 +2,21 @@
   "name": "蜉蝣哲学：活不过一天也要搅局",
   "short_name": "蜉蝣哲学",
   "description": "一只寿命24小时的蜉蝣，体验现代打工人荒诞日常",
-  "start_url": "/",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#0a0a0f",
   "theme_color": "#0a0a0f",
   "lang": "zh-CN",
   "icons": [
     {
-      "src": "/icons/icon-192.svg",
+      "src": "icons/icon-192.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-512.svg",
+      "src": "icons/icon-512.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"

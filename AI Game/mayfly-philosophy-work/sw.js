@@ -1,16 +1,23 @@
 // Mayfly Philosophy - Service Worker
-const CACHE_NAME = 'mayfly-v1';
+const CACHE_NAME = 'mayfly-v2';
 
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/src/game-core.js',
-  '/src/share-poster.js',
-  '/vendor/gsap.min.js',
-  '/fonts/ZCOOLQingKeHuangYou.ttf',
-  '/fonts/ZCOOLKuaiLe.ttf',
-  '/fonts/PressStart2P.ttf'
-];
+  './',
+  './index.html',
+  './src/game-core.js',
+  './src/share-poster.js',
+  './src/audio.js',
+  './vendor/gsap.min.js',
+  './fonts/ZCOOLQingKeHuangYou.ttf',
+  './fonts/ZCOOLKuaiLe.ttf',
+  './fonts/PressStart2P.ttf',
+  './output/assets/mayfly-title-hero.png',
+  './output/assets/mayfly-character-banner.png',
+  './output/assets/mayfly-death-postcard.png',
+  './manifest.json',
+  './icons/icon-192.svg',
+  './icons/icon-512.svg'
+].map((path) => new URL(path, self.registration.scope).toString());
 
 // Install: pre-cache essential assets
 self.addEventListener('install', (event) => {
