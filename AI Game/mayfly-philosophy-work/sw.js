@@ -1,5 +1,5 @@
 // Mayfly Philosophy - Service Worker
-const CACHE_NAME = 'mayfly-v2';
+const CACHE_NAME = 'mayfly-v3';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -43,8 +43,28 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: cache-first, network fallback
+// Fetch: navigations are network-first so deployed UI updates are not trapped by an old cached shell.
 self.addEventListener('fetch', (event) => {
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() =>
+          caches.match(event.request)
+            .then((cachedResponse) => cachedResponse || caches.match(new URL('./index.html', self.registration.scope).toString()))
+        )
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((cachedResponse) => {

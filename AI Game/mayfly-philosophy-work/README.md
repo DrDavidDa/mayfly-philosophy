@@ -2,15 +2,29 @@
 
 一款黑色幽默的 24 小时压缩人生小游戏。玩家扮演一只寿命极短的蜉蝣，在加班、摸鱼、社交、AI 外包和当众搅局之间选择自己的荒诞路线。
 
+## 在线试玩
+
+正式入口：
+
+```text
+https://drdavidda.github.io/mayfly-philosophy/
+```
+
+兼容旧入口：
+
+```text
+https://drdavidda.github.io/mayfly-philosophy/AI%20Game/mayfly-philosophy-work/index.html
+```
+
 ## 本地试玩
 
-直接打开 `index.html`，或在当前目录启动静态服务器后访问：
+游戏是纯静态页面，可以直接打开 `index.html`。如果要模拟线上环境和 Service Worker，建议在当前目录启动静态服务器：
 
 ```bash
 python3 -m http.server 8766
 ```
 
-然后打开：
+然后访问：
 
 ```text
 http://127.0.0.1:8766/index.html
@@ -18,9 +32,12 @@ http://127.0.0.1:8766/index.html
 
 ## 发布说明
 
-这是一个静态网页游戏，核心文件为：
+这是一个 PWA 离线化静态网页游戏，核心文件为：
 
 - `index.html`
 - `src/game-core.js`
+- `src/share-poster.js`
+- `manifest.json`
+- `sw.js`
 
-当前版本会从 CDN 加载字体、Tailwind 和 GSAP，因此线上试玩需要联网。
+字体、视觉资源和 GSAP 已本地化，部署后可离线缓存。GitHub Pages 使用 `gh-pages` 分支根目录发布；该分支由 `AI Game/mayfly-philosophy-work` 生成，方便玩家使用短链接试玩，同时避免主仓库根目录里的其他项目影响上线内容。
