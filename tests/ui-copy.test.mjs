@@ -6,6 +6,9 @@ const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const manifest = fs.readFileSync(new URL('../manifest.json', import.meta.url), 'utf8');
 const serviceWorker = fs.readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
 const readme = fs.readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+const playtestGuide = fs.existsSync(new URL('../docs/playtest-feedback.md', import.meta.url))
+  ? fs.readFileSync(new URL('../docs/playtest-feedback.md', import.meta.url), 'utf8')
+  : '';
 
 test('action scene labels do not expose raw implementation tokens', () => {
   assert.doesNotMatch(html, /left:\s*'\{\}'/);
@@ -40,6 +43,25 @@ test('death screen frames sharing as a death poster', () => {
   assert.match(html, /截图发朋友/);
 });
 
+test('title screen exposes a playtest feedback entry point', () => {
+  assert.match(html, /id="btn-feedback-title"/);
+  assert.match(html, /试玩反馈/);
+  assert.match(html, /id="feedback-overlay"/);
+});
+
+test('feedback panel asks focused first-run questions', () => {
+  assert.match(html, /第1局有没有看懂目标/);
+  assert.match(html, /哪一刻最想退出/);
+  assert.match(html, /哪张卡最像你自己/);
+  assert.match(html, /复制反馈模板/);
+});
+
+test('death screen prompts first-run playtest feedback without hiding replay', () => {
+  assert.match(html, /首局试玩反馈/);
+  assert.match(html, /先记下这一局哪里爽、哪里懵/);
+  assert.match(html, /id="btn-feedback-death"/);
+});
+
 test('PWA paths are relative so GitHub Pages subdirectory deploys work', () => {
   const parsed = JSON.parse(manifest);
 
@@ -65,4 +87,12 @@ test('README documents the short live URL and offline PWA setup', () => {
   assert.match(readme, /https:\/\/drdavidda\.github\.io\/mayfly-philosophy\//);
   assert.match(readme, /PWA|离线/);
   assert.doesNotMatch(readme, /CDN 加载字体|Tailwind/);
+});
+
+test('playtest feedback guide is ready to send to real players', () => {
+  assert.match(playtestGuide, /Phase 9 试玩反馈闭环/);
+  assert.match(playtestGuide, /https:\/\/drdavidda\.github\.io\/mayfly-philosophy\//);
+  assert.match(playtestGuide, /3分钟首局观察/);
+  assert.match(playtestGuide, /二刷意愿/);
+  assert.match(playtestGuide, /请用一句话吐槽/);
 });

@@ -296,6 +296,91 @@ body::after {
 .title-actions .btn-neon {
   margin-top: 0;
 }
+.feedback-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 180;
+}
+.feedback-overlay.active { display: flex; }
+.feedback-panel {
+  width: min(560px, calc(100vw - 28px));
+  max-height: min(720px, calc(100vh - 36px));
+  overflow-y: auto;
+  padding: 18px;
+  border: 1px solid rgba(0,245,212,0.36);
+  border-radius: 8px;
+  background: rgba(18,14,30,0.96);
+  color: var(--paper-white);
+  box-shadow: 0 22px 70px rgba(0,0,0,0.58), inset 0 0 28px rgba(0,245,212,0.08);
+}
+.feedback-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.feedback-kicker {
+  color: var(--neon-yellow);
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+}
+.feedback-title {
+  margin-top: 7px;
+  color: var(--neon-cyan);
+  font-family: var(--font-title);
+  font-size: 1.45rem;
+}
+.feedback-close {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  color: var(--paper-white);
+  cursor: pointer;
+}
+.feedback-list {
+  display: grid;
+  gap: 9px;
+  margin-top: 14px;
+}
+.feedback-list li {
+  padding: 9px 10px;
+  border-left: 3px solid var(--neon-pink);
+  background: rgba(255,45,120,0.08);
+  line-height: 1.45;
+  font-size: 0.82rem;
+}
+.feedback-template {
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid rgba(254,228,64,0.28);
+  border-radius: 6px;
+  background: rgba(254,228,64,0.08);
+  color: var(--paper-white);
+  white-space: pre-wrap;
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+.feedback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+.feedback-status {
+  margin-top: 8px;
+  min-height: 18px;
+  color: var(--neon-yellow);
+  font-size: 0.72rem;
+}
 
 /* ========== 角色选择 ========== */
 .select-shell {
@@ -2979,6 +3064,24 @@ body.first-run-mode .rookie-panel.active {
   opacity: 0.92;
   text-align: center;
 }
+.death-playtest-prompt {
+  margin-top: 12px;
+  padding: 11px 12px;
+  border: 1px solid rgba(0,245,212,0.28);
+  border-radius: 6px;
+  background: rgba(0,245,212,0.08);
+  color: var(--paper-white);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  text-align: left;
+}
+.death-playtest-prompt strong {
+  display: block;
+  color: var(--neon-cyan);
+  font-family: var(--font-title);
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
 .death-btns .btn-neon {
   margin-top: 0;
   padding: 12px 18px;
@@ -4001,6 +4104,9 @@ body:not(.details-open) .activity-btn:not(.simple-card) {
   .title-actions { margin-top: 16px; gap: 8px; }
   .title-actions .btn-neon { flex: 1; min-width: 0; padding: 10px 8px; font-size: 0.86rem; }
   .title-actions .primary-start { flex-basis: 100%; min-height: 52px; font-size: 1.05rem; }
+  .feedback-panel { padding: 14px; }
+  .feedback-title { font-size: 1.2rem; }
+  .feedback-actions .btn-neon { flex: 1 1 100%; margin-top: 0; padding: 11px 12px; font-size: 0.92rem; }
   .title-version { display: none; }
   .select-shell { width: min(420px, calc(100vw - 24px)); gap: 12px; }
   .select-grid { grid-template-columns: 1fr; gap: 10px; }
@@ -4781,6 +4887,7 @@ body.sunset-active .hud-turn {
         <button class="btn-neon primary-start" id="btn-start">开始搅局</button>
         <button class="btn-neon cyan" id="btn-daily-challenge">📅 今日挑战</button>
         <button class="btn-neon pink" id="btn-collection-title">结局收藏册</button>
+        <button class="btn-neon" id="btn-feedback-title">试玩反馈</button>
       </div>
     </div>
   </div>
@@ -4788,6 +4895,41 @@ body.sunset-active .hud-turn {
     MAYFLY PHILOSOPHY v0.2 VISUAL BUILD
   </div>
 </section>
+
+<!-- ========== 试玩反馈 ========== -->
+<div class="feedback-overlay" id="feedback-overlay" aria-hidden="true">
+  <div class="feedback-panel" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
+    <div class="feedback-head">
+      <div>
+        <div class="feedback-kicker">PHASE 9 PLAYTEST</div>
+        <div class="feedback-title" id="feedback-title">试玩反馈：只抓最影响二刷的事</div>
+      </div>
+      <button class="feedback-close" id="btn-feedback-close" aria-label="关闭试玩反馈">×</button>
+    </div>
+    <ol class="feedback-list">
+      <li>第1局有没有看懂目标？哪一句提示最有用，哪一句像废话？</li>
+      <li>哪一刻最想退出？是文字太多、因果不清、按钮不明显，还是死得太突然？</li>
+      <li>哪张卡最像你自己？哪张卡最像“作者自嗨”？</li>
+      <li>死亡复盘有没有让你明白“我为什么死”？如果没有，缺哪条因果？</li>
+      <li>二刷意愿 0-10 分：你愿不愿意再开一局收集另一个死法？</li>
+    </ol>
+    <pre class="feedback-template" id="feedback-template">《蜉蝣哲学》试玩反馈
+链接：https://drdavidda.github.io/mayfly-philosophy/
+设备：
+第1局有没有看懂目标：
+哪一刻最想退出：
+哪张卡最像你自己：
+哪条因果最懵：
+最想截图分享的瞬间：
+二刷意愿 0-10：
+请用一句话吐槽：</pre>
+    <div class="feedback-actions">
+      <button class="btn-neon primary-start" id="btn-copy-feedback">复制反馈模板</button>
+      <a class="btn-neon" href="docs/playtest-feedback.md" target="_blank" rel="noopener">打开反馈清单</a>
+    </div>
+    <div class="feedback-status" id="feedback-status"></div>
+  </div>
+</div>
 
 <!-- ========== 收藏册 ========== -->
 <section id="screen-collection" class="screen">
@@ -5106,8 +5248,13 @@ body.sunset-active .hud-turn {
 		      <div class="report-line">朋友圈悼念</div>
 		      <div class="memorial-list" id="memorial-list"></div>
 	    </div>
+	    <div class="death-playtest-prompt">
+	      <strong>首局试玩反馈</strong>
+	      先记下这一局哪里爽、哪里懵，再决定要不要重开。最有价值的反馈通常来自刚死完的10秒。
+	    </div>
 	    <div class="death-share-tip">生成死因海报，截图发朋友：看看谁的人生更像被算法偷偷外包。</div>
 	    <div class="death-btns">
+	      <button class="btn-neon primary-start" id="btn-feedback-death">首局试玩反馈</button>
 	      <button class="btn-neon" id="btn-share-poster">📸 生成死因海报</button>
 	      <button class="btn-neon" id="btn-share-postcard">🖼 保存死亡明信片</button>
 	      <button class="btn-neon" id="btn-retry">带着遗产再活一次</button>
@@ -5370,6 +5517,7 @@ let pendingRunSetup = null;
 function init() {
   loadProgress();
   initSettings();
+  setupFeedbackPanel();
   createFloatingGlyphs();
   setupTitleScreen();
   startFakeNotifications();
@@ -5419,6 +5567,57 @@ function updateTitleControls() {
   if (collectionButton) {
     collectionButton.style.display = isFirstRunProgress() ? 'none' : '';
   }
+}
+
+function openFeedbackPanel() {
+  const overlay = document.getElementById('feedback-overlay');
+  if (!overlay) return;
+  overlay.classList.add('active');
+  overlay.setAttribute('aria-hidden', 'false');
+  const status = document.getElementById('feedback-status');
+  if (status) status.textContent = '';
+}
+
+function closeFeedbackPanel() {
+  const overlay = document.getElementById('feedback-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('active');
+  overlay.setAttribute('aria-hidden', 'true');
+}
+
+async function copyFeedbackTemplate() {
+  const template = document.getElementById('feedback-template');
+  const status = document.getElementById('feedback-status');
+  if (!template) return;
+  const text = template.textContent.trim();
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const input = document.createElement('textarea');
+      input.value = text;
+      input.setAttribute('readonly', '');
+      input.style.position = 'fixed';
+      input.style.left = '-9999px';
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      input.remove();
+    }
+    if (status) status.textContent = '已复制。发给测试玩家时，让他们先玩一局再填。';
+  } catch (error) {
+    if (status) status.textContent = '复制失败，可以直接手动选中模板。';
+  }
+}
+
+function setupFeedbackPanel() {
+  document.getElementById('btn-feedback-title')?.addEventListener('click', openFeedbackPanel);
+  document.getElementById('btn-feedback-death')?.addEventListener('click', openFeedbackPanel);
+  document.getElementById('btn-feedback-close')?.addEventListener('click', closeFeedbackPanel);
+  document.getElementById('btn-copy-feedback')?.addEventListener('click', copyFeedbackTemplate);
+  document.getElementById('feedback-overlay')?.addEventListener('click', (event) => {
+    if (event.target && event.target.id === 'feedback-overlay') closeFeedbackPanel();
+  });
 }
 
 // ========== 漂浮文字 ==========
