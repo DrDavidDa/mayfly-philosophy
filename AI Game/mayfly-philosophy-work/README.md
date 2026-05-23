@@ -16,6 +16,14 @@ https://drdavidda.github.io/mayfly-philosophy/
 https://drdavidda.github.io/mayfly-philosophy/AI%20Game/mayfly-philosophy-work/index.html
 ```
 
+## 试玩反馈
+
+Phase 9 的重点是验证首局体验和二刷意愿。发给玩家时建议附上：
+
+- 试玩链接：`https://drdavidda.github.io/mayfly-philosophy/`
+- 反馈清单：`docs/playtest-feedback.md`
+- 目标：先完整玩 1 局，再回答“哪里爽、哪里懵、是否愿意再来一局”
+
 ## 本地试玩
 
 游戏是纯静态页面，可以直接打开 `index.html`。如果要模拟线上环境和 Service Worker，建议在当前目录启动静态服务器：
