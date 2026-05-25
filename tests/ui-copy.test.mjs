@@ -116,7 +116,7 @@ test('visual layout pass balances desktop columns and readable cards', () => {
   assert.match(html, /#screen-game > \.objective-panel\s*\{[\s\S]*max-height:\s*min\(430px,\s*calc\(100dvh - 330px\)\)/);
   assert.match(html, /body\.first-run-mode \.game-stage\s*\{[\s\S]*display:\s*block !important/);
   assert.match(html, /body\.first-run-mode #screen-game > \.game-stage\s*\{[\s\S]*flex:\s*0 0 150px !important/);
-  assert.match(html, /body\.first-run-mode #screen-game > \.activity-grid\s*\{[\s\S]*flex:\s*0 0 248px !important/);
+  assert.match(html, /body\.first-run-mode #screen-game > \.activity-grid\s*\{[\s\S]*flex:\s*0 0 268px !important/);
   assert.match(html, /body\.first-run-mode \.objective-panel\s*\{[\s\S]*max-height:\s*220px !important/);
   assert.match(html, /\.activity-btn \.act-compact-note\s*\{[\s\S]*font-size:\s*var\(--readable-sm\)/);
   assert.match(html, /\.activity-btn \.act-impact-chip\s*\{[\s\S]*min-height:\s*26px/);
