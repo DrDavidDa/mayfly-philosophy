@@ -4815,6 +4815,553 @@ body.sunset-active .hud-turn {
     display: block !important;
   }
 }
+
+/* ========== Phase 10 Readability Pass ========== */
+:root {
+  --readable-xs: clamp(0.76rem, 1.7vw, 0.9rem);
+  --readable-sm: clamp(0.86rem, 1.9vw, 1rem);
+  --readable-md: clamp(1rem, 2.2vw, 1.16rem);
+  --readable-lg: clamp(1.18rem, 2.6vw, 1.45rem);
+  --layout-measure: min(1120px, calc(100vw - 32px));
+  --touch-target: 48px;
+}
+
+body {
+  font-size: var(--readable-sm);
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::after {
+  opacity: 0.18 !important;
+}
+
+.screen {
+  padding-inline: clamp(14px, 3vw, 28px);
+}
+
+.title-shell {
+  width: var(--layout-measure);
+  grid-template-columns: minmax(360px, 1fr) minmax(360px, 1fr);
+  gap: clamp(24px, 4vw, 48px);
+}
+
+.title-copy {
+  max-width: 560px;
+}
+
+.title-sub,
+.title-slogan,
+.title-quick-goal {
+  text-wrap: pretty;
+}
+
+.title-quick-goal {
+  font-size: var(--readable-sm);
+  line-height: 1.55;
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+
+.title-chip {
+  min-height: 82px;
+  padding: 12px;
+}
+
+.title-chip span {
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.title-chip strong {
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.2;
+}
+
+.title-actions {
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.title-actions .btn-neon,
+.btn-neon,
+.details-toggle,
+.feedback-close,
+.settings-close-btn,
+.banner-close-btn {
+  min-height: var(--touch-target);
+}
+
+.btn-neon.primary-start {
+  min-height: var(--touch-target);
+  background: var(--neon-cyan);
+  color: var(--bg-void);
+  border-color: var(--neon-cyan);
+}
+
+.title-actions .btn-neon {
+  font-size: 1.08rem;
+  padding: 13px 24px;
+}
+
+.hud-bar {
+  min-height: 76px;
+  padding: 13px 14px !important;
+}
+
+.hud-label {
+  font-size: var(--readable-xs) !important;
+}
+
+.hud-time {
+  font-size: clamp(0.96rem, 1.8vw, 1.12rem) !important;
+  line-height: 1.35;
+}
+
+.hud-turn {
+  font-size: 0.72rem !important;
+}
+
+.dock-card {
+  min-height: 76px !important;
+  padding: 10px !important;
+}
+
+.dock-top,
+.stat-label,
+.stat-val,
+.objective-tag,
+.phase-tag,
+.route-tag,
+.rescue-tag,
+.npc-tag,
+.world-glitch-kicker {
+  font-size: var(--readable-xs) !important;
+}
+
+.dock-value {
+  font-size: 1.08rem !important;
+  line-height: 1.18;
+}
+
+.objective-title,
+.rookie-title,
+.phase-title,
+.route-title,
+.rescue-title,
+.npc-title,
+.world-glitch-title,
+.consequence-title,
+.target-tracker-title,
+.goals-title,
+.legacy-title {
+  font-size: var(--readable-lg) !important;
+  line-height: 1.22;
+}
+
+.objective-copy,
+.rookie-copy,
+.phase-desc,
+.route-copy,
+.rescue-copy,
+.npc-summary,
+.world-glitch-copy,
+.consequence-copy,
+.target-tracker-copy,
+.goals-copy,
+.legacy-copy,
+.turn-feed-line {
+  font-size: var(--readable-sm) !important;
+  line-height: 1.5;
+}
+
+.objective-map-label,
+.rookie-step-index,
+.phase-label,
+.route-label,
+.npc-name {
+  font-size: var(--readable-md) !important;
+}
+
+.objective-map-text,
+.rookie-step-text,
+.phase-outcome,
+.route-outcome,
+.npc-note,
+.target-tracker-step,
+.goals-step,
+.legacy-step {
+  font-size: var(--readable-xs) !important;
+  line-height: 1.48;
+}
+
+.details-toggle {
+  font-size: var(--readable-sm) !important;
+  line-height: 1.2 !important;
+  padding: 10px 14px !important;
+}
+
+.activity-btn {
+  padding: 14px !important;
+  border-radius: 8px !important;
+  font-size: var(--readable-sm) !important;
+  line-height: 1.42;
+}
+
+.activity-btn .act-name {
+  font-size: clamp(1.15rem, 2.2vw, 1.35rem) !important;
+  line-height: 1.12;
+}
+
+.activity-btn .act-caption,
+.activity-btn .act-result-strip,
+.activity-btn .act-quote,
+.activity-btn .act-causal-preview,
+.activity-btn .act-effects,
+.activity-btn .act-collection-hint {
+  font-size: var(--readable-sm) !important;
+  line-height: 1.46;
+}
+
+.activity-btn .act-compact-note {
+  font-size: var(--readable-sm) !important;
+  line-height: 1.48;
+}
+
+.activity-btn .act-simple-result,
+.activity-btn .act-first-guide,
+.activity-btn .act-consequence-hint,
+.activity-btn .act-route-inertia,
+.activity-btn .act-npc-warning,
+.activity-btn .act-npc-relief,
+.activity-btn .act-details-label {
+  font-size: var(--readable-xs) !important;
+  line-height: 1.45;
+}
+
+.activity-btn .act-impact-chip,
+.activity-btn .act-effects span {
+  min-height: 26px !important;
+  padding: 4px 7px !important;
+  font-size: var(--readable-xs) !important;
+  line-height: 1.2;
+}
+
+.activity-btn .act-impact-chip {
+  min-height: 26px !important;
+}
+
+.activity-btn .act-cta {
+  min-height: 42px !important;
+  padding: 8px 10px !important;
+  font-size: 1rem !important;
+  line-height: 1.2;
+}
+
+.activity-btn .act-caption strong,
+.activity-btn .act-result-strip strong {
+  font-size: var(--readable-md) !important;
+}
+
+.event-card,
+.feedback-panel,
+.collection-panel,
+.floating-settings-panel {
+  font-size: var(--readable-sm);
+  line-height: 1.5;
+}
+
+@media (min-width: 900px) {
+  #screen-game.active {
+    width: min(1180px, calc(100vw - 32px)) !important;
+    grid-template-columns: minmax(280px, 0.9fr) minmax(430px, 1.15fr) minmax(320px, 0.95fr) !important;
+    gap: 16px !important;
+    align-items: start !important;
+    padding: 20px 16px 28px !important;
+  }
+
+  #screen-game > .hud-bar {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #screen-game > .state-dock {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    max-width: none !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  #screen-game > .stats-container {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #screen-game > .objective-panel,
+  #screen-game > .rookie-panel,
+  #screen-game > .world-glitch-panel {
+    grid-column: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #screen-game > .objective-panel { grid-row: 4 !important; }
+  #screen-game > .rookie-panel { grid-row: 5 !important; }
+  #screen-game > .world-glitch-panel { grid-row: 6 !important; }
+
+  #screen-game > .objective-panel {
+    max-height: min(430px, calc(100dvh - 330px)) !important;
+    overflow-y: auto !important;
+  }
+
+  #screen-game > .rookie-panel,
+  #screen-game > .world-glitch-panel {
+    max-height: 260px !important;
+    overflow-y: auto !important;
+  }
+
+  #screen-game > .game-stage {
+    grid-column: 2 !important;
+    grid-row: 1 / span 4 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #screen-game > .turn-feed {
+    grid-column: 2 !important;
+    grid-row: 5 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #screen-game > .details-toggle {
+    grid-column: 2 !important;
+    grid-row: 6 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #screen-game > .activity-grid {
+    grid-column: 3 !important;
+    grid-row: 1 / span 6 !important;
+    width: 100% !important;
+    max-width: none !important;
+    max-height: calc(100dvh - 48px) !important;
+    overflow-y: auto !important;
+    padding: 0 4px 8px 0 !important;
+    gap: 14px !important;
+  }
+}
+
+@media (max-width: 899px) {
+  .title-shell {
+    width: min(720px, calc(100vw - 28px));
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .title-copy {
+    max-width: none;
+  }
+
+  .title-playbook {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .screen {
+    padding: 14px;
+  }
+
+  #screen-title {
+    justify-content: flex-start;
+    overflow-y: auto;
+    padding-top: 12px;
+    padding-bottom: 18px;
+  }
+
+  .title-shell {
+    width: min(430px, calc(100vw - 24px));
+    gap: 12px;
+  }
+
+  .title-main {
+    font-size: clamp(2.4rem, 13vw, 3.4rem);
+  }
+
+  .title-sub {
+    font-size: var(--readable-md);
+  }
+
+  .title-slogan,
+  .title-quick-goal {
+    font-size: var(--readable-sm);
+  }
+
+  .title-playbook {
+    gap: 8px;
+  }
+
+  .title-chip {
+    min-height: 70px;
+    padding: 9px;
+  }
+
+  .title-chip span {
+    font-size: 0.56rem !important;
+  }
+
+  .title-chip strong {
+    font-size: 0.9rem !important;
+  }
+
+  .title-actions {
+    margin-top: 18px;
+    gap: 10px;
+  }
+
+  .title-actions .btn-neon {
+    min-height: 48px !important;
+    font-size: 1rem !important;
+    padding: 11px 16px !important;
+  }
+
+  body:not(.details-open) #screen-game {
+    padding: 10px 12px !important;
+    gap: 10px !important;
+  }
+
+  body:not(.details-open) #screen-game > .hud-bar,
+  body:not(.details-open) #screen-game > .state-dock,
+  body:not(.details-open) #screen-game > .stats-container,
+  body:not(.details-open) #screen-game > .game-stage,
+  body:not(.details-open) #screen-game > .details-toggle {
+    max-width: 460px !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid {
+    gap: 12px !important;
+    padding: 8px 18px 12px !important;
+    margin: 0 -12px !important;
+  }
+
+  body.first-run-mode .game-stage {
+    display: block !important;
+    order: 2 !important;
+    width: 100% !important;
+    max-width: 460px !important;
+    aspect-ratio: 520 / 220 !important;
+    min-height: auto !important;
+    max-height: 160px !important;
+  }
+
+  body.first-run-mode #screen-game > .game-stage {
+    display: block !important;
+    order: 2 !important;
+    flex: 0 0 150px !important;
+    height: 150px !important;
+    max-height: 150px !important;
+    aspect-ratio: auto !important;
+  }
+
+  body.first-run-mode .stage-svg {
+    aspect-ratio: 520 / 220 !important;
+  }
+
+  body.first-run-mode .objective-panel {
+    order: 3 !important;
+    width: 100% !important;
+    max-width: 460px !important;
+    max-height: 220px !important;
+    overflow-y: auto !important;
+  }
+
+  body.first-run-mode #screen-game > .activity-grid {
+    order: 4 !important;
+    flex: 0 0 248px !important;
+    height: 248px !important;
+    max-height: 248px !important;
+  }
+
+  body.first-run-mode #screen-game > .details-toggle {
+    order: 5 !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn {
+    flex-basis: 86% !important;
+    min-width: 282px !important;
+    max-width: 342px !important;
+    min-height: 232px !important;
+    padding: 13px !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.simple-card {
+    min-height: 232px !important;
+  }
+
+  body:not(.details-open) .dock-card {
+    min-height: 60px !important;
+  }
+
+  body:not(.details-open) .dock-top {
+    font-size: 0.68rem !important;
+  }
+
+  body:not(.details-open) .dock-value {
+    font-size: 0.82rem !important;
+  }
+
+  body:not(.details-open) #screen-game .stats-container .stat-row {
+    font-size: 0.78rem !important;
+  }
+
+  .stat-label {
+    width: 38px !important;
+    font-size: 0.78rem !important;
+  }
+
+  .stat-val {
+    width: 24px !important;
+    font-size: 0.66rem !important;
+  }
+
+  .details-toggle {
+    height: auto !important;
+    min-height: 42px !important;
+    font-size: 0.86rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .act-visual {
+    height: 62px !important;
+  }
+
+  .activity-btn .act-name {
+    font-size: 1.08rem !important;
+  }
+
+  .activity-btn .act-caption,
+  .activity-btn .act-result-strip {
+    grid-template-columns: 42px minmax(0, 1fr) !important;
+    padding: 7px 8px !important;
+  }
+
+  .activity-btn .act-impact-row {
+    gap: 6px !important;
+  }
+
+  .activity-btn .act-cta {
+    margin-top: 7px !important;
+  }
+}
 </style>
 </head>
 <body>

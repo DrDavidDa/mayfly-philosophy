@@ -96,3 +96,28 @@ test('playtest feedback guide is ready to send to real players', () => {
   assert.match(playtestGuide, /二刷意愿/);
   assert.match(playtestGuide, /请用一句话吐槽/);
 });
+
+test('visual readability pass raises tiny type and touch targets', () => {
+  assert.match(html, /Phase 10 Readability Pass/);
+  assert.match(html, /--readable-xs:\s*clamp\(0\.76rem,\s*1\.7vw,\s*0\.9rem\)/);
+  assert.match(html, /--touch-target:\s*48px/);
+  assert.match(html, /\.title-quick-goal\s*\{[\s\S]*font-size:\s*var\(--readable-sm\)/);
+  assert.match(html, /\.title-chip span\s*\{[\s\S]*font-size:\s*0\.72rem/);
+  assert.match(html, /\.title-chip strong\s*\{[\s\S]*font-size:\s*clamp\(1rem/);
+  assert.doesNotMatch(html, /font-size:\s*0\.38rem\s*!important/);
+});
+
+test('visual layout pass balances desktop columns and readable cards', () => {
+  assert.match(
+    html,
+    /#screen-game\.active\s*\{[\s\S]*grid-template-columns:\s*minmax\(280px,\s*0\.9fr\)\s*minmax\(430px,\s*1\.15fr\)\s*minmax\(320px,\s*0\.95fr\)/
+  );
+  assert.match(html, /#screen-game > \.activity-grid\s*\{[\s\S]*max-height:\s*calc\(100dvh - 48px\)/);
+  assert.match(html, /#screen-game > \.objective-panel\s*\{[\s\S]*max-height:\s*min\(430px,\s*calc\(100dvh - 330px\)\)/);
+  assert.match(html, /body\.first-run-mode \.game-stage\s*\{[\s\S]*display:\s*block !important/);
+  assert.match(html, /body\.first-run-mode #screen-game > \.game-stage\s*\{[\s\S]*flex:\s*0 0 150px !important/);
+  assert.match(html, /body\.first-run-mode #screen-game > \.activity-grid\s*\{[\s\S]*flex:\s*0 0 248px !important/);
+  assert.match(html, /body\.first-run-mode \.objective-panel\s*\{[\s\S]*max-height:\s*220px !important/);
+  assert.match(html, /\.activity-btn \.act-compact-note\s*\{[\s\S]*font-size:\s*var\(--readable-sm\)/);
+  assert.match(html, /\.activity-btn \.act-impact-chip\s*\{[\s\S]*min-height:\s*26px/);
+});
