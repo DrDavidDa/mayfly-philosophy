@@ -1,5 +1,5 @@
 // Mayfly Philosophy - Service Worker
-const CACHE_NAME = 'mayfly-v3';
+const CACHE_NAME = 'mayfly-v4';
 
 const ASSETS_TO_CACHE = [
   './',

@@ -5362,6 +5362,399 @@ body::after {
     margin-top: 7px !important;
   }
 }
+
+/* ========== Phase 11 Card Table ========== */
+:root {
+  --card-paper: #fff8e7;
+  --card-paper-deep: #f2dfb7;
+  --card-ink: #17212b;
+  --card-muted: #6a5d50;
+  --card-line: #d6bf91;
+  --card-shadow: rgba(42, 29, 18, 0.24);
+  --card-warning: #d94b4b;
+  --card-gold: #e7aa34;
+  --card-blue: #2b6f8a;
+  --card-green: #4a8f68;
+  --card-radius: 10px;
+}
+
+body:has(#screen-game.active) {
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255, 248, 231, 0.14), transparent 28%),
+    linear-gradient(135deg, #1c1820 0%, #25202a 45%, #161219 100%) !important;
+}
+
+#screen-game.active {
+  background:
+    linear-gradient(180deg, rgba(255, 248, 231, 0.06), rgba(255, 248, 231, 0.02)),
+    radial-gradient(circle at 52% 18%, rgba(231, 170, 52, 0.13), transparent 34%) !important;
+  border: 1px solid rgba(255, 248, 231, 0.1);
+  border-radius: 18px;
+}
+
+#screen-game > .activity-grid {
+  align-content: start;
+}
+
+.activity-btn.card-table-face {
+  --card-accent: var(--card-blue);
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  min-height: 380px !important;
+  padding: 12px !important;
+  border: 2px solid var(--card-line) !important;
+  border-radius: var(--card-radius) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 248, 231, 0.94)),
+    repeating-linear-gradient(0deg, transparent 0 18px, rgba(42, 29, 18, 0.035) 18px 19px),
+    var(--card-paper) !important;
+  color: var(--card-ink) !important;
+  box-shadow: 0 16px 32px var(--card-shadow), inset 0 0 0 4px rgba(255, 255, 255, 0.46) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  overflow: hidden;
+  text-shadow: none !important;
+}
+
+.activity-btn.card-table-face.category-work,
+.activity-btn.card-table-face.category-meeting { --card-accent: var(--card-warning); }
+.activity-btn.card-table-face.category-slack,
+.activity-btn.card-table-face.category-disrupt { --card-accent: var(--card-green); }
+.activity-btn.card-table-face.category-social,
+.activity-btn.card-table-face.category-phone { --card-accent: var(--card-gold); }
+.activity-btn.card-table-face.category-ai,
+.activity-btn.card-table-face.category-think { --card-accent: var(--card-blue); }
+
+.activity-btn.card-table-face:hover {
+  transform: translateY(-6px) rotate(0deg) !important;
+  border-color: var(--card-accent) !important;
+  box-shadow: 0 20px 40px rgba(42, 29, 18, 0.32), 0 0 0 4px rgba(255, 248, 231, 0.16) !important;
+}
+
+.activity-btn.card-table-face::after {
+  content: '出牌';
+  right: 12px;
+  bottom: 12px;
+  padding: 6px 12px;
+  border: 1px solid rgba(23, 33, 43, 0.18);
+  border-radius: 999px;
+  background: var(--card-ink);
+  color: var(--card-paper);
+  font-family: var(--font-title);
+  font-size: 0.92rem;
+  line-height: 1;
+  box-shadow: 0 6px 14px rgba(23, 33, 43, 0.18);
+}
+
+.activity-btn.card-table-face.recommended::before {
+  content: '推荐';
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  background: var(--card-gold);
+  color: var(--card-ink);
+  border: 1px solid rgba(23, 33, 43, 0.18);
+  border-radius: 999px;
+  box-shadow: 0 6px 14px rgba(231, 170, 52, 0.28);
+}
+
+.card-face-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+}
+
+.card-face-type,
+.card-face-cost,
+.card-face-chips span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(23, 33, 43, 0.14);
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--card-muted);
+  font-size: 0.8rem;
+  line-height: 1.12;
+}
+
+.card-face-type {
+  background: var(--card-ink);
+  color: var(--card-paper);
+}
+
+.card-face-cost {
+  color: var(--card-warning);
+  background: rgba(217, 75, 75, 0.08);
+}
+
+.card-face-art {
+  min-height: 126px;
+  border: 2px solid rgba(23, 33, 43, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--card-paper-deep);
+  box-shadow: inset 0 -18px 32px rgba(23, 33, 43, 0.08);
+}
+
+.card-face-art .act-visual {
+  height: 100% !important;
+  min-height: 126px;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.card-face-title-row {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.card-face-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 2px solid rgba(23, 33, 43, 0.22);
+  border-radius: 50%;
+  background: var(--card-paper-deep);
+  font-size: 1.4rem;
+}
+
+.activity-btn.card-table-face .card-face-title {
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--card-ink) !important;
+  font-size: 1.36rem !important;
+  line-height: 1.12 !important;
+  text-shadow: none !important;
+}
+
+.card-face-temptation {
+  min-height: 58px;
+  padding: 10px 12px;
+  border-left: 4px solid var(--card-accent);
+  background: rgba(255, 255, 255, 0.48);
+  color: var(--card-ink);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.36;
+}
+
+.card-face-risk {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+  padding: 9px 10px;
+  border: 1px dashed rgba(217, 75, 75, 0.4);
+  border-radius: 8px;
+  background: rgba(217, 75, 75, 0.06);
+  color: var(--card-warning);
+}
+
+.card-face-risk span {
+  color: var(--card-muted);
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.card-face-risk strong {
+  color: var(--card-warning);
+  font-size: 0.96rem;
+  line-height: 1.32;
+}
+
+.card-face-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 38px;
+}
+
+.activity-btn.card-table-face .act-face-detail {
+  display: none;
+}
+
+body.details-open .activity-btn.card-table-face {
+  min-height: 0 !important;
+}
+
+body.details-open .activity-btn.card-table-face .act-face-detail {
+  display: grid;
+  gap: 8px;
+  padding-bottom: 42px;
+}
+
+body.details-open .activity-btn.card-table-face .card-face-chips {
+  padding-bottom: 0;
+}
+
+body.details-open .activity-btn.card-table-face .act-caption,
+body.details-open .activity-btn.card-table-face .act-result-strip,
+body.details-open .activity-btn.card-table-face .act-compact-note,
+body.details-open .activity-btn.card-table-face .act-causal-preview,
+body.details-open .activity-btn.card-table-face .act-route-inertia,
+body.details-open .activity-btn.card-table-face .act-npc-warning,
+body.details-open .activity-btn.card-table-face .act-npc-relief,
+body.details-open .activity-btn.card-table-face .act-effects,
+body.details-open .activity-btn.card-table-face .act-collection-hint {
+  color: var(--card-ink) !important;
+  background: rgba(255, 255, 255, 0.46) !important;
+  border-color: rgba(23, 33, 43, 0.16) !important;
+}
+
+body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face {
+  min-height: 360px !important;
+}
+
+@media (min-width: 900px) {
+  #screen-game.active {
+    width: min(1220px, calc(100vw - 32px)) !important;
+    grid-template-columns: minmax(260px, 0.74fr) minmax(430px, 1fr) minmax(360px, 0.92fr) !important;
+    grid-auto-rows: auto !important;
+  }
+
+  #screen-game > .game-stage {
+    grid-column: 2 !important;
+    grid-row: 1 / span 3 !important;
+    min-height: 220px !important;
+  }
+
+  #screen-game > .turn-feed {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    min-height: 0 !important;
+    max-height: 120px !important;
+    overflow: hidden !important;
+    opacity: 0.72;
+  }
+
+  #screen-game > .details-toggle {
+    grid-column: 2 / span 2 !important;
+    grid-row: 7 !important;
+  }
+
+  #screen-game > .activity-grid {
+    grid-column: 2 / span 2 !important;
+    grid-row: 4 / span 3 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+    width: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    gap: 16px !important;
+  }
+
+  #screen-game > .activity-grid .activity-btn.card-table-face {
+    gap: 8px !important;
+    min-height: 300px !important;
+    padding: 10px !important;
+  }
+
+  #screen-game > .activity-grid .card-face-art,
+  #screen-game > .activity-grid .card-face-art .act-visual {
+    min-height: 88px !important;
+  }
+
+  #screen-game > .activity-grid .card-face-temptation {
+    min-height: 0;
+    padding: 8px 10px;
+    font-size: 0.94rem;
+  }
+
+  #screen-game > .activity-grid .card-face-risk {
+    padding: 7px 9px;
+  }
+
+  #screen-game > .activity-grid .card-face-risk strong {
+    font-size: 0.9rem;
+  }
+
+  #screen-game > .activity-grid .card-face-chips {
+    padding-bottom: 28px;
+  }
+
+  #screen-game > .activity-grid .activity-btn.card-table-face .act-cta {
+    min-height: 30px !important;
+    margin-top: 0 !important;
+    padding: 5px 8px !important;
+    font-size: 0.82rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .activity-btn.card-table-face {
+    gap: 8px !important;
+    padding: 11px !important;
+  }
+
+  body.first-run-mode #screen-game > .activity-grid {
+    flex: 0 0 352px !important;
+    height: 352px !important;
+    max-height: 352px !important;
+  }
+
+  body.first-run-mode .objective-panel {
+    flex: 0 0 86px !important;
+    min-height: 86px !important;
+    max-height: 86px !important;
+    overflow: hidden !important;
+    padding: 8px 10px !important;
+  }
+
+  body.first-run-mode .objective-copy,
+  body.first-run-mode .objective-rhythm,
+  body.first-run-mode .objective-steps,
+  body.first-run-mode .objective-chips,
+  body.first-run-mode .objective-pulse {
+    display: none !important;
+  }
+
+  body.first-run-mode .objective-head {
+    margin-bottom: 6px !important;
+  }
+
+  body.first-run-mode .objective-title {
+    font-size: 1.08rem !important;
+  }
+
+  body.first-run-mode .objective-map {
+    margin-top: 0 !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face,
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face.simple-card {
+    min-height: 340px !important;
+  }
+
+  .card-face-art,
+  .card-face-art .act-visual {
+    min-height: 104px !important;
+  }
+
+  .activity-btn.card-table-face .card-face-title {
+    font-size: 1.18rem !important;
+  }
+
+  .card-face-temptation {
+    min-height: 52px;
+    font-size: 0.92rem;
+  }
+
+  .card-face-risk strong {
+    font-size: 0.88rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -6636,6 +7029,7 @@ function renderChoiceCards() {
   gameState.currentCards.forEach((card, index) => {
     const btn = document.createElement('button');
     const causalPreview = CORE.buildChoiceCausalPreview(gameState, card);
+    const face = CORE.buildCardFace(card, gameState);
     const routeMatch = route.active && route.categories.includes(card.category);
     const recommended = recommendedIds.includes(card.id) || (!recommendedIds.length && firstRunSimple && index === 0);
     const hint = (!gameState.firstRun && gameState.collectionTarget)
@@ -6650,90 +7044,83 @@ function renderChoiceCards() {
       tracking ? 'tracking' : ''
     ].filter(Boolean).join(' ');
     const hintLabel = tracking ? '追踪中' : hint?.label;
-    btn.className = `activity-btn category-${card.category}${firstRunSimple ? ' simple-card' : ''}${recommended ? ' recommended' : ''}${card.isMutant ? ' mutant' : ''}`;
+    btn.className = `activity-btn card-table-face category-${card.category}${firstRunSimple ? ' simple-card' : ''}${recommended ? ' recommended' : ''}${card.isMutant ? ' mutant' : ''}`;
     const readability = buildCardReadability(card, causalPreview);
-    const simpleLabel = causalPreview.risk.level === 'lethal' || causalPreview.risk.level === 'danger'
-      ? '高风险'
-      : causalPreview.routeEscape
-        ? '换路线'
-        : causalPreview.npcRelief
-        ? '关系降温'
-        : /焦虑-/.test(causalPreview.immediate)
-          ? '降焦虑'
-          : /精神\+|社交\+|健康\+/.test(causalPreview.immediate)
-        ? '补状态'
-        : card.disruption >= 15
-          ? '攒搅局'
-          : causalPreview.callback
-            ? '会挂旧账'
-            : '推进路线';
     const recommendationReason = buildRecommendationReason(card, causalPreview, chain);
-    btn.innerHTML = firstRunSimple ? `
-      ${buildCardVisual(card, causalPreview)}
+    btn.setAttribute(
+      'aria-label',
+      `${face.title}，${face.costChip}。${face.temptation} ${face.riskWhisper}。详情：${face.detail.effectText}`
+    );
+    btn.innerHTML = `
       ${card.isMutant ? `<div class="act-mutant-badge">✦ 因果之遗 · 变异卡</div>` : ''}
-      <div class="act-simple-top">
-        <div class="act-name">${card.name}</div>
-        <div class="act-simple-label">${simpleLabel}</div>
+      <div class="card-face-topline">
+        <span class="card-face-type">${face.typeLabel}</span>
+        <span class="card-face-cost">${face.costChip}</span>
       </div>
-      <div class="act-caption">
-        <span>你会</span>
-        <strong>${readability.action}</strong>
+      <div class="card-face-art card-face-art-${face.artMood}">
+        ${buildCardVisual(card, causalPreview)}
       </div>
-      <div class="act-result-strip ${readability.tone}">
-        <span>${readability.resultLabel}</span>
-        <strong>${readability.result}</strong>
+      <div class="card-face-title-row">
+        <span class="card-face-icon" aria-hidden="true">${face.icon}</span>
+        <div class="act-name card-face-title">${face.title}</div>
       </div>
-      <div class="act-impact-row">${buildQuickImpactChips(card, causalPreview)}</div>
-      ${recommended ? `<div class="act-cta">${recommendationReason}</div>` : ''}
-    ` : `
-      ${buildCardVisual(card, causalPreview)}
-      ${card.isMutant ? `<div class="act-mutant-badge">✦ 因果之遗 · 变异卡</div>` : ''}
-      <div class="act-name">${card.name}</div>
-      <div class="act-caption">
-        <span>这张牌</span>
-        <strong>${readability.action}</strong>
+      <div class="card-face-temptation">${face.temptation}</div>
+      <div class="card-face-risk">
+        <span>风险</span>
+        <strong>${face.riskWhisper}</strong>
       </div>
-      <div class="act-impact-row compact">${buildQuickImpactChips(card, causalPreview)}</div>
-      <div class="act-compact-note">
-        <span>${readability.resultLabel}</span>
-        <strong>${readability.result}</strong>
-      </div>
-      <div class="act-details-label">展开旧账与属性可看完整因果</div>
-      <div class="act-quote">${shortText(card.quote, 36)}</div>
-      <div class="act-cost ${causalPreview.routeModifier ? 'modified' : ''}">-${formatDuration(causalPreview.timeCost || card.cost.time)}${causalPreview.routeModifier ? ' · 路线改写' : ''}</div>
-      <div class="act-causal-preview">
-        <div class="act-causal-row">
-          <span>推进</span><strong>${causalPreview.routeTitle}${routeMatch ? ' · 偏向中' : ''}</strong>
+      <div class="card-face-chips">${buildCardFaceChips(face)}</div>
+      <div class="act-face-detail">
+        <div class="act-caption">
+          <span>你会</span>
+          <strong>${readability.action}</strong>
         </div>
-        <div class="act-causal-row">
-          <span>马上</span><strong>${causalPreview.immediate}</strong>
+        <div class="act-result-strip ${readability.tone}">
+          <span>${readability.resultLabel}</span>
+          <strong>${readability.result}</strong>
         </div>
-        <div class="act-causal-row ${causalPreview.risk.level}">
-          <span>${causalPreview.callback ? '旧账' : '风险'}</span><strong>${causalPreview.callback ? causalPreview.callback.text : `${causalPreview.risk.label}：${causalPreview.risk.text}`}</strong>
+        <div class="act-impact-row compact">${buildQuickImpactChips(card, causalPreview)}</div>
+        <div class="act-compact-note">
+          <span>完整结算</span>
+          <strong>${face.detail.effectText}</strong>
         </div>
-      </div>
-      ${causalPreview.routeModifier ? `
-        <div class="act-route-inertia">
-          <div class="inertia-head">
-            <strong class="inertia-label">${causalPreview.routeModifier.label || '路线惯性'}</strong>
-            <span class="inertia-detail">${causalPreview.routeModifier.detail || causalPreview.routeModifier.note}</span>
+        <div class="act-details-label">展开旧账与属性可看完整因果</div>
+        <div class="act-quote">${shortText(face.detail.fullQuote || card.quote, 36)}</div>
+        <div class="act-cost ${causalPreview.routeModifier ? 'modified' : ''}">${face.costChip}${causalPreview.routeModifier ? ' · 路线改写' : ''}</div>
+        <div class="act-causal-preview">
+          <div class="act-causal-row">
+            <span>推进</span><strong>${face.detail.routeTitle || causalPreview.routeTitle}${routeMatch ? ' · 偏向中' : ''}</strong>
           </div>
-          <div class="act-route-chips">${formatRouteModifierChips(causalPreview.routeModifier)}</div>
+          <div class="act-causal-row">
+            <span>马上</span><strong>${causalPreview.immediate}</strong>
+          </div>
+          <div class="act-causal-row ${causalPreview.risk.level}">
+            <span>${causalPreview.callback ? '旧账' : '风险'}</span><strong>${causalPreview.callback ? causalPreview.callback.text : `${causalPreview.risk.label}：${causalPreview.risk.text}`}</strong>
+          </div>
         </div>
-      ` : ''}
-      ${causalPreview.npcWarning ? `
-        <div class="act-npc-warning">
-          <span>关系预警</span>${causalPreview.npcWarning.avatar} ${causalPreview.npcWarning.name} ${causalPreview.npcWarning.before}->${causalPreview.npcWarning.after}：${causalPreview.npcWarning.text}
-        </div>
-      ` : ''}
-      ${causalPreview.npcRelief ? `
-        <div class="act-npc-relief">
-          <span>关系降温</span>${causalPreview.npcRelief.avatar} ${causalPreview.npcRelief.name} ${causalPreview.npcRelief.before}->${causalPreview.npcRelief.after}：${causalPreview.npcRelief.text}
-        </div>
-      ` : ''}
-      <div class="act-effects">${formatCardEffects(card, causalPreview)}</div>
-      ${hint ? `<div class="${hintClasses}">${hintLabel}：${hint.text}</div>` : ''}
-      <div class="act-tag">${card.tag}</div>
+        ${causalPreview.routeModifier ? `
+          <div class="act-route-inertia">
+            <div class="inertia-head">
+              <strong class="inertia-label">${causalPreview.routeModifier.label || '路线惯性'}</strong>
+              <span class="inertia-detail">${causalPreview.routeModifier.detail || causalPreview.routeModifier.note}</span>
+            </div>
+            <div class="act-route-chips">${formatRouteModifierChips(causalPreview.routeModifier)}</div>
+          </div>
+        ` : ''}
+        ${causalPreview.npcWarning ? `
+          <div class="act-npc-warning">
+            <span>关系预警</span>${causalPreview.npcWarning.avatar} ${causalPreview.npcWarning.name} ${causalPreview.npcWarning.before}->${causalPreview.npcWarning.after}：${causalPreview.npcWarning.text}
+          </div>
+        ` : ''}
+        ${causalPreview.npcRelief ? `
+          <div class="act-npc-relief">
+            <span>关系降温</span>${causalPreview.npcRelief.avatar} ${causalPreview.npcRelief.name} ${causalPreview.npcRelief.before}->${causalPreview.npcRelief.after}：${causalPreview.npcRelief.text}
+          </div>
+        ` : ''}
+        <div class="act-effects">${formatCardEffects(card, causalPreview)}</div>
+        ${hint ? `<div class="${hintClasses}">${hintLabel}：${hint.text}</div>` : ''}
+        <div class="act-tag">${card.tag}</div>
+      </div>
       ${recommended ? `<div class="act-cta">${recommendationReason}</div>` : ''}
     `;
     btn.addEventListener('click', () => executeTurn(card.id));
@@ -6744,6 +7131,12 @@ function renderChoiceCards() {
   });
 
   if (window.MayflyAudio) window.MayflyAudio.playCardDraw();
+}
+
+function buildCardFaceChips(face) {
+  return (face.displayChips || [])
+    .map((chip) => `<span>${chip}</span>`)
+    .join('');
 }
 
 function buildRecommendationReason(card, causalPreview, chain) {
