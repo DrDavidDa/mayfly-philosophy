@@ -2796,6 +2796,78 @@
     };
   }
 
+  const CARD_FACE_OVERRIDES = {
+    'doom-scroll': {
+      title: '刷效率短视频',
+      temptation: '收藏五个高效方法，先获得一种正在变好的错觉。',
+      riskWhisper: '算法之后会回来找你。',
+      artMood: 'phone-glow'
+    },
+    'like-boss-post': {
+      temptation: '完成一次朋友圈在岗证明，看起来很懂组织温度。',
+      riskWhisper: '旧账之后会回来找你。',
+      artMood: 'thumb-trap'
+    }
+  };
+
+  const CARD_ART_MOODS = {
+    work: 'desk-lamp',
+    meeting: 'meeting-fog',
+    slack: 'soft-escape',
+    social: 'polite-smile',
+    phone: 'phone-glow',
+    think: 'thought-loop',
+    ai: 'bot-shadow',
+    disrupt: 'red-stamp',
+    event: 'paper-alarm'
+  };
+
+  function summarizeCardEffectText(state, card) {
+    if (!card) return '没有可结算的效果。';
+    const impact = buildEffectiveCardImpact(state || createRunState('mayfly'), card);
+    const parts = [`寿命-${formatShortDuration(impact.timeCost)}`];
+    Object.keys(impact.effect || {}).forEach((key) => {
+      const value = impact.effect[key];
+      if (value) parts.push(formatStatDelta(key, value));
+    });
+    if (impact.disruption) parts.push(`搅局${impact.disruption > 0 ? '+' : ''}${impact.disruption}`);
+    if (impact.absurdDebt) parts.push(`荒诞债${impact.absurdDebt > 0 ? '+' : ''}${impact.absurdDebt}`);
+    return parts.join('，');
+  }
+
+  function buildCardFace(card, state = createRunState('mayfly')) {
+    const source = card || {};
+    const override = CARD_FACE_OVERRIDES[source.id] || {};
+    const consequence = buildCardConsequencePreview(source);
+    const categoryLabel = CATEGORY_LABELS[source.category] || '人生';
+    const route = findRouteForCard(source);
+    const displayChips = [
+      categoryLabel,
+      source.tag,
+      consequence ? '有旧账' : route ? '会成线' : null
+    ].filter(Boolean).slice(0, 3);
+
+    return {
+      role: 'action',
+      typeLabel: '行动牌',
+      id: source.id,
+      title: override.title || source.name || '未命名选择',
+      icon: source.icon || '✦',
+      artMood: override.artMood || CARD_ART_MOODS[source.category] || 'paper-choice',
+      costChip: `耗时 ${formatShortDuration(((source.cost || {}).time) || 0.5)}`,
+      temptation: override.temptation || source.quote || '看起来能让今天稍微好过一点。',
+      riskWhisper: override.riskWhisper || (consequence ? '旧账之后会回来找你。' : '代价会在结算时露面。'),
+      displayChips,
+      detail: {
+        effectText: summarizeCardEffectText(state, source),
+        routeTitle: route ? route.title : `${categoryLabel}支线`,
+        fullQuote: source.quote || '',
+        causality: source.causality || '',
+        consequence: consequence ? consequence.text : ''
+      }
+    };
+  }
+
   function getLeadingLifeRoute(state) {
     const counts = (state && state.categoryCounts) || {};
     const ranked = LIFE_ROUTES
@@ -5719,6 +5791,7 @@
     drawCardPair,
     getChoiceCountForRun,
     applyCard,
+    buildCardFace,
     buildCardConsequencePreview,
     buildChoiceCausalPreview,
     buildFirstRunGuide,

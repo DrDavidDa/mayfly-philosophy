@@ -23,6 +23,33 @@ test('drawCardOptions returns three varied choices for a less monotonous turn', 
   assert.ok(cards.every((card) => card.cost.time > 0 && card.cost.time <= 3));
 });
 
+test('buildCardFace turns an action into a clean card-table face', () => {
+  const state = core.createRunState('mayfly');
+  const card = core.ACTION_CARDS.find((item) => item.id === 'doom-scroll');
+  const face = core.buildCardFace(card, state);
+
+  assert.equal(face.role, 'action');
+  assert.equal(face.typeLabel, '行动牌');
+  assert.equal(face.title, '刷效率短视频');
+  assert.match(face.costChip, /耗时/);
+  assert.ok(face.temptation.length > 6);
+  assert.ok(face.riskWhisper.length > 6);
+  assert.ok(face.artMood);
+  assert.ok(face.displayChips.length <= 3);
+  assert.doesNotMatch(`${face.temptation}\n${face.riskWhisper}\n${face.displayChips.join('\n')}`, /精神|社交|健康|焦虑|荒诞债|搅局|[-+]\d/);
+});
+
+test('buildCardFace uses delayed debt as a whisper instead of a full preview wall', () => {
+  const state = core.createRunState('mayfly');
+  const card = core.ACTION_CARDS.find((item) => item.id === 'like-boss-post');
+  const face = core.buildCardFace(card, state);
+
+  assert.match(face.riskWhisper, /旧账|回访|记住|之后/);
+  assert.ok(face.riskWhisper.length <= 30);
+  assert.ok(face.detail.effectText);
+  assert.match(face.detail.effectText, /焦虑|社交|精神|健康|搅局|荒诞债/);
+});
+
 test('AI era content uses recognizable parody names without official brand names', () => {
   const text = [
     JSON.stringify(core.ACTION_CARDS),
@@ -2049,4 +2076,3 @@ test('daily challenge weekend-recovery applies passive stats recovery on card pl
   const expectedAnxietyWithoutRecovery = Math.max(0, state.stats.anxiety + (card.effect.anxiety || 0));
   assert.ok(next.stats.anxiety < expectedAnxietyWithoutRecovery + 3);
 });
-

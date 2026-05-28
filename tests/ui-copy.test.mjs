@@ -72,7 +72,7 @@ test('PWA paths are relative so GitHub Pages subdirectory deploys work', () => {
 });
 
 test('service worker gets fresh navigations before falling back to cache', () => {
-  assert.match(serviceWorker, /CACHE_NAME\s*=\s*'mayfly-v3'/);
+  assert.match(serviceWorker, /CACHE_NAME\s*=\s*'mayfly-v4'/);
   assert.match(serviceWorker, /event\.request\.mode\s*===\s*'navigate'/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*caches\.match\(event\.request\)/);
 });
@@ -120,4 +120,51 @@ test('visual layout pass balances desktop columns and readable cards', () => {
   assert.match(html, /body\.first-run-mode \.objective-panel\s*\{[\s\S]*max-height:\s*220px !important/);
   assert.match(html, /\.activity-btn \.act-compact-note\s*\{[\s\S]*font-size:\s*var\(--readable-sm\)/);
   assert.match(html, /\.activity-btn \.act-impact-chip\s*\{[\s\S]*min-height:\s*26px/);
+});
+
+test('card table pass introduces a clean card-face surface', () => {
+  assert.match(html, /Phase 11 Card Table/);
+  assert.match(html, /--card-paper:\s*#fff8e7/);
+  assert.match(html, /--card-ink:\s*#17212b/);
+  assert.match(html, /\.activity-btn\.card-table-face/);
+  assert.match(html, /\.card-face-art/);
+  assert.match(html, /\.card-face-temptation/);
+  assert.match(html, /\.card-face-risk/);
+});
+
+test('choice rendering uses core card faces instead of a raw stat wall', () => {
+  assert.match(html, /CORE\.buildCardFace\(card,\s*gameState\)/);
+  assert.match(html, /face\.temptation/);
+  assert.match(html, /face\.riskWhisper/);
+  assert.match(html, /face\.detail\.effectText/);
+  assert.match(html, /act-face-detail/);
+});
+
+test('card table layout makes action cards the main play area on desktop', () => {
+  assert.match(
+    html,
+    /#screen-game > \.activity-grid\s*\{[\s\S]*grid-column:\s*2\s*\/\s*span\s*2\s*!important[\s\S]*grid-template-columns:\s*repeat\(2,\s*minmax\(260px,\s*1fr\)\)/
+  );
+  assert.match(
+    html,
+    /#screen-game > \.game-stage\s*\{[\s\S]*grid-column:\s*2\s*!important[\s\S]*grid-row:\s*1\s*\/\s*span\s*3\s*!important/
+  );
+});
+
+test('card table mobile first-run slot is tall enough for full action cards', () => {
+  assert.match(
+    html,
+    /body\.first-run-mode #screen-game > \.activity-grid\s*\{[\s\S]*flex:\s*0 0 352px !important[\s\S]*height:\s*352px !important[\s\S]*max-height:\s*352px !important/
+  );
+});
+
+test('card table mobile compresses the objective panel into a brief strip', () => {
+  assert.match(
+    html,
+    /body\.first-run-mode \.objective-panel\s*\{[\s\S]*flex:\s*0 0 86px !important[\s\S]*max-height:\s*86px !important/
+  );
+  assert.match(
+    html,
+    /body\.first-run-mode \.objective-copy,[\s\S]*body\.first-run-mode \.objective-rhythm,[\s\S]*display:\s*none !important/
+  );
 });
