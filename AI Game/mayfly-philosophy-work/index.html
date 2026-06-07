@@ -49,6 +49,12 @@
   --neon-purple: #9d4edd;          /* 荧光高亮电紫 */
   --neon-green: #38b000;           /* 荧光高亮翠绿 */
   --neon-orange: #ff5400;          /* 荧光高亮橘橙 */
+  --neon-pink-rgb: 255, 45, 120;
+  --neon-cyan-rgb: 0, 245, 212;
+  --neon-yellow-rgb: 254, 228, 64;
+  --neon-purple-rgb: 157, 78, 221;
+  --neon-green-rgb: 56, 176, 0;
+  --neon-orange-rgb: 255, 84, 0;
   --fluorescent: #e0aaff;          /* 极光荧光白紫色 */
   --paper-white: #f3e8ee;          /* 冰透文字白色 */
   --postit-yellow: rgba(254, 228, 64, 0.12);  /* 玻璃变黄高亮 */
@@ -2626,6 +2632,43 @@ body.first-run-mode .rookie-panel.active {
   max-width: 380px;
   width: 100%;
 }
+/* 新角色解锁横幅 */
+.death-unlock-banner {
+  background: var(--card-paper) !important;
+  color: var(--card-ink) !important;
+  border: 2px dashed var(--card-gold) !important;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 10px auto 16px;
+  text-align: center;
+  max-width: 360px;
+  box-shadow: 0 8px 16px rgba(42, 29, 18, 0.16);
+  animation: unlockWiggle 1.5s ease-in-out infinite alternate;
+  position: relative;
+}
+.death-unlock-banner .unlock-badge {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  color: var(--card-warning);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  margin-bottom: 4px;
+}
+.death-unlock-banner .unlock-name {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--card-ink);
+  margin-bottom: 6px;
+}
+.death-unlock-banner .unlock-desc {
+  font-size: 0.78rem;
+  color: var(--card-muted);
+  line-height: 1.4;
+}
+@keyframes unlockWiggle {
+  0% { transform: rotate(-2deg); }
+  100% { transform: rotate(2deg); }
+}
 .death-emoji { font-size: 4rem; }
 .death-postcard-art {
   margin: 12px auto 0;
@@ -2876,6 +2919,93 @@ body.first-run-mode .rookie-panel.active {
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 4px;
   text-align: left;
+}
+.death-review {
+  margin-top: 14px;
+  padding: 14px;
+  background: rgba(0, 245, 212, 0.05);
+  border: 1px solid rgba(0, 245, 212, 0.22);
+  border-radius: 4px;
+  text-align: left;
+}
+.death-review-title {
+  color: var(--neon-cyan);
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.death-review-grade {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  background: var(--neon-cyan);
+  color: #0a0a0f !important;
+  padding: 2px 10px;
+  border-radius: 2px;
+  font-weight: bold;
+  text-shadow: none !important;
+}
+.death-review-subtitle {
+  font-size: 0.8rem;
+  color: var(--neon-cyan);
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+.death-review-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.death-review-item {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 8px 10px;
+  border-radius: 4px;
+  border-left: 3px solid var(--neon-cyan);
+}
+.death-review-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2px;
+}
+.death-review-value {
+  font-size: 0.9rem;
+  color: var(--paper-white);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.death-review-value .progress-mini {
+  display: inline-block;
+  height: 6px;
+  width: 48px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+.death-review-value .progress-mini-bar {
+  height: 100%;
+  background: var(--neon-cyan);
+}
+.death-review-full {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+.death-review-summary {
+  font-size: 0.78rem;
+  color: var(--paper-white);
+  line-height: 1.45;
+  margin-bottom: 6px;
+}
+.death-review-debt-desc {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.4;
 }
 .death-legacy {
   margin-top: 14px;
@@ -5380,16 +5510,18 @@ body::after {
 
 body:has(#screen-game.active) {
   background:
-    radial-gradient(circle at 18% 8%, rgba(255, 248, 231, 0.14), transparent 28%),
-    linear-gradient(135deg, #1c1820 0%, #25202a 45%, #161219 100%) !important;
+    radial-gradient(circle at 15% 15%, rgba(0, 245, 212, 0.15), transparent 30%),
+    radial-gradient(circle at 85% 85%, rgba(255, 45, 120, 0.12), transparent 35%),
+    linear-gradient(135deg, #0a0812 0%, #151124 50%, #06050b 100%) !important;
 }
 
 #screen-game.active {
   background:
-    linear-gradient(180deg, rgba(255, 248, 231, 0.06), rgba(255, 248, 231, 0.02)),
-    radial-gradient(circle at 52% 18%, rgba(231, 170, 52, 0.13), transparent 34%) !important;
-  border: 1px solid rgba(255, 248, 231, 0.1);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+    radial-gradient(circle at 50% 20%, rgba(157, 78, 221, 0.15), transparent 40%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 18px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 
 #screen-game > .activity-grid {
@@ -5397,39 +5529,51 @@ body:has(#screen-game.active) {
 }
 
 .activity-btn.card-table-face {
-  --card-accent: var(--card-blue);
+  --card-accent: var(--neon-purple);
+  --card-accent-rgb: var(--neon-purple-rgb);
   display: flex !important;
   flex-direction: column !important;
   gap: 10px !important;
   min-height: 380px !important;
   padding: 12px !important;
-  border: 2px solid var(--card-line) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.18) !important;
   border-radius: var(--card-radius) !important;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 248, 231, 0.94)),
-    repeating-linear-gradient(0deg, transparent 0 18px, rgba(42, 29, 18, 0.035) 18px 19px),
-    var(--card-paper) !important;
-  color: var(--card-ink) !important;
-  box-shadow: 0 16px 32px var(--card-shadow), inset 0 0 0 4px rgba(255, 255, 255, 0.46) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  background: linear-gradient(135deg, rgba(26, 20, 42, 0.85) 0%, rgba(18, 14, 30, 0.95) 100%) !important;
+  color: var(--paper-white) !important;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 12px rgba(var(--card-accent-rgb), 0.15) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   overflow: hidden;
-  text-shadow: none !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
 
 .activity-btn.card-table-face.category-work,
-.activity-btn.card-table-face.category-meeting { --card-accent: var(--card-warning); }
+.activity-btn.card-table-face.category-meeting {
+  --card-accent: var(--neon-pink);
+  --card-accent-rgb: var(--neon-pink-rgb);
+}
 .activity-btn.card-table-face.category-slack,
-.activity-btn.card-table-face.category-disrupt { --card-accent: var(--card-green); }
+.activity-btn.card-table-face.category-disrupt {
+  --card-accent: var(--neon-cyan);
+  --card-accent-rgb: var(--neon-cyan-rgb);
+}
 .activity-btn.card-table-face.category-social,
-.activity-btn.card-table-face.category-phone { --card-accent: var(--card-gold); }
+.activity-btn.card-table-face.category-phone {
+  --card-accent: var(--neon-yellow);
+  --card-accent-rgb: var(--neon-yellow-rgb);
+}
 .activity-btn.card-table-face.category-ai,
-.activity-btn.card-table-face.category-think { --card-accent: var(--card-blue); }
+.activity-btn.card-table-face.category-think {
+  --card-accent: var(--neon-purple);
+  --card-accent-rgb: var(--neon-purple-rgb);
+}
 
 .activity-btn.card-table-face:hover {
-  transform: translateY(-6px) rotate(0deg) !important;
-  border-color: var(--card-accent) !important;
-  box-shadow: 0 20px 40px rgba(42, 29, 18, 0.32), 0 0 0 4px rgba(255, 248, 231, 0.16) !important;
+  transform: translateY(-8px) scale(1.02) !important;
+  border-color: rgba(var(--card-accent-rgb), 0.7) !important;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.65), 0 0 20px rgba(var(--card-accent-rgb), 0.35), inset 0 0 16px rgba(var(--card-accent-rgb), 0.25) !important;
 }
 
 .activity-btn.card-table-face::after {
@@ -5437,14 +5581,21 @@ body:has(#screen-game.active) {
   right: 12px;
   bottom: 12px;
   padding: 6px 12px;
-  border: 1px solid rgba(23, 33, 43, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
-  background: var(--card-ink);
-  color: var(--card-paper);
+  background: var(--neon-cyan);
+  color: #06050b;
   font-family: var(--font-title);
   font-size: 0.92rem;
+  font-weight: 900;
   line-height: 1;
-  box-shadow: 0 6px 14px rgba(23, 33, 43, 0.18);
+  box-shadow: 0 4px 12px rgba(0, 245, 212, 0.3);
+  transition: all 0.2s ease;
+}
+
+.activity-btn.card-table-face:hover::after {
+  box-shadow: 0 4px 16px rgba(0, 245, 212, 0.6);
+  transform: scale(1.05);
 }
 
 .activity-btn.card-table-face.recommended::before {
@@ -5452,11 +5603,12 @@ body:has(#screen-game.active) {
   top: 10px;
   right: 10px;
   z-index: 5;
-  background: var(--card-gold);
-  color: var(--card-ink);
-  border: 1px solid rgba(23, 33, 43, 0.18);
+  background: var(--neon-yellow);
+  color: #06050b;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
-  box-shadow: 0 6px 14px rgba(231, 170, 52, 0.28);
+  box-shadow: 0 0 12px rgba(254, 228, 64, 0.6);
+  font-weight: 900;
 }
 
 .card-face-topline {
@@ -5469,36 +5621,40 @@ body:has(#screen-game.active) {
 
 .card-face-type,
 .card-face-cost,
-.card-face-chips span {
+.card-face-chips span,
+.act-impact-chip {
   display: inline-flex;
   align-items: center;
   min-height: 26px;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(23, 33, 43, 0.14);
-  background: rgba(255, 255, 255, 0.58);
-  color: var(--card-muted);
   font-size: 0.8rem;
   line-height: 1.12;
+  font-family: var(--font-body);
 }
 
 .card-face-type {
-  background: var(--card-ink);
-  color: var(--card-paper);
+  background: rgba(var(--card-accent-rgb), 0.15) !important;
+  color: var(--card-accent) !important;
+  border: 1px solid rgba(var(--card-accent-rgb), 0.4) !important;
+  font-weight: bold !important;
+  text-shadow: 0 0 4px rgba(var(--card-accent-rgb), 0.4) !important;
 }
 
 .card-face-cost {
-  color: var(--card-warning);
-  background: rgba(217, 75, 75, 0.08);
+  color: var(--neon-orange) !important;
+  background: rgba(255, 84, 0, 0.15) !important;
+  border: 1px solid rgba(255, 84, 0, 0.4) !important;
+  font-weight: bold !important;
 }
 
 .card-face-art {
   min-height: 126px;
-  border: 2px solid rgba(23, 33, 43, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 8px;
   overflow: hidden;
-  background: var(--card-paper-deep);
-  box-shadow: inset 0 -18px 32px rgba(23, 33, 43, 0.08);
+  background: #08060c !important;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(var(--card-accent-rgb), 0.15) !important;
 }
 
 .card-face-art .act-visual {
@@ -5522,30 +5678,39 @@ body:has(#screen-game.active) {
   place-items: center;
   width: 42px;
   height: 42px;
-  border: 2px solid rgba(23, 33, 43, 0.22);
+  border: 1.5px solid rgba(var(--card-accent-rgb), 0.5) !important;
   border-radius: 50%;
-  background: var(--card-paper-deep);
+  background: rgba(var(--card-accent-rgb), 0.12) !important;
+  box-shadow: 0 0 10px rgba(var(--card-accent-rgb), 0.25) !important;
+  text-shadow: 0 0 6px rgba(var(--card-accent-rgb), 0.3) !important;
   font-size: 1.4rem;
 }
 
 .activity-btn.card-table-face .card-face-title {
   margin: 0 !important;
   padding: 0 !important;
-  color: var(--card-ink) !important;
+  color: var(--paper-white) !important;
+  font-family: var(--font-title) !important;
   font-size: 1.36rem !important;
   line-height: 1.12 !important;
-  text-shadow: none !important;
+  letter-spacing: 0.5px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
 }
 
 .card-face-temptation {
   min-height: 58px;
   padding: 10px 12px;
-  border-left: 4px solid var(--card-accent);
-  background: rgba(255, 255, 255, 0.48);
-  color: var(--card-ink);
+  border-radius: 4px !important;
+  border-left: 4px solid var(--card-accent) !important;
+  border-top: 1px solid rgba(var(--card-accent-rgb), 0.15) !important;
+  border-right: 1px solid rgba(var(--card-accent-rgb), 0.15) !important;
+  border-bottom: 1px solid rgba(var(--card-accent-rgb), 0.15) !important;
+  background: rgba(var(--card-accent-rgb), 0.06) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
   font-size: 1rem;
   font-weight: 800;
   line-height: 1.36;
+  box-shadow: inset 0 0 8px rgba(var(--card-accent-rgb), 0.05) !important;
 }
 
 .card-face-risk {
@@ -5554,20 +5719,21 @@ body:has(#screen-game.active) {
   gap: 9px;
   align-items: start;
   padding: 9px 10px;
-  border: 1px dashed rgba(217, 75, 75, 0.4);
+  border: 1px dashed rgba(255, 45, 120, 0.6) !important;
   border-radius: 8px;
-  background: rgba(217, 75, 75, 0.06);
-  color: var(--card-warning);
+  background: rgba(255, 45, 120, 0.08) !important;
+  color: var(--neon-pink) !important;
+  box-shadow: 0 0 12px rgba(255, 45, 120, 0.1) !important;
 }
 
 .card-face-risk span {
-  color: var(--card-muted);
+  color: rgba(255, 255, 255, 0.6) !important;
   font-size: 0.84rem;
   font-weight: 900;
 }
 
 .card-face-risk strong {
-  color: var(--card-warning);
+  color: #ff5252 !important;
   font-size: 0.96rem;
   line-height: 1.32;
 }
@@ -5606,9 +5772,10 @@ body.details-open .activity-btn.card-table-face .act-npc-warning,
 body.details-open .activity-btn.card-table-face .act-npc-relief,
 body.details-open .activity-btn.card-table-face .act-effects,
 body.details-open .activity-btn.card-table-face .act-collection-hint {
-  color: var(--card-ink) !important;
-  background: rgba(255, 255, 255, 0.46) !important;
-  border-color: rgba(23, 33, 43, 0.16) !important;
+  color: var(--paper-white) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 6px;
 }
 
 body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face {
@@ -6146,6 +6313,11 @@ body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-f
 <!-- ========== 死亡屏 ========== -->
 <section id="screen-death" class="screen">
   <div class="death-card">
+    <div class="death-unlock-banner" id="death-unlock-banner" style="display: none;">
+      <div class="unlock-badge">🎉 新角色解锁 🎉</div>
+      <div class="unlock-name" id="death-unlock-name">【角色名】</div>
+      <div class="unlock-desc" id="death-unlock-desc">角色描述</div>
+    </div>
 	    <div class="death-emoji" id="death-emoji">💀</div>
 	    <div class="death-title" id="death-title">死因</div>
 	    <div class="death-rarity" id="death-rarity">N</div>
@@ -6161,6 +6333,7 @@ body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-f
 	    </details>
 	    <div class="death-stats" id="death-stats"></div>
 	    <div class="death-collection" id="death-collection"></div>
+	    <div class="death-review" id="death-review-card"></div>
 	    <div class="death-legacy" id="death-legacy">
 	      <div class="death-legacy-title">新遗产卡</div>
 	      <div class="death-legacy-body">
@@ -6766,65 +6939,23 @@ function setCollectionTarget(kind, target) {
 // ========== 角色选择 ==========
 
 function buildCharacterPortrait(char, locked) {
-  const isMosquito = char.id === 'mosquito';
-  const accent = isMosquito ? '#ff2d78' : '#00f5d4';
-  const body = isMosquito ? '#a06c48' : '#c38a35';
-  const face = isMosquito ? '#d0995e' : '#f1bf56';
-  const label = isMosquito ? '12H' : '24H';
-  const warning = locked ? 'LOCKED' : (isMosquito ? 'BITE ROUTE' : 'MAYFLY ROUTE');
-  if (!isMosquito) {
-    return `
-      <img
-        class="char-portrait-image${locked ? ' locked' : ''}"
-        src="output/assets/mayfly-character-banner.png"
-        alt=""
-        loading="eager"
-        decoding="async"
-      >
-    `;
-  }
-  const skyline = isMosquito
-    ? '<rect x="18" y="82" width="36" height="38" fill="#241525"/><rect x="72" y="70" width="44" height="50" fill="#2a172b"/><rect x="196" y="78" width="42" height="42" fill="#241525"/>'
-    : '<rect x="18" y="78" width="44" height="42" fill="#171827"/><rect x="88" y="62" width="52" height="58" fill="#222437"/><rect x="204" y="74" width="48" height="46" fill="#171827"/>';
-  const insect = isMosquito
-    ? `<g transform="translate(142 62)">
-        <ellipse cx="-30" cy="-14" rx="32" ry="14" fill="#d8f7ff" opacity="0.7" stroke="#fff" stroke-width="3"/>
-        <ellipse cx="29" cy="-13" rx="31" ry="14" fill="#d8f7ff" opacity="0.7" stroke="#fff" stroke-width="3"/>
-        <ellipse cx="0" cy="9" rx="15" ry="34" fill="${body}" stroke="#15110b" stroke-width="5"/>
-        <circle cx="0" cy="-21" r="24" fill="${face}" stroke="#15110b" stroke-width="5"/>
-        <path d="M21 -18 L64 -30" stroke="#15110b" stroke-width="5" stroke-linecap="round"/>
-        <circle cx="-9" cy="-25" r="8" fill="#fff8d8" stroke="#15110b" stroke-width="3"/><circle cx="9" cy="-25" r="8" fill="#fff8d8" stroke="#15110b" stroke-width="3"/>
-        <circle cx="-7" cy="-24" r="3" fill="#15110b"/><circle cx="12" cy="-24" r="3" fill="#15110b"/>
-      </g>`
-    : `<g transform="translate(140 64)">
-        <ellipse cx="-34" cy="-18" rx="40" ry="19" fill="#d8f7ff" opacity="0.72" stroke="#fff" stroke-width="3"/>
-        <ellipse cx="34" cy="-18" rx="40" ry="19" fill="#d8f7ff" opacity="0.72" stroke="#fff" stroke-width="3"/>
-        <ellipse cx="0" cy="14" rx="18" ry="38" fill="${body}" stroke="#15110b" stroke-width="5"/>
-        <circle cx="0" cy="-20" r="27" fill="${face}" stroke="#15110b" stroke-width="5"/>
-        <circle cx="-11" cy="-25" r="9.5" fill="#fff8d8" stroke="#15110b" stroke-width="3"/><circle cx="12" cy="-25" r="9.5" fill="#fff8d8" stroke="#15110b" stroke-width="3"/>
-        <circle cx="-8" cy="-24" r="3" fill="#15110b"/><circle cx="15" cy="-24" r="3" fill="#15110b"/>
-        <path d="M-9 -6 Q0 2 11 -6" fill="none" stroke="#15110b" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="-18" cy="-11" r="4" fill="#ddb0a3" opacity="0.55"/>
-        <circle cx="19" cy="-11" r="4" fill="#ddb0a3" opacity="0.55"/>
-        <path d="M-6 10 L0 16 L6 10 L0 6 Z" fill="#c35b4d" stroke="#15110b" stroke-width="2"/>
-      </g>`;
+  const images = {
+    mayfly: 'output/assets/mayfly-character-banner.png',
+    mosquito: 'output/assets/mosquito-character-banner.png',
+    old_wang: 'output/assets/old_wang-character-banner.png',
+    slacker_yu: 'output/assets/slacker_yu-character-banner.png'
+  };
+
+  const src = images[char.id] || images.mayfly;
   return `
-    <svg viewBox="0 0 280 138" role="img" aria-label="${char.name}角色肖像">
-      <rect width="280" height="138" fill="${isMosquito ? '#2a1220' : '#101722'}"/>
-      <g opacity="0.26" stroke="${accent}" stroke-width="1">
-        <path d="M0 28 H280M0 56 H280M0 84 H280"/>
-        <path d="M38 0 V138M86 0 V138M134 0 V138M182 0 V138M230 0 V138"/>
-      </g>
-      <circle cx="230" cy="30" r="18" fill="${accent}" opacity="0.36"/>
-      ${skyline}
-      <rect x="0" y="120" width="280" height="18" fill="#0a0a0f"/>
-      <path d="M20 103 C62 70 88 111 124 82 C166 49 203 73 252 42" fill="none" stroke="${accent}" stroke-width="4" stroke-linecap="round" stroke-dasharray="11 8" opacity="0.88"/>
-      ${insect}
-      <rect x="14" y="12" width="58" height="24" fill="#15120d" stroke="${accent}" stroke-width="2"/>
-      <text x="43" y="29" text-anchor="middle" fill="${accent}" font-size="14" font-family="monospace">${label}</text>
-      <rect x="174" y="98" width="82" height="22" fill="#15120d" stroke="${accent}" stroke-width="2"/>
-      <text x="215" y="113" text-anchor="middle" fill="${accent}" font-size="9" font-family="monospace">${warning}</text>
-    </svg>
+    <img
+      class="char-portrait-image${locked ? ' locked' : ''}"
+      src="${src}"
+      alt="${char.name}角色肖像"
+      loading="eager"
+      decoding="async"
+      style="${locked ? 'filter: grayscale(1) brightness(0.4);' : ''}"
+    >
   `;
 }
 
@@ -7131,6 +7262,22 @@ function renderChoiceCards() {
   });
 
   if (window.MayflyAudio) window.MayflyAudio.playCardDraw();
+
+  if (typeof gsap !== 'undefined') {
+    gsap.fromTo('.activity-btn.card-table-face',
+      { opacity: 0, y: 30, scale: 0.95, rotateX: 15 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotateX: 0,
+        duration: 0.4,
+        stagger: 0.08,
+        ease: 'back.out(1.2)',
+        clearProps: 'transform,opacity'
+      }
+    );
+  }
 }
 
 function buildCardFaceChips(face) {
@@ -7212,86 +7359,103 @@ function shortText(text, maxLength) {
 
 function buildCardVisual(card, causalPreview) {
   const category = card.category || 'think';
+  const images = {
+    work: 'output/assets/card-art-work.png',
+    meeting: 'output/assets/card-art-meeting.png',
+    slack: 'output/assets/card-art-slack.png',
+    social: 'output/assets/card-art-social.png',
+    phone: 'output/assets/card-art-phone.png',
+    think: 'output/assets/card-art-think.png',
+    ai: 'output/assets/card-art-ai.png',
+    disrupt: 'output/assets/card-art-disrupt.png'
+  };
+  const src = images[category] || images.think;
   const danger = causalPreview.callback || ['danger', 'lethal'].includes(causalPreview.risk.level);
-  const scene = getActionScene(card);
   return `
-    <div class="act-visual ${category} ${danger ? 'danger' : ''}" aria-hidden="true">
-      ${buildActionSceneSvg(scene, card, danger)}
+    <div class="act-visual ${category} ${danger ? 'danger' : ''}" style="position: relative; width: 100%; height: 100%; display: block; overflow: hidden;" aria-hidden="true">
+      <img src="${src}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) brightness(0.95);">
+      ${danger ? `<div class="danger-cross-indicator" style="position: absolute; inset: 0; background: rgba(255, 45, 120, 0.18); border: 2.5px solid var(--neon-pink); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--neon-pink); font-family: var(--font-pixel); text-shadow: 0 0 10px var(--neon-pink); backdrop-filter: blur(2px);">☠️<span style="font-size: 0.6rem; margin-top: 4px; letter-spacing: 0.1em; font-family: var(--font-body); font-weight: bold; background: var(--bg-void); padding: 2px 6px; border-radius: 4px;">警告：致命旧账</span></div>` : ''}
     </div>
   `;
 }
 
 function getActionScene(card) {
   const byId = {
-    'voluntary-overtime': { bg: '#9bc7d9', floor: '#34425a', accent: '#ff2d78', center: '💻', left: '📎', right: '☕', label: 'OVERTIME' },
-    'final-ppt': { bg: '#b9d7ef', floor: '#34425a', accent: '#fee440', center: '📊', left: '🗂', right: '🔥', label: 'FINAL_v17' },
-    'meeting-silence': { bg: '#bdd2df', floor: '#30394d', accent: '#b537f2', center: '🗣', left: '👥', right: '📋', label: 'MEETING' },
-    'write-minutes': { bg: '#d8d4c7', floor: '#3a3545', accent: '#00f5d4', center: '📝', left: '💬', right: '🔁', label: 'MINUTES' },
-    'toilet-slack': { bg: '#baffc9', floor: '#2f6957', accent: '#00f5d4', center: '🚽', left: '🐟', right: '🚪', label: 'SAFE ROOM' },
-    'fake-ide': { bg: '#173047', floor: '#101722', accent: '#39ff14', center: '⌨️', left: '码', right: '🍱', label: 'FAKE IDE' },
-    'milk-tea-social': { bg: '#ffd3d8', floor: '#7a4154', accent: '#fee440', center: '🧋', left: '❤', right: '💬', label: 'SOCIAL' },
-    'like-boss-post': { bg: '#ffd3d8', floor: '#5b3041', accent: '#ff2d78', center: '👍', left: '📱', right: '👔', label: 'BOSS LIKE' },
-    'doom-scroll': { bg: '#baffc9', floor: '#153b32', accent: '#39ff14', center: '📱', left: '5法', right: '▶', label: 'SCROLL' },
-    'notification-dnd': { bg: '#baffc9', floor: '#153b32', accent: '#00f5d4', center: '🔕', left: '99+', right: '🌙', label: 'DND' },
-    'old-post': { bg: '#2a1220', floor: '#100a12', accent: '#ff2d78', center: '🕳', left: '📷', right: '😬', label: 'BLACK HISTORY' },
-    'calculate-wage': { bg: '#fee9a8', floor: '#54452a', accent: '#ff6b35', center: '🧮', left: '¥', right: '？', label: 'MATH HURTS' },
-    'ai-weekly-report': { bg: '#101722', floor: '#050912', accent: '#00f5d4', center: '🤖', left: '周报', right: '⌘', label: 'PROMPT' },
-    'ai-deep-research': { bg: '#101722', floor: '#050912', accent: '#00f5d4', center: '🐋', left: 'PDF', right: '???', label: 'RESEARCH' },
-    'ai-meeting-bot': { bg: '#101722', floor: '#050912', accent: '#00f5d4', center: '🎙️', left: 'BOT', right: '📋', label: 'PROXY' },
-    'ai-comfort-bot': { bg: '#101722', floor: '#050912', accent: '#b537f2', center: '🧸', left: 'OK?', right: '☑', label: 'COMFORT' },
-    'boundary-statement': { bg: '#fee9a8', floor: '#4b3328', accent: '#ff2d78', center: '✋', left: 'NO', right: '👀', label: 'BOUNDARY' },
-    'speak-truth': { bg: '#fee9a8', floor: '#4b3328', accent: '#ff2d78', center: '⚡', left: '🎤', right: '😶', label: 'TRUTH' },
-    'wrong-emoji': { bg: '#fee9a8', floor: '#4b3328', accent: '#b537f2', center: '🙃', left: '群', right: '撤回', label: 'OOPS' },
-    'solo-slack': { bg: '#baffc9', floor: '#153b32', accent: '#00f5d4', center: '🛋', left: '🐟', right: '🫥', label: 'SOLO' },
-    'return-favor': { bg: '#ffd3d8', floor: '#5b3041', accent: '#fee440', center: '🤝', left: '账', right: '🧋', label: 'FAVOR' },
-    'reschedule-meeting': { bg: '#bdd2df', floor: '#30394d', accent: '#fee440', center: '📅', left: '↻', right: '⏰', label: 'MOVE IT' },
-    'window-sunset': { bg: '#29394d', floor: '#15202d', accent: '#fee440', center: '🌇', left: '窗', right: '1s', label: 'SUNSET' }
+    'voluntary-overtime': { bg: '#0d0b18', floor: '#2a1a3a', accent: '#ff2d78', center: '💻', left: '📎', right: '☕', label: 'OVERTIME' },
+    'final-ppt': { bg: '#0b1626', floor: '#1a3050', accent: '#fee440', center: '📊', left: '🗂', right: '🔥', label: 'FINAL_v17' },
+    'meeting-silence': { bg: '#0e0b1a', floor: '#221a38', accent: '#b537f2', center: '🗣', left: '👥', right: '📋', label: 'MEETING' },
+    'write-minutes': { bg: '#081216', floor: '#142c36', accent: '#00f5d4', center: '📝', left: '💬', right: '🔁', label: 'MINUTES' },
+    'toilet-slack': { bg: '#051812', floor: '#103c2a', accent: '#00f5d4', center: '🚽', left: '🐟', right: '🚪', label: 'SAFE ROOM' },
+    'fake-ide': { bg: '#08101a', floor: '#12243c', accent: '#39ff14', center: '⌨️', left: '码', right: '🍱', label: 'FAKE IDE' },
+    'milk-tea-social': { bg: '#1a0b12', floor: '#3a1828', accent: '#fee440', center: '🧋', left: '❤', right: '💬', label: 'SOCIAL' },
+    'like-boss-post': { bg: '#1a0b12', floor: '#3c1424', accent: '#ff2d78', center: '👍', left: '📱', right: '👔', label: 'BOSS LIKE' },
+    'doom-scroll': { bg: '#051810', floor: '#123824', accent: '#39ff14', center: '📱', left: '5法', right: '▶', label: 'SCROLL' },
+    'notification-dnd': { bg: '#051812', floor: '#103c2a', accent: '#00f5d4', center: '🔕', left: '99+', right: '🌙', label: 'DND' },
+    'old-post': { bg: '#160812', floor: '#2c0c20', accent: '#ff2d78', center: '🕳', left: '📷', right: '😬', label: 'BLACK HISTORY' },
+    'calculate-wage': { bg: '#181208', floor: '#382810', accent: '#ff6b35', center: '🧮', left: '¥', right: '？', label: 'MATH HURTS' },
+    'ai-weekly-report': { bg: '#080c16', floor: '#101a30', accent: '#00f5d4', center: '🤖', left: '周报', right: '⌘', label: 'PROMPT' },
+    'ai-deep-research': { bg: '#080c16', floor: '#101a30', accent: '#00f5d4', center: '🐋', left: 'PDF', right: '???', label: 'RESEARCH' },
+    'ai-meeting-bot': { bg: '#080c16', floor: '#101a30', accent: '#00f5d4', center: '🎙️', left: 'BOT', right: '📋', label: 'PROXY' },
+    'ai-comfort-bot': { bg: '#0a0816', floor: '#181036', accent: '#b537f2', center: '🧸', left: 'OK?', right: '☑', label: 'COMFORT' },
+    'boundary-statement': { bg: '#180a10', floor: '#3c1224', accent: '#ff2d78', center: '✋', left: 'NO', right: '👀', label: 'BOUNDARY' },
+    'speak-truth': { bg: '#180a10', floor: '#3c1224', accent: '#ff2d78', center: '⚡', left: '🎤', right: '😶', label: 'TRUTH' },
+    'wrong-emoji': { bg: '#140818', floor: '#2a103c', accent: '#b537f2', center: '🙃', left: '群', right: '撤回', label: 'OOPS' },
+    'solo-slack': { bg: '#051812', floor: '#103c2a', accent: '#00f5d4', center: '🛋', left: '🐟', right: '🫥', label: 'SOLO' },
+    'return-favor': { bg: '#1a180a', floor: '#383210', accent: '#fee440', center: '🤝', left: '账', right: '🧋', label: 'FAVOR' },
+    'reschedule-meeting': { bg: '#16180a', floor: '#323610', accent: '#fee440', center: '📅', left: '↻', right: '⏰', label: 'MOVE IT' },
+    'window-sunset': { bg: '#0f1826', floor: '#1a2b40', accent: '#fee440', center: '🌇', left: '窗', right: '1s', label: 'SUNSET' }
   };
   const byCategory = {
-    work: { bg: '#9bc7d9', floor: '#34425a', accent: '#ff2d78', center: '💻', left: '📎', right: '☕', label: 'WORK' },
-    meeting: { bg: '#bdd2df', floor: '#30394d', accent: '#b537f2', center: '🗣', left: '👥', right: '📋', label: 'MEETING' },
-    slack: { bg: '#baffc9', floor: '#153b32', accent: '#00f5d4', center: '🐟', left: '🚪', right: '📱', label: 'SLACK' },
-    social: { bg: '#ffd3d8', floor: '#5b3041', accent: '#fee440', center: '🧋', left: '❤', right: '💬', label: 'SOCIAL' },
-    phone: { bg: '#baffc9', floor: '#153b32', accent: '#39ff14', center: '📱', left: '▶', right: '99+', label: 'PHONE' },
-    think: { bg: '#fee9a8', floor: '#54452a', accent: '#ff6b35', center: '🧠', left: '？', right: '!', label: 'THINK' },
-    ai: { bg: '#101722', floor: '#050912', accent: '#00f5d4', center: '🤖', left: 'AI', right: '⌘', label: 'AI' },
-    disrupt: { bg: '#fee9a8', floor: '#4b3328', accent: '#ff2d78', center: '⚡', left: '🎤', right: '!', label: 'DISRUPT' }
+    work: { bg: '#0a0b16', floor: '#1a1a36', accent: '#ff2d78', center: '💻', left: '📎', right: '☕', label: 'WORK' },
+    meeting: { bg: '#0d0b1a', floor: '#221a38', accent: '#b537f2', center: '🗣', left: '👥', right: '📋', label: 'MEETING' },
+    slack: { bg: '#051812', floor: '#103c2a', accent: '#00f5d4', center: '🐟', left: '🚪', right: '📱', label: 'SLACK' },
+    social: { bg: '#1a0b12', floor: '#3a1828', accent: '#fee440', center: '🧋', left: '❤', right: '💬', label: 'SOCIAL' },
+    phone: { bg: '#051810', floor: '#123824', accent: '#39ff14', center: '📱', left: '▶', right: '99+', label: 'PHONE' },
+    think: { bg: '#181208', floor: '#382810', accent: '#ff6b35', center: '🧠', left: '？', right: '!', label: 'THINK' },
+    ai: { bg: '#080c16', floor: '#101a30', accent: '#00f5d4', center: '🤖', left: 'AI', right: '⌘', label: 'AI' },
+    disrupt: { bg: '#180a10', floor: '#3c1224', accent: '#ff2d78', center: '⚡', left: '🎤', right: '!', label: 'DISRUPT' }
   };
   return byId[card.id] || byCategory[card.category] || byCategory.think;
 }
 
 function buildActionSceneSvg(scene, card, danger) {
-  const isDark = ['#101722', '#2a1220'].includes(scene.bg);
-  const panel = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.46)';
-  const text = isDark ? '#f0f0e8' : '#15120d';
-  const objectSvg = buildActionObjectSvg(card, scene, isDark);
+  const objectSvg = buildActionObjectSvg(card, scene);
   return `
     <svg class="act-scene-svg" viewBox="0 0 320 88" role="img" aria-label="${card.name}小场景">
+      <defs>
+        <filter id="neon-glow-${card.id}" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
       <rect width="320" height="88" fill="${scene.bg}"/>
-      <g opacity="${isDark ? '0.34' : '0.28'}" stroke="${scene.accent}" stroke-width="1">
+      <g opacity="0.15" stroke="${scene.accent}" stroke-width="1">
         ${Array.from({ length: 9 }).map((_, i) => `<path d="M${i * 40 - 12} 0 V88"/>`).join('')}
         ${Array.from({ length: 4 }).map((_, i) => `<path d="M0 ${i * 22 + 10} H320"/>`).join('')}
       </g>
-      <circle cx="272" cy="20" r="13" fill="${scene.accent}" opacity="0.55"/>
+      <circle cx="272" cy="20" r="13" fill="${scene.accent}" opacity="0.3" filter="url(#neon-glow-${card.id})"/>
       <rect x="0" y="63" width="320" height="25" fill="${scene.floor}"/>
-      <path d="M0 64 H320" stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-dasharray="8 7"/>
+      <path d="M0 64 H320" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-dasharray="8 7"/>
       <g transform="translate(36 47)">
-        <rect x="-20" y="-18" width="40" height="31" fill="${panel}" stroke="${text}" stroke-width="2" transform="rotate(-6)"/>
-        <text x="0" y="4" text-anchor="middle" font-size="${String(scene.left).length > 2 ? '10' : '18'}" fill="${text}" font-family="sans-serif">${scene.left}</text>
+        <rect x="-20" y="-18" width="40" height="31" fill="rgba(255,255,255,0.05)" stroke="${scene.accent}" stroke-width="1.5" transform="rotate(-6)" opacity="0.8"/>
+        <text x="0" y="5" text-anchor="middle" font-size="${String(scene.left).length > 2 ? '10' : '18'}" fill="#f3e8ee" font-family="sans-serif">${scene.left}</text>
       </g>
       <g transform="translate(282 47)">
-        <rect x="-20" y="-22" width="40" height="36" fill="${panel}" stroke="${text}" stroke-width="2" transform="rotate(6)"/>
-        <text x="0" y="4" text-anchor="middle" font-size="${String(scene.right).length > 2 ? '10' : '18'}" fill="${text}" font-family="sans-serif">${scene.right}</text>
+        <rect x="-20" y="-22" width="40" height="36" fill="rgba(255,255,255,0.05)" stroke="${scene.accent}" stroke-width="1.5" transform="rotate(6)" opacity="0.8"/>
+        <text x="0" y="5" text-anchor="middle" font-size="${String(scene.right).length > 2 ? '10' : '18'}" fill="#f3e8ee" font-family="sans-serif">${scene.right}</text>
       </g>
       <g transform="translate(142 49)">
         ${buildTinyActionMayfly(scene.accent, danger)}
       </g>
-      <g transform="translate(210 47)">
+      <g transform="translate(210 47)" filter="url(#neon-glow-${card.id})">
         ${objectSvg}
-        ${danger ? `<path d="M-31 -29 L31 29 M31 -29 L-31 29" stroke="#ff2d78" stroke-width="4" stroke-linecap="round" opacity="0.42"/>` : ''}
+        ${danger ? `<path d="M-31 -29 L31 29 M31 -29 L-31 29" stroke="#ff2d78" stroke-width="4" stroke-linecap="round" opacity="0.8"/>` : ''}
       </g>
-      <rect x="10" y="9" width="86" height="20" fill="#15120d"/>
-      <text x="19" y="23" fill="${scene.accent}" font-size="10" font-family="monospace">${shortText(scene.label, 12)}</text>
+      <rect x="10" y="9" width="86" height="20" fill="#06050b" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <text x="19" y="23" fill="${scene.accent}" font-size="10" font-family="monospace" font-weight="bold">${shortText(scene.label, 12)}</text>
     </svg>
   `;
 }
@@ -7301,60 +7465,60 @@ function buildTinyActionMayfly(accent, danger) {
   const pupilY = danger ? -12 : -10;
   return `
     <g>
-      <ellipse cx="-18" cy="-15" rx="25" ry="12" fill="#d8f7ff" opacity="0.78" stroke="#15120d" stroke-width="2"/>
-      <ellipse cx="18" cy="-15" rx="25" ry="12" fill="#d8f7ff" opacity="0.78" stroke="#15120d" stroke-width="2"/>
-      <ellipse cx="0" cy="8" rx="12" ry="21" fill="#c38a35" stroke="#15120d" stroke-width="3"/>
-      <circle cx="0" cy="-8" r="16" fill="#f1bf56" stroke="#15120d" stroke-width="3"/>
-      <circle cx="-7" cy="-11" r="6.3" fill="#fff8d8" stroke="#15120d" stroke-width="2"/>
-      <circle cx="8" cy="-11" r="6.3" fill="#fff8d8" stroke="#15120d" stroke-width="2"/>
+      <ellipse cx="-18" cy="-15" rx="25" ry="12" fill="rgba(0, 245, 212, 0.25)" opacity="0.8" stroke="#f3e8ee" stroke-width="1.5"/>
+      <ellipse cx="18" cy="-15" rx="25" ry="12" fill="rgba(0, 245, 212, 0.25)" opacity="0.8" stroke="#f3e8ee" stroke-width="1.5"/>
+      <ellipse cx="0" cy="8" rx="12" ry="21" fill="#a67c2c" stroke="#f3e8ee" stroke-width="2"/>
+      <circle cx="0" cy="-8" r="16" fill="#d9aa34" stroke="#f3e8ee" stroke-width="2"/>
+      <circle cx="-7" cy="-11" r="6.3" fill="#fff8d8" stroke="#15120d" stroke-width="1.5"/>
+      <circle cx="8" cy="-11" r="6.3" fill="#fff8d8" stroke="#15120d" stroke-width="1.5"/>
       <circle cx="${danger ? -9 : -6}" cy="${pupilY}" r="1.8" fill="#15120d"/>
       <circle cx="${danger ? 5 : 9}" cy="${pupilY}" r="1.8" fill="#15120d"/>
       <path d="${mouth}" fill="none" stroke="#15120d" stroke-width="2" stroke-linecap="round"/>
       <circle cx="-13" cy="-2" r="2.7" fill="#ddb0a3" opacity="0.6"/>
       <circle cx="13" cy="-2" r="2.7" fill="#ddb0a3" opacity="0.6"/>
       <path d="M-3 11 L0 15 L3 11" fill="none" stroke="#15120d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M-4 7 L0 11 L4 7 L0 4 Z" fill="#c35b4d" stroke="#15120d" stroke-width="1.5"/>
-      <path d="M-8 24 L-22 33 M0 26 L0 37 M8 24 L22 33" stroke="#15120d" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="0" cy="4" r="25" fill="none" stroke="${accent}" stroke-width="2" opacity="0.34"/>
+      <path d="M-4 7 L0 11 L4 7 L0 4 Z" fill="#c35b4d" stroke="#f3e8ee" stroke-width="1"/>
+      <path d="M-8 24 L-22 33 M0 26 L0 37 M8 24 L22 33" stroke="#f3e8ee" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="0" cy="4" r="25" fill="none" stroke="${accent}" stroke-width="2" opacity="0.5"/>
     </g>
   `;
 }
 
-function buildActionObjectSvg(card, scene, isDark) {
-  const stroke = isDark ? '#f5ebd6' : '#15120d';
-  const fill = isDark ? '#101722' : '#fff3b0';
+function buildActionObjectSvg(card, scene) {
+  const stroke = '#f3e8ee';
+  const fill = 'rgba(0, 0, 0, 0.4)';
   const accent = scene.accent;
   const category = card.category || 'think';
   if (category === 'work' || card.id === 'final-ppt') {
     return `
       <g>
-        <rect x="-30" y="-24" width="60" height="40" rx="4" fill="${fill}" stroke="${stroke}" stroke-width="4"/>
+        <rect x="-30" y="-24" width="60" height="40" rx="4" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
         <rect x="-19" y="-14" width="18" height="14" fill="${accent}"/>
-        <path d="M6 4 L21 -12" stroke="${stroke}" stroke-width="4" stroke-linecap="round"/>
+        <path d="M6 4 L21 -12" stroke="${stroke}" stroke-width="3" stroke-linecap="round"/>
         <rect x="-18" y="20" width="36" height="5" fill="${stroke}" opacity="0.72"/>
       </g>`;
   }
   if (category === 'meeting') {
     return `
       <g>
-        <rect x="-28" y="-18" width="56" height="34" rx="5" fill="${fill}" stroke="${stroke}" stroke-width="4"/>
+        <rect x="-28" y="-18" width="56" height="34" rx="5" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
         <circle cx="-12" cy="-2" r="7" fill="${accent}"/>
         <circle cx="8" cy="-2" r="7" fill="${accent}" opacity="0.7"/>
-        <path d="M-18 14 H20" stroke="${stroke}" stroke-width="4" stroke-linecap="round"/>
+        <path d="M-18 14 H20" stroke="${stroke}" stroke-width="3" stroke-linecap="round"/>
       </g>`;
   }
   if (category === 'slack') {
     return `
       <g>
-        <path d="M-26 -14 h44 v24 q0 16 -18 16 h-9 q-18 0 -18 -16 v-11" fill="#f5ebd6" stroke="${stroke}" stroke-width="4"/>
-        <path d="M21 -11 q21 10 0 28" fill="none" stroke="${accent}" stroke-width="5" stroke-linecap="round"/>
+        <path d="M-26 -14 h44 v24 q0 16 -18 16 h-9 q-18 0 -18 -16 v-11" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
+        <path d="M21 -11 q21 10 0 28" fill="none" stroke="${accent}" stroke-width="4" stroke-linecap="round"/>
         <circle cx="-7" cy="1" r="5" fill="${accent}"/>
       </g>`;
   }
   if (category === 'phone' || card.id === 'doom-scroll') {
     return `
       <g>
-        <rect x="-18" y="-30" width="36" height="60" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="4"/>
+        <rect x="-18" y="-30" width="36" height="60" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
         <path d="M-8 -12 L9 0 L-8 12 Z" fill="${accent}"/>
         <circle cx="0" cy="22" r="3" fill="${stroke}"/>
       </g>`;
@@ -7362,31 +7526,31 @@ function buildActionObjectSvg(card, scene, isDark) {
   if (category === 'social') {
     return `
       <g>
-        <rect x="-32" y="-22" width="64" height="44" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="4"/>
-        <path d="M-9 0 C-22 -13 -2 -24 0 -9 C5 -24 24 -13 9 0 L0 12 Z" fill="${accent}" stroke="${stroke}" stroke-width="2"/>
-        <circle cx="23" cy="-17" r="8" fill="#ff2d78" stroke="${stroke}" stroke-width="3"/>
+        <rect x="-32" y="-22" width="64" height="44" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
+        <path d="M-9 0 C-22 -13 -2 -24 0 -9 C5 -24 24 -13 9 0 L0 12 Z" fill="${accent}" stroke="${stroke}" stroke-width="1.5"/>
+        <circle cx="23" cy="-17" r="8" fill="#ff2d78" stroke="${stroke}" stroke-width="2"/>
       </g>`;
   }
   if (category === 'ai') {
     return `
       <g>
-        <rect x="-31" y="-25" width="62" height="50" rx="9" fill="#101722" stroke="${accent}" stroke-width="4"/>
+        <rect x="-31" y="-25" width="62" height="50" rx="9" fill="${fill}" stroke="${accent}" stroke-width="3"/>
         <circle cx="-12" cy="-3" r="8" fill="${accent}"/>
         <circle cx="13" cy="-3" r="8" fill="${accent}" opacity="0.82"/>
-        <path d="M-16 16 H18" stroke="${accent}" stroke-width="4" stroke-linecap="round"/>
-        <path d="M-21 -25 V-35 M21 -25 V-35" stroke="${accent}" stroke-width="3" stroke-linecap="round"/>
+        <path d="M-16 16 H18" stroke="${accent}" stroke-width="3" stroke-linecap="round"/>
+        <path d="M-21 -25 V-35 M21 -25 V-35" stroke="${accent}" stroke-width="2" stroke-linecap="round"/>
       </g>`;
   }
   if (category === 'disrupt') {
     return `
       <g>
-        <rect x="-28" y="-22" width="56" height="44" rx="5" fill="${fill}" stroke="${stroke}" stroke-width="4"/>
-        <path d="M-18 9 L-2 -17 L2 1 L19 -12" fill="none" stroke="${accent}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="-28" y="-22" width="56" height="44" rx="5" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
+        <path d="M-18 9 L-2 -17 L2 1 L19 -12" fill="none" stroke="${accent}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
       </g>`;
   }
   return `
     <g>
-      <circle r="28" fill="${fill}" stroke="${stroke}" stroke-width="4"/>
+      <circle r="28" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
       <path d="M-14 2 Q0 -18 14 2 Q4 18 -14 2 Z" fill="${accent}" opacity="0.92"/>
       <circle cx="0" cy="2" r="6" fill="${stroke}"/>
     </g>`;
@@ -8690,11 +8854,27 @@ function triggerDeath(death) {
   const legacyCard = CORE.buildLegacyCard(postcard, report);
 
   // 角色解锁
+  const newlyUnlocked = [];
   if (death.id !== 'natural' || gameState.turnCount >= 3 || gameState.disruption >= 50) {
     if (!gameState.unlockedChars.includes('mosquito')) {
       gameState.unlockedChars.push('mosquito');
+      newlyUnlocked.push('mosquito');
     }
   }
+  if (death.id === 'self-optimized-away' || (gameState.npc && gameState.npc.boss >= 70)) {
+    if (!gameState.unlockedChars.includes('old_wang')) {
+      gameState.unlockedChars.push('old_wang');
+      newlyUnlocked.push('old_wang');
+    }
+  }
+  if (death.id === 'permanent-away' || (gameState.npc && gameState.npc.slacker >= 70)) {
+    if (!gameState.unlockedChars.includes('slacker_yu')) {
+      gameState.unlockedChars.push('slacker_yu');
+      newlyUnlocked.push('slacker_yu');
+    }
+  }
+  gameState.newlyUnlockedThisRun = newlyUnlocked;
+
   recordProgress(postcard, report, legacyCard);
   saveProgress();
 
@@ -8823,9 +9003,18 @@ function playDeathAnimation(postcard, explanation, report, ledger, memorial, leg
     <span>荒诞债 ${postcard.absurdDebt}</span>
   `;
 
-  // 检查是否新解锁
-  if (gameState.unlockedChars.includes('mosquito') && gameState.character.id === 'mayfly') {
-    statsEl.innerHTML += `<span style="color: var(--neon-green);">🔓 解锁新角色：蚊子!</span>`;
+  // 检查是否新解锁角色并渲染横幅
+  const unlockBanner = document.getElementById('death-unlock-banner');
+  if (gameState.newlyUnlockedThisRun && gameState.newlyUnlockedThisRun.length > 0) {
+    const nextUnlockId = gameState.newlyUnlockedThisRun[0];
+    const unlockedChar = CORE.CHARACTERS[nextUnlockId];
+    if (unlockedChar) {
+      unlockBanner.style.display = 'block';
+      document.getElementById('death-unlock-name').textContent = `【${unlockedChar.emoji} ${unlockedChar.name}】`;
+      document.getElementById('death-unlock-desc').textContent = `${unlockedChar.subtitle}。${unlockedChar.description}`;
+    }
+  } else {
+    unlockBanner.style.display = 'none';
   }
 
   const collectionEl = document.getElementById('death-collection');
@@ -8836,6 +9025,62 @@ function playDeathAnimation(postcard, explanation, report, ledger, memorial, leg
     <span>人格 ${summary.personalityCount.collected}/${summary.personalityCount.total}</span>
     <span>遗产 ${(progress.legacyCards || []).length}</span>
   `;
+
+  // 终局绩效复盘评估报告
+  const reviewEl = document.getElementById('death-review-card');
+  if (reviewEl) {
+    const review = CORE.buildEndgameReview(gameState);
+    const makeBar = (val) => `
+      <div class="progress-mini" title="${val}%">
+        <div class="progress-mini-bar" style="width: ${val}%"></div>
+      </div>
+    `;
+    reviewEl.innerHTML = `
+      <div class="death-review-title">
+        <span>📊 终局绩效复盘评估报告</span>
+        <span class="death-review-grade">${review.grade}</span>
+      </div>
+      <div class="death-review-subtitle">
+        评级结论：${review.gradeExplain}
+      </div>
+      <div class="death-review-grid">
+        <div class="death-review-item" style="border-left-color: var(--neon-cyan);">
+          <div class="death-review-label">路线完成度</div>
+          <div class="death-review-value">
+            <span>${review.routeCompletion}%</span>
+            ${makeBar(review.routeCompletion)}
+          </div>
+        </div>
+        <div class="death-review-item" style="border-left-color: var(--neon-yellow);">
+          <div class="death-review-label">自主决策率</div>
+          <div class="death-review-value">
+            <span>${review.proactivity}%</span>
+            ${makeBar(review.proactivity)}
+          </div>
+        </div>
+        <div class="death-review-item" style="border-left-color: var(--neon-pink);">
+          <div class="death-review-label">背锅等级</div>
+          <div class="death-review-value">
+            <span style="font-size: 0.8rem; font-weight: bold; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              ${review.scapegoatLabel} (${review.scapegoatIndex}%)
+            </span>
+          </div>
+        </div>
+        <div class="death-review-item" style="border-left-color: var(--neon-purple);">
+          <div class="death-review-label">荒诞债大头</div>
+          <div class="death-review-value">
+            <span style="font-size: 0.8rem; font-weight: bold; color: var(--neon-yellow); width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              ${review.debtDominant}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="death-review-full">
+        <div class="death-review-summary"><strong>背锅分析：</strong>${review.scapegoatDesc}</div>
+        <div class="death-review-debt-desc"><strong>负债诊断：</strong>${review.debtDominantDesc}</div>
+      </div>
+    `;
+  }
 
   document.getElementById('death-legacy-emoji').textContent = legacyCard.emoji || '🌀';
   document.getElementById('death-legacy-name').textContent = `${legacyCard.title}${legacyCard.stack > 1 ? ` ×${legacyCard.stack}` : ''}`;
@@ -8896,6 +9141,7 @@ function playDeathAnimation(postcard, explanation, report, ledger, memorial, leg
     .fromTo('.death-stats span', cleanVarsForReducedMotion({ opacity: 0, x: -10 }), cleanVarsForReducedMotion({ opacity: 1, x: 0, duration: 0.3, stagger: 0.1 }), '-=0.2')
     .fromTo('.death-collection span', cleanVarsForReducedMotion({ opacity: 0, y: 8 }), cleanVarsForReducedMotion({ opacity: 1, y: 0, duration: 0.25, stagger: 0.06 }), '-=0.1')
     .fromTo('.death-next', cleanVarsForReducedMotion({ opacity: 0, y: 12 }), cleanVarsForReducedMotion({ opacity: 1, y: 0, duration: 0.35 }), '-=0.1')
+    .fromTo('.death-review', cleanVarsForReducedMotion({ opacity: 0, y: 14 }), cleanVarsForReducedMotion({ opacity: 1, y: 0, duration: 0.35 }), '-=0.1')
     .fromTo('.death-report', cleanVarsForReducedMotion({ opacity: 0, y: 14 }), cleanVarsForReducedMotion({ opacity: 1, y: 0, duration: 0.4 }), '-=0.1')
     .fromTo('.death-btns', cleanVarsForReducedMotion({ y: 20, opacity: 0 }), cleanVarsForReducedMotion({ y: 0, opacity: 1, duration: 0.4 }), '-=0.1');
 }
@@ -8973,7 +9219,21 @@ init();
 <script>
 // Service Worker registration (PWA offline support)
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(() => {});
+  // 本地开发环境下注销 Service Worker 防止强缓存导致修改不生效
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister().then((success) => {
+          if (success) {
+            console.log('Dev Mode: Service Worker unregistered for cache busting');
+            location.reload();
+          }
+        });
+      }
+    });
+  } else {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
 }
 </script>
 </body>

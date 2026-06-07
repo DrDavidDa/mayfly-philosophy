@@ -2076,3 +2076,188 @@ test('daily challenge weekend-recovery applies passive stats recovery on card pl
   const expectedAnxietyWithoutRecovery = Math.max(0, state.stats.anxiety + (card.effect.anxiety || 0));
   assert.ok(next.stats.anxiety < expectedAnxietyWithoutRecovery + 3);
 });
+
+test('mosquito character increases disruption gain and health loss', () => {
+  let state = core.createRunState('mosquito');
+  const card = core.ACTION_CARDS.find(item => item.id === 'voluntary-overtime');
+  
+  // Base disruption is -5. Should not increase because it is not positive.
+  // Base health is -8. Mosquito increases negative health effect by 1.5x (Math.round(-8 * 1.5) = -12)
+  const next = core.applyCard(state, card);
+  assert.equal(next.stats.health - state.stats.health, -12);
+  
+  // A card with positive disruption (e.g. toilet-slack has disruption: 10)
+  const slackCard = core.ACTION_CARDS.find(item => item.id === 'toilet-slack');
+  const nextSlack = core.applyCard(state, slackCard);
+  // Base disruption is 10, mosquito passive adds +5.
+  assert.equal(nextSlack.disruption - state.disruption, 15);
+});
+
+test('old_wang character reduces work card time and doubles boss affinity and absurdDebt', () => {
+  let state = core.createRunState('old_wang');
+  const card = core.ACTION_CARDS.find(item => item.id === 'voluntary-overtime');
+  
+  // voluntary-overtime is work category.
+  // Base time: 2.5. Old Wang reduces it by 30% -> 2.5 * 0.7 = 1.75
+  // Base boss affinity: 12. Old Wang doubles it -> 24
+  // Base absurdDebt: 15. Old Wang doubles it -> 30
+  const next = core.applyCard(state, card);
+  assert.equal(state.timeLeft - next.timeLeft, 1.75);
+  assert.equal(next.npc.boss - state.npc.boss, 24);
+  assert.equal(next.absurdDebt - state.absurdDebt, 30);
+});
+
+test('slacker_yu character increases slacking recovery and decays boss affinity each turn', () => {
+  let state = core.createRunState('slacker_yu');
+  const card = core.ACTION_CARDS.find(item => item.id === 'toilet-slack');
+  
+  // toilet-slack is slack category.
+  // Base spirit: 12. Slacker Yu increases by 1.5x -> 18
+  // Boss affinity decay: -3
+  const next = core.applyCard(state, card);
+  assert.equal(next.stats.spirit - state.stats.spirit, 18);
+  assert.equal(next.npc.boss - state.npc.boss, -3);
+});
+
+test('character unlock conditions logic', () => {
+  // Helper to simulate the check logic
+  function checkUnlocks(unlockedChars, deathId, turnCount, disruption, bossAffinity, slackerAffinity) {
+    const newlyUnlocked = [];
+    const currentUnlocked = [...unlockedChars];
+    
+    // Mosquito condition
+    if (deathId !== 'natural' || turnCount >= 3 || disruption >= 50) {
+      if (!currentUnlocked.includes('mosquito')) {
+        currentUnlocked.push('mosquito');
+        newlyUnlocked.push('mosquito');
+      }
+    }
+    // Old Wang condition
+    if (deathId === 'self-optimized-away' || bossAffinity >= 70) {
+      if (!currentUnlocked.includes('old_wang')) {
+        currentUnlocked.push('old_wang');
+        newlyUnlocked.push('old_wang');
+      }
+    }
+    // Slacker Yu condition
+    if (deathId === 'permanent-away' || slackerAffinity >= 70) {
+      if (!currentUnlocked.includes('slacker_yu')) {
+        currentUnlocked.push('slacker_yu');
+        newlyUnlocked.push('slacker_yu');
+      }
+    }
+    return { currentUnlocked, newlyUnlocked };
+  }
+
+  // Case 1: Early natural death with low stats -> only mosquito unlocks if turnCount >= 3
+  const r1 = checkUnlocks(['mayfly'], 'natural', 3, 10, 30, 40);
+  assert.deepEqual(r1.newlyUnlocked, ['mosquito']);
+
+  // Case 2: High boss affinity death -> unlocks mosquito (turnCount >= 3) and old_wang
+  const r2 = checkUnlocks(['mayfly'], 'natural', 5, 10, 72, 40);
+  assert.deepEqual(r2.newlyUnlocked, ['mosquito', 'old_wang']);
+
+  // Case 3: Permanent away death -> unlocks mosquito (turnCount >= 3) and slacker_yu
+  const r3 = checkUnlocks(['mayfly', 'mosquito'], 'permanent-away', 8, 12, 40, 50);
+  assert.deepEqual(r3.newlyUnlocked, ['slacker_yu']);
+});
+
+test('buildEndgameReview evaluates player performance correctly', () => {
+  // Case 1: Null/Empty state should return defaults (Grade F)
+  const emptyReview = core.buildEndgameReview(null);
+  assert.equal(emptyReview.grade, 'F');
+  assert.equal(emptyReview.proactivity, 100);
+
+  // Case 2: Early death (turnCount < 5) should trigger Grade F
+  const stateF = {
+    turnCount: 3,
+    history: [
+      { category: 'work', absurdDebt: 10 },
+      { category: 'event', absurdDebt: 0 },
+      { category: 'meeting', absurdDebt: 5 }
+    ],
+    stats: { spirit: 60, health: 60 },
+    disruption: 10
+  };
+  const reviewF = core.buildEndgameReview(stateF);
+  assert.equal(reviewF.grade, 'F');
+  assert.ok(reviewF.proactivity > 0);
+
+  // Case 3: High disruption (disruption >= 120) should trigger Grade S
+  const stateS = {
+    turnCount: 8,
+    disruption: 150,
+    history: [
+      { category: 'work', absurdDebt: 10 },
+      { category: 'meeting', absurdDebt: 20 },
+      { category: 'ai', absurdDebt: 40 },
+      { category: 'event', absurdDebt: 0 }
+    ],
+    stats: { spirit: 40, health: 40 }
+  };
+  const reviewS = core.buildEndgameReview(stateS);
+  assert.equal(reviewS.grade, 'S');
+
+  // Case 4: High proactivity and high route completion should trigger Grade A
+  const stateA = {
+    turnCount: 10,
+    disruption: 20,
+    categoryCounts: { work: 5 }, // 5 out of 7 -> 71% completion >= 70%
+    history: [
+      { category: 'work', absurdDebt: 10 },
+      { category: 'work', absurdDebt: 10 },
+      { category: 'work', absurdDebt: 10 },
+      { category: 'work', absurdDebt: 10 },
+      { category: 'work', absurdDebt: 10 },
+      { category: 'meeting', absurdDebt: 5 }
+    ],
+    stats: { spirit: 30, health: 35 }
+  };
+  const reviewA = core.buildEndgameReview(stateA);
+  assert.equal(reviewA.grade, 'A');
+  assert.equal(reviewA.routeCompletion, 71);
+
+  // Case 5: High scapegoat index (eventCount >= 6) should trigger Grade C
+  const stateC = {
+    turnCount: 10,
+    disruption: 10,
+    history: [
+      { category: 'event', absurdDebt: 10 },
+      { category: 'event', absurdDebt: 10 },
+      { category: 'event', absurdDebt: 10 },
+      { category: 'event', absurdDebt: 10 },
+      { category: 'event', absurdDebt: 10 },
+      { category: 'event', absurdDebt: 10 }
+    ],
+    stats: { spirit: 20, health: 30 }
+  };
+  const reviewC = core.buildEndgameReview(stateC);
+  assert.equal(reviewC.grade, 'C');
+  assert.ok(reviewC.scapegoatIndex >= 70);
+
+  // Case 6: High spirit & health with low anxiety should trigger Grade B+
+  const stateBPlus = {
+    turnCount: 6,
+    disruption: 5,
+    history: [
+      { category: 'slack', absurdDebt: 10 },
+      { category: 'phone', absurdDebt: 5 }
+    ],
+    stats: { spirit: 65, health: 70 }
+  };
+  const reviewBPlus = core.buildEndgameReview(stateBPlus);
+  assert.equal(reviewBPlus.grade, 'B+');
+
+  // Case 7: Debt breakdown and dominant source check (AI debt dominant)
+  const stateDebt = {
+    turnCount: 8,
+    history: [
+      { category: 'ai', absurdDebt: 50 },
+      { category: 'work', absurdDebt: 10 }
+    ],
+    stats: { spirit: 40, health: 40 }
+  };
+  const reviewDebt = core.buildEndgameReview(stateDebt);
+  assert.equal(reviewDebt.debtDominant, '提示词负债');
+  assert.equal(reviewDebt.debtBreakdown.ai, 83); // 50 / 60 = 83%
+});
