@@ -45,6 +45,28 @@
       description: '你的一生就是找机会叮一口。每个人都想拍死你，但你很自由。',
       color: 'var(--neon-pink)',
       locked: true
+    },
+    old_wang: {
+      id: 'old_wang',
+      name: '老王',
+      emoji: '🧎',
+      subtitle: '万物皆可卷，奋斗无终点',
+      baseStats: { spirit: 35, social: 45, health: 40, anxiety: 55 },
+      timeLimit: 24,
+      description: 'KPI专家。工作与开会时间减少30%，双倍老板好感，但双倍累积荒诞债。',
+      color: 'var(--neon-yellow)',
+      locked: true
+    },
+    slacker_yu: {
+      id: 'slacker_yu',
+      name: '小余',
+      emoji: '🛌',
+      subtitle: '生命在于静止，工作不如摸鱼',
+      baseStats: { spirit: 65, social: 25, health: 50, anxiety: 30 },
+      timeLimit: 24,
+      description: '摸鱼达人。摸鱼和刷手机效果提升50%，但每回合老板好感度自动-3。',
+      color: 'var(--neon-green)',
+      locked: true
     }
   };
 
@@ -2579,6 +2601,40 @@
       }
     }
 
+    // Apply character passive modifiers
+    if (state && state.characterId) {
+      if (state.characterId === 'mosquito') {
+        // Mosquito: disruption bonus +5, health negative effect increased by 50%
+        if (disruption > 0) {
+          disruption += 5;
+        }
+        if (effect.health < 0) {
+          effect.health = Math.round(effect.health * 1.5);
+        }
+      } else if (state.characterId === 'old_wang') {
+        // Old Wang: Work & meeting cards take 30% less time. Double boss affinity gains. Double absurdDebt gains.
+        if (card.category === 'work' || card.category === 'meeting') {
+          timeCost = Math.max(0.25, timeCost * 0.7);
+          if (npc.boss > 0) {
+            npc.boss = Math.round(npc.boss * 2);
+          }
+          if (absurdDebt > 0) {
+            absurdDebt = Math.round(absurdDebt * 2);
+          }
+        }
+      } else if (state.characterId === 'slacker_yu') {
+        // Slacker Yu: Slack/phone cards restore 50% more spirit/health
+        if (card.category === 'slack' || card.category === 'phone') {
+          if (effect.spirit > 0) {
+            effect.spirit = Math.round(effect.spirit * 1.5);
+          }
+          if (effect.health > 0) {
+            effect.health = Math.round(effect.health * 1.5);
+          }
+        }
+      }
+    }
+
     return {
       timeCost,
       effect,
@@ -2599,6 +2655,9 @@
     next.timeLeft = Math.max(0, next.timeLeft - impact.timeCost);
     applyDelta(next.stats, impact.effect, 0, 100);
     applyDelta(next.npc, impact.npc, 0, 100);
+    if (next.characterId === 'slacker_yu') {
+      next.npc.boss = Math.max(0, next.npc.boss - 3);
+    }
     next.disruption = clamp(next.disruption + impact.disruption, 0, 999);
     next.absurdDebt = clamp(next.absurdDebt + impact.absurdDebt, 0, 100);
     next.turnCount += 1;
@@ -4862,6 +4921,138 @@
     };
   }
 
+  function buildEndgameReview(state) {
+    if (!state || !state.history) {
+      return {
+        routeCompletion: 0,
+        proactivity: 100,
+        scapegoatIndex: 0,
+        scapegoatLabel: '无所事事',
+        scapegoatDesc: '你甚至没开始上班就结束了。',
+        debtBreakdown: { work: 0, ai: 0, slack: 0, social: 0, other: 0 },
+        debtDominant: '无',
+        debtDominantDesc: '没有产生任何债务，这很不现代。',
+        grade: 'F',
+        gradeExplain: '试用期未过即淘汰，不留痕迹。'
+      };
+    }
+
+    const history = state.history || [];
+    const totalCount = history.length || 1;
+    const activeCount = history.filter((item) => item.category && item.category !== 'event').length;
+    const eventCount = history.filter((item) => item.category === 'event').length;
+
+    // 1. Proactivity
+    const proactivity = Math.round((activeCount / totalCount) * 100);
+
+    // 2. Scapegoat Index
+    const scapegoatIndex = Math.min(100, eventCount * 12);
+    let scapegoatLabel = '完美闪避';
+    let scapegoatDesc = '你滑得像抹了油，所有待办和黑锅都在你身边物理弹开。';
+    if (scapegoatIndex > 15 && scapegoatIndex <= 45) {
+      scapegoatLabel = '日常接锅手';
+      scapegoatDesc = '在茶水间和会议的边缘偶尔顶包，虽然叹气但还能应付。';
+    } else if (scapegoatIndex > 45 && scapegoatIndex <= 75) {
+      scapegoatLabel = '资深背锅侠';
+      scapegoatDesc = '你的工牌上挂满了无主的需求与责任，成为了团队的中流砥柱（指最容易被问责那个）。';
+    } else if (scapegoatIndex > 75) {
+      scapegoatLabel = '背锅大宗师';
+      scapegoatDesc = '你已经把背锅升华为艺术，公司流程因为你承受了所有，简直是系统运行的血肉地基。';
+    }
+
+    // 3. Route Completion
+    const route = buildRouteStatus(state);
+    const routeCount = route.active ? route.count : 0;
+    const routeCompletion = Math.min(100, Math.round((routeCount / 7) * 100));
+
+    // 4. Absurd Debt Breakdown
+    let workDebt = 0;
+    let aiDebt = 0;
+    let slackDebt = 0;
+    let socialDebt = 0;
+    let otherDebt = 0;
+
+    history.forEach((item) => {
+      const debt = item.absurdDebt || 0;
+      if (debt <= 0) return;
+      if (item.category === 'work' || item.category === 'meeting') {
+        workDebt += debt;
+      } else if (item.category === 'ai') {
+        aiDebt += debt;
+      } else if (item.category === 'slack' || item.category === 'phone') {
+        slackDebt += debt;
+      } else if (item.category === 'social') {
+        socialDebt += debt;
+      } else {
+        otherDebt += debt;
+      }
+    });
+
+    const totalDebt = workDebt + aiDebt + slackDebt + socialDebt + otherDebt || 1;
+    const debtBreakdown = {
+      work: Math.round((workDebt / totalDebt) * 100),
+      ai: Math.round((aiDebt / totalDebt) * 100),
+      slack: Math.round((slackDebt / totalDebt) * 100),
+      social: Math.round((socialDebt / totalDebt) * 100),
+      other: Math.round((otherDebt / totalDebt) * 100)
+    };
+
+    let debtDominant = '无';
+    let debtDominantDesc = '本局没有背上任何荒诞债，清白得不像是现代职场人。';
+    const maxVal = Math.max(workDebt, aiDebt, slackDebt, socialDebt, otherDebt);
+    if (maxVal > 0) {
+      if (maxVal === workDebt) {
+        debtDominant = '会议内卷';
+        debtDominantDesc = '你在无尽的PPT地狱和对齐会里反复被摩擦，完成了灵肉的双重消磨。';
+      } else if (maxVal === aiDebt) {
+        debtDominant = '提示词负债';
+        debtDominantDesc = '你把灵魂和脑力外包给了大模型，省下的时间全部变成了“代写周报”的巨额提示词利息。';
+      } else if (maxVal === slackDebt) {
+        debtDominant = '摆烂反噬';
+        debtDominantDesc = '在厕所和假IDE的庇护下，你积累了巨额的良心债与拖延税，最终还是被离席热力图逮捕。';
+      } else if (maxVal === socialDebt) {
+        debtDominant = '朋友圈人情';
+        debtDominantDesc = '你为了虚无的职场关系四处点赞社交，每一口奶茶都暗中标记好了人情债单的利息。';
+      } else {
+        debtDominant = '随机事故';
+        debtDominantDesc = '命运的黑天鹅总是挑你下手，哪怕是不起眼的小动作也能衍生出巨额债单。';
+      }
+    }
+
+    // 5. Grade
+    let grade = 'B';
+    let gradeExplain = '合格的系统燃料，完成了中规中矩的消耗。';
+    if (state.turnCount < 5) {
+      grade = 'F';
+      gradeExplain = '试用期未过即淘汰，不留痕迹。';
+    } else if (state.disruption >= 120 || routeCompletion === 100) {
+      grade = 'S';
+      gradeExplain = '让系统严重卡顿的搅局先驱，甚至惊动了决策层。';
+    } else if (proactivity >= 85 && routeCompletion >= 70) {
+      grade = 'A';
+      gradeExplain = '自我驱动的优秀牛马，积极承接了大量待办。';
+    } else if (scapegoatIndex >= 70) {
+      grade = 'C';
+      gradeExplain = '默认附件接收器，替团队承受了太多的沉重。';
+    } else if (state.stats && state.stats.spirit >= 50 && state.stats.health >= 50) {
+      grade = 'B+';
+      gradeExplain = '养生摸鱼专家，以极高的状态存活，摸鱼成仙。';
+    }
+
+    return {
+      routeCompletion,
+      proactivity,
+      scapegoatIndex,
+      scapegoatLabel,
+      scapegoatDesc,
+      debtBreakdown,
+      debtDominant,
+      debtDominantDesc,
+      grade,
+      gradeExplain
+    };
+  }
+
   function buildCausalityLedger(state) {
     const entries = state.history
       .filter((item) => item.causality)
@@ -5821,6 +6012,7 @@
     resolveConsequenceResponse,
     buildPersonalityReport,
     buildCausalityLedger,
+    buildEndgameReview,
     formatCountdown,
     formatWorldTime,
     formatLifeAge,
