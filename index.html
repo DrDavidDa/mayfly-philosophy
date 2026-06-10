@@ -6938,99 +6938,23 @@ function setCollectionTarget(kind, target) {
 // ========== 角色选择 ==========
 
 function buildCharacterPortrait(char, locked) {
-  const isMosquito = char.id === 'mosquito';
-  const isOldWang = char.id === 'old_wang';
-  const isSlackerYu = char.id === 'slacker_yu';
-  
-  const accent = isMosquito ? '#ff2d78' : isOldWang ? '#fee440' : isSlackerYu ? '#38b000' : '#00f5d4';
-  const body = isMosquito ? '#a06c48' : '#c38a35';
-  const face = isMosquito ? '#d0995e' : '#f1bf56';
-  const label = isMosquito ? '12H' : isOldWang ? '6H' : isSlackerYu ? '36H' : '24H';
-  const warning = locked ? 'LOCKED' : (isMosquito ? 'BITE ROUTE' : isOldWang ? 'WORK ROUTE' : isSlackerYu ? 'SLACK ROUTE' : 'MAYFLY ROUTE');
+  const images = {
+    mayfly: 'output/assets/mayfly-character-banner.png',
+    mosquito: 'output/assets/mosquito-character-banner.png',
+    old_wang: 'output/assets/old_wang-character-banner.png',
+    slacker_yu: 'output/assets/slacker_yu-character-banner.png'
+  };
 
-  const skyline = isMosquito
-    ? '<rect x="18" y="82" width="36" height="38" fill="#241525"/><rect x="72" y="70" width="44" height="50" fill="#2a172b"/><rect x="196" y="78" width="42" height="42" fill="#241525"/>'
-    : isOldWang
-    ? '<rect x="18" y="82" width="36" height="38" fill="#1a150b"/><rect x="72" y="70" width="44" height="50" fill="#2c2211"/><rect x="196" y="78" width="42" height="42" fill="#1a150b"/>'
-    : isSlackerYu
-    ? '<rect x="18" y="82" width="36" height="38" fill="#0d1b10"/><rect x="72" y="70" width="44" height="50" fill="#182c1b"/><rect x="196" y="78" width="42" height="42" fill="#0d1b10"/>'
-    : '<rect x="18" y="78" width="44" height="42" fill="#171827"/><rect x="88" y="62" width="52" height="58" fill="#222437"/><rect x="204" y="74" width="48" height="46" fill="#171827"/>';
-
-  let insect = '';
-  if (isMosquito) {
-    insect = `<g transform="translate(142 62)">
-        <ellipse cx="-30" cy="-14" rx="32" ry="14" fill="#d8f7ff" opacity="0.7" stroke="#fff" stroke-width="3"/>
-        <ellipse cx="29" cy="-13" rx="31" ry="14" fill="#d8f7ff" opacity="0.7" stroke="#fff" stroke-width="3"/>
-        <ellipse cx="0" cy="9" rx="15" ry="34" fill="${body}" stroke="#15110b" stroke-width="5"/>
-        <circle cx="0" cy="-21" r="24" fill="${face}" stroke="#15110b" stroke-width="5"/>
-        <path d="M21 -18 L64 -30" stroke="#15110b" stroke-width="5" stroke-linecap="round"/>
-        <circle cx="-9" cy="-25" r="8" fill="#fff8d8" stroke="#15110b" stroke-width="3"/><circle cx="9" cy="-25" r="8" fill="#fff8d8" stroke="#15110b" stroke-width="3"/>
-        <circle cx="-7" cy="-24" r="3" fill="#15110b"/><circle cx="12" cy="-24" r="3" fill="#15110b"/>
-      </g>`;
-  } else if (isOldWang) {
-    insect = `<g transform="translate(140 64)">
-        <ellipse cx="-28" cy="-12" rx="26" ry="12" fill="#d8f7ff" opacity="0.6" stroke="#fff" stroke-width="2.5"/>
-        <ellipse cx="28" cy="-12" rx="26" ry="12" fill="#d8f7ff" opacity="0.6" stroke="#fff" stroke-width="2.5"/>
-        <rect x="-15" y="6" width="30" height="30" fill="#1e293b" stroke="#15110b" stroke-width="4"/>
-        <path d="M-4 6 L4 6 L2 20 L-2 20 Z" fill="#dc2626"/>
-        <circle cx="0" cy="-20" r="24" fill="#f1bf56" stroke="#15110b" stroke-width="5"/>
-        <rect x="-16" y="-26" width="12" height="12" rx="2" fill="none" stroke="#15110b" stroke-width="3"/>
-        <rect x="4" y="-26" width="12" height="12" rx="2" fill="none" stroke="#15110b" stroke-width="3"/>
-        <line x1="-4" y1="-20" x2="4" y2="-20" stroke="#15110b" stroke-width="3"/>
-        <circle cx="-10" cy="-20" r="2.5" fill="#15110b"/>
-        <circle cx="10" cy="-20" r="2.5" fill="#15110b"/>
-        <path d="M-8 -44 Q-16 -56 -4 -62" fill="none" stroke="#15110b" stroke-width="4" stroke-linecap="round"/>
-        <path d="M8 -44 Q16 -56 4 -62" fill="none" stroke="#15110b" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="-15" cy="-10" r="3" fill="#ddb0a3" opacity="0.6"/>
-        <circle cx="15" cy="-10" r="3" fill="#ddb0a3" opacity="0.6"/>
-      </g>`;
-  } else if (isSlackerYu) {
-    insect = `<g transform="translate(140 64)">
-        <path d="M-45 20 Q0 -10 45 20 Q0 36 -45 20" fill="#4ade80" stroke="#15110b" stroke-width="4"/>
-        <circle cx="-20" cy="8" r="14" fill="#a3e635" stroke="#15110b" stroke-width="4"/>
-        <circle cx="-6" cy="8" r="13" fill="#a3e635" stroke="#15110b" stroke-width="4"/>
-        <circle cx="8" cy="8" r="12" fill="#a3e635" stroke="#15110b" stroke-width="4"/>
-        <circle cx="22" cy="5" r="15" fill="#84cc16" stroke="#15110b" stroke-width="4"/>
-        <path d="M16 1 Q19 5 22 1" fill="none" stroke="#15110b" stroke-width="3" stroke-linecap="round"/>
-        <path d="M25 1 Q28 5 31 1" fill="none" stroke="#15110b" stroke-width="3" stroke-linecap="round"/>
-        <text x="28" y="-18" fill="#a3e635" font-size="12" font-family="monospace" font-weight="bold">z</text>
-        <text x="36" y="-24" fill="#a3e635" font-size="16" font-family="monospace" font-weight="bold">Z</text>
-        <circle cx="14" cy="7" r="3" fill="#ddb0a3" opacity="0.6"/>
-      </g>`;
-  } else {
-    insect = `<g transform="translate(140 64)">
-        <ellipse cx="-34" cy="-18" rx="40" ry="19" fill="#d8f7ff" opacity="0.72" stroke="#fff" stroke-width="3"/>
-        <ellipse cx="34" cy="-18" rx="40" ry="19" fill="#d8f7ff" opacity="0.72" stroke="#fff" stroke-width="3"/>
-        <ellipse cx="0" cy="14" rx="18" ry="38" fill="${body}" stroke="#15110b" stroke-width="5"/>
-        <circle cx="0" cy="-20" r="27" fill="${face}" stroke="#15110b" stroke-width="5"/>
-        <circle cx="-11" cy="-25" r="9.5" fill="#fff8d8" stroke="#15110b" stroke-width="3"/><circle cx="12" cy="-25" r="9.5" fill="#fff8d8" stroke="#15110b" stroke-width="3"/>
-        <circle cx="-8" cy="-24" r="3" fill="#15110b"/><circle cx="15" cy="-24" r="3" fill="#15110b"/>
-        <path d="M-9 -6 Q0 2 11 -6" fill="none" stroke="#15110b" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="-18" cy="-11" r="4" fill="#ddb0a3" opacity="0.55"/>
-        <circle cx="19" cy="-11" r="4" fill="#ddb0a3" opacity="0.55"/>
-        <path d="M-6 10 L0 16 L6 10 L0 6 Z" fill="#c35b4d" stroke="#15110b" stroke-width="2"/>
-      </g>`;
-  }
-
-  const lockedStyle = locked ? 'filter: grayscale(1) brightness(0.4);' : '';
-
+  const src = images[char.id] || images.mayfly;
   return `
-    <svg viewBox="0 0 280 138" style="width: 100%; height: 100%; display: block; ${lockedStyle}" role="img" aria-label="${char.name}角色肖像">
-      <rect width="280" height="138" fill="${isMosquito ? '#2a1220' : isOldWang ? '#1e1c14' : isSlackerYu ? '#101c13' : '#101722'}"/>
-      <g opacity="0.26" stroke="${accent}" stroke-width="1">
-        <path d="M0 28 H280M0 56 H280M0 84 H280"/>
-        <path d="M38 0 V138M86 0 V138M134 0 V138M182 0 V138M230 0 V138"/>
-      </g>
-      <circle cx="230" cy="30" r="18" fill="${accent}" opacity="0.36"/>
-      ${skyline}
-      <rect x="0" y="120" width="280" height="18" fill="#0a0a0f"/>
-      <path d="M20 103 C62 70 88 111 124 82 C166 49 203 73 252 42" fill="none" stroke="${accent}" stroke-width="4" stroke-linecap="round" stroke-dasharray="11 8" opacity="0.88"/>
-      ${insect}
-      <rect x="14" y="12" width="58" height="24" fill="#15120d" stroke="${accent}" stroke-width="2"/>
-      <text x="43" y="29" text-anchor="middle" fill="${accent}" font-size="14" font-family="monospace">${label}</text>
-      <rect x="174" y="98" width="82" height="22" fill="#15120d" stroke="${accent}" stroke-width="2"/>
-      <text x="215" y="113" text-anchor="middle" fill="${accent}" font-size="9" font-family="monospace">${warning}</text>
-    </svg>
+    <img
+      class="char-portrait-image${locked ? ' locked' : ''}"
+      src="${src}"
+      alt="${char.name}角色肖像"
+      loading="eager"
+      decoding="async"
+      style="${locked ? 'filter: grayscale(1) brightness(0.4);' : ''}"
+    >
   `;
 }
 
