@@ -5510,18 +5510,16 @@ body::after {
 
 body:has(#screen-game.active) {
   background:
-    radial-gradient(circle at 15% 15%, rgba(0, 245, 212, 0.15), transparent 30%),
-    radial-gradient(circle at 85% 85%, rgba(255, 45, 120, 0.12), transparent 35%),
-    linear-gradient(135deg, #0a0812 0%, #151124 50%, #06050b 100%) !important;
+    radial-gradient(circle at 18% 8%, rgba(255, 248, 231, 0.14), transparent 28%),
+    linear-gradient(135deg, #1c1820 0%, #25202a 45%, #161219 100%) !important;
 }
 
 #screen-game.active {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
-    radial-gradient(circle at 50% 20%, rgba(157, 78, 221, 0.15), transparent 40%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    linear-gradient(180deg, rgba(255, 248, 231, 0.06), rgba(255, 248, 231, 0.02)),
+    radial-gradient(circle at 52% 18%, rgba(231, 170, 52, 0.13), transparent 34%) !important;
+  border: 1px solid rgba(255, 248, 231, 0.1);
   border-radius: 18px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 
 #screen-game > .activity-grid {
@@ -5529,86 +5527,87 @@ body:has(#screen-game.active) {
 }
 
 .activity-btn.card-table-face {
-  --card-accent: var(--neon-purple);
-  --card-accent-rgb: var(--neon-purple-rgb);
+  --card-accent: var(--card-blue);
   display: flex !important;
   flex-direction: column !important;
   gap: 10px !important;
   min-height: 380px !important;
   padding: 12px !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+  border: 2px solid var(--card-line) !important;
   border-radius: var(--card-radius) !important;
-  background: linear-gradient(135deg, rgba(26, 20, 42, 0.85) 0%, rgba(18, 14, 30, 0.95) 100%) !important;
-  color: var(--paper-white) !important;
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 12px rgba(var(--card-accent-rgb), 0.15) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 248, 231, 0.94)),
+    repeating-linear-gradient(0deg, transparent 0 18px, rgba(42, 29, 18, 0.035) 18px 19px),
+    var(--card-paper) !important;
+  color: var(--card-ink) !important;
+  box-shadow: 0 16px 32px var(--card-shadow), inset 0 0 0 4px rgba(255, 255, 255, 0.46) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   overflow: hidden;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+  text-shadow: none !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
 
 .activity-btn.card-table-face.category-work,
 .activity-btn.card-table-face.category-meeting {
-  --card-accent: var(--neon-pink);
-  --card-accent-rgb: var(--neon-pink-rgb);
+  --card-accent: var(--card-warning);
 }
 .activity-btn.card-table-face.category-slack,
 .activity-btn.card-table-face.category-disrupt {
-  --card-accent: var(--neon-cyan);
-  --card-accent-rgb: var(--neon-cyan-rgb);
+  --card-accent: var(--card-green);
 }
 .activity-btn.card-table-face.category-social,
 .activity-btn.card-table-face.category-phone {
-  --card-accent: var(--neon-yellow);
-  --card-accent-rgb: var(--neon-yellow-rgb);
+  --card-accent: var(--card-gold);
 }
 .activity-btn.card-table-face.category-ai,
 .activity-btn.card-table-face.category-think {
-  --card-accent: var(--neon-purple);
-  --card-accent-rgb: var(--neon-purple-rgb);
+  --card-accent: var(--card-blue);
 }
 
 .activity-btn.card-table-face:hover {
   transform: translateY(-8px) scale(1.02) !important;
-  border-color: rgba(var(--card-accent-rgb), 0.7) !important;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.65), 0 0 20px rgba(var(--card-accent-rgb), 0.35), inset 0 0 16px rgba(var(--card-accent-rgb), 0.25) !important;
+  border-color: var(--card-accent) !important;
+  box-shadow: 0 24px 48px var(--card-shadow), inset 0 0 0 4px rgba(255, 255, 255, 0.6) !important;
 }
 
 .activity-btn.card-table-face::after {
   content: '出牌';
+  position: absolute;
   right: 12px;
   bottom: 12px;
   padding: 6px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  background: var(--neon-cyan);
-  color: #06050b;
+  border: 2px solid var(--card-line);
+  border-radius: 6px;
+  background: var(--card-paper);
+  color: var(--card-ink);
   font-family: var(--font-title);
   font-size: 0.92rem;
-  font-weight: 900;
+  font-weight: bold;
   line-height: 1;
-  box-shadow: 0 4px 12px rgba(0, 245, 212, 0.3);
+  box-shadow: 0 4px 8px var(--card-shadow);
   transition: all 0.2s ease;
 }
 
 .activity-btn.card-table-face:hover::after {
-  box-shadow: 0 4px 16px rgba(0, 245, 212, 0.6);
-  transform: scale(1.05);
+  background: var(--card-accent);
+  color: var(--card-paper);
+  border-color: var(--card-accent);
 }
 
 .activity-btn.card-table-face.recommended::before {
   content: '推荐';
+  position: absolute;
   top: 10px;
   right: 10px;
   z-index: 5;
-  background: var(--neon-yellow);
-  color: #06050b;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  box-shadow: 0 0 12px rgba(254, 228, 64, 0.6);
-  font-weight: 900;
+  padding: 4px 8px;
+  background: var(--card-gold);
+  color: var(--card-paper);
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px var(--card-shadow);
 }
 
 .card-face-topline {
@@ -6939,23 +6938,99 @@ function setCollectionTarget(kind, target) {
 // ========== 角色选择 ==========
 
 function buildCharacterPortrait(char, locked) {
-  const images = {
-    mayfly: 'output/assets/mayfly-character-banner.png',
-    mosquito: 'output/assets/mosquito-character-banner.png',
-    old_wang: 'output/assets/old_wang-character-banner.png',
-    slacker_yu: 'output/assets/slacker_yu-character-banner.png'
-  };
+  const isMosquito = char.id === 'mosquito';
+  const isOldWang = char.id === 'old_wang';
+  const isSlackerYu = char.id === 'slacker_yu';
+  
+  const accent = isMosquito ? '#ff2d78' : isOldWang ? '#fee440' : isSlackerYu ? '#38b000' : '#00f5d4';
+  const body = isMosquito ? '#a06c48' : '#c38a35';
+  const face = isMosquito ? '#d0995e' : '#f1bf56';
+  const label = isMosquito ? '12H' : isOldWang ? '6H' : isSlackerYu ? '36H' : '24H';
+  const warning = locked ? 'LOCKED' : (isMosquito ? 'BITE ROUTE' : isOldWang ? 'WORK ROUTE' : isSlackerYu ? 'SLACK ROUTE' : 'MAYFLY ROUTE');
 
-  const src = images[char.id] || images.mayfly;
+  const skyline = isMosquito
+    ? '<rect x="18" y="82" width="36" height="38" fill="#241525"/><rect x="72" y="70" width="44" height="50" fill="#2a172b"/><rect x="196" y="78" width="42" height="42" fill="#241525"/>'
+    : isOldWang
+    ? '<rect x="18" y="82" width="36" height="38" fill="#1a150b"/><rect x="72" y="70" width="44" height="50" fill="#2c2211"/><rect x="196" y="78" width="42" height="42" fill="#1a150b"/>'
+    : isSlackerYu
+    ? '<rect x="18" y="82" width="36" height="38" fill="#0d1b10"/><rect x="72" y="70" width="44" height="50" fill="#182c1b"/><rect x="196" y="78" width="42" height="42" fill="#0d1b10"/>'
+    : '<rect x="18" y="78" width="44" height="42" fill="#171827"/><rect x="88" y="62" width="52" height="58" fill="#222437"/><rect x="204" y="74" width="48" height="46" fill="#171827"/>';
+
+  let insect = '';
+  if (isMosquito) {
+    insect = `<g transform="translate(142 62)">
+        <ellipse cx="-30" cy="-14" rx="32" ry="14" fill="#d8f7ff" opacity="0.7" stroke="#fff" stroke-width="3"/>
+        <ellipse cx="29" cy="-13" rx="31" ry="14" fill="#d8f7ff" opacity="0.7" stroke="#fff" stroke-width="3"/>
+        <ellipse cx="0" cy="9" rx="15" ry="34" fill="${body}" stroke="#15110b" stroke-width="5"/>
+        <circle cx="0" cy="-21" r="24" fill="${face}" stroke="#15110b" stroke-width="5"/>
+        <path d="M21 -18 L64 -30" stroke="#15110b" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="-9" cy="-25" r="8" fill="#fff8d8" stroke="#15110b" stroke-width="3"/><circle cx="9" cy="-25" r="8" fill="#fff8d8" stroke="#15110b" stroke-width="3"/>
+        <circle cx="-7" cy="-24" r="3" fill="#15110b"/><circle cx="12" cy="-24" r="3" fill="#15110b"/>
+      </g>`;
+  } else if (isOldWang) {
+    insect = `<g transform="translate(140 64)">
+        <ellipse cx="-28" cy="-12" rx="26" ry="12" fill="#d8f7ff" opacity="0.6" stroke="#fff" stroke-width="2.5"/>
+        <ellipse cx="28" cy="-12" rx="26" ry="12" fill="#d8f7ff" opacity="0.6" stroke="#fff" stroke-width="2.5"/>
+        <rect x="-15" y="6" width="30" height="30" fill="#1e293b" stroke="#15110b" stroke-width="4"/>
+        <path d="M-4 6 L4 6 L2 20 L-2 20 Z" fill="#dc2626"/>
+        <circle cx="0" cy="-20" r="24" fill="#f1bf56" stroke="#15110b" stroke-width="5"/>
+        <rect x="-16" y="-26" width="12" height="12" rx="2" fill="none" stroke="#15110b" stroke-width="3"/>
+        <rect x="4" y="-26" width="12" height="12" rx="2" fill="none" stroke="#15110b" stroke-width="3"/>
+        <line x1="-4" y1="-20" x2="4" y2="-20" stroke="#15110b" stroke-width="3"/>
+        <circle cx="-10" cy="-20" r="2.5" fill="#15110b"/>
+        <circle cx="10" cy="-20" r="2.5" fill="#15110b"/>
+        <path d="M-8 -44 Q-16 -56 -4 -62" fill="none" stroke="#15110b" stroke-width="4" stroke-linecap="round"/>
+        <path d="M8 -44 Q16 -56 4 -62" fill="none" stroke="#15110b" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="-15" cy="-10" r="3" fill="#ddb0a3" opacity="0.6"/>
+        <circle cx="15" cy="-10" r="3" fill="#ddb0a3" opacity="0.6"/>
+      </g>`;
+  } else if (isSlackerYu) {
+    insect = `<g transform="translate(140 64)">
+        <path d="M-45 20 Q0 -10 45 20 Q0 36 -45 20" fill="#4ade80" stroke="#15110b" stroke-width="4"/>
+        <circle cx="-20" cy="8" r="14" fill="#a3e635" stroke="#15110b" stroke-width="4"/>
+        <circle cx="-6" cy="8" r="13" fill="#a3e635" stroke="#15110b" stroke-width="4"/>
+        <circle cx="8" cy="8" r="12" fill="#a3e635" stroke="#15110b" stroke-width="4"/>
+        <circle cx="22" cy="5" r="15" fill="#84cc16" stroke="#15110b" stroke-width="4"/>
+        <path d="M16 1 Q19 5 22 1" fill="none" stroke="#15110b" stroke-width="3" stroke-linecap="round"/>
+        <path d="M25 1 Q28 5 31 1" fill="none" stroke="#15110b" stroke-width="3" stroke-linecap="round"/>
+        <text x="28" y="-18" fill="#a3e635" font-size="12" font-family="monospace" font-weight="bold">z</text>
+        <text x="36" y="-24" fill="#a3e635" font-size="16" font-family="monospace" font-weight="bold">Z</text>
+        <circle cx="14" cy="7" r="3" fill="#ddb0a3" opacity="0.6"/>
+      </g>`;
+  } else {
+    insect = `<g transform="translate(140 64)">
+        <ellipse cx="-34" cy="-18" rx="40" ry="19" fill="#d8f7ff" opacity="0.72" stroke="#fff" stroke-width="3"/>
+        <ellipse cx="34" cy="-18" rx="40" ry="19" fill="#d8f7ff" opacity="0.72" stroke="#fff" stroke-width="3"/>
+        <ellipse cx="0" cy="14" rx="18" ry="38" fill="${body}" stroke="#15110b" stroke-width="5"/>
+        <circle cx="0" cy="-20" r="27" fill="${face}" stroke="#15110b" stroke-width="5"/>
+        <circle cx="-11" cy="-25" r="9.5" fill="#fff8d8" stroke="#15110b" stroke-width="3"/><circle cx="12" cy="-25" r="9.5" fill="#fff8d8" stroke="#15110b" stroke-width="3"/>
+        <circle cx="-8" cy="-24" r="3" fill="#15110b"/><circle cx="15" cy="-24" r="3" fill="#15110b"/>
+        <path d="M-9 -6 Q0 2 11 -6" fill="none" stroke="#15110b" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="-18" cy="-11" r="4" fill="#ddb0a3" opacity="0.55"/>
+        <circle cx="19" cy="-11" r="4" fill="#ddb0a3" opacity="0.55"/>
+        <path d="M-6 10 L0 16 L6 10 L0 6 Z" fill="#c35b4d" stroke="#15110b" stroke-width="2"/>
+      </g>`;
+  }
+
+  const lockedStyle = locked ? 'filter: grayscale(1) brightness(0.4);' : '';
+
   return `
-    <img
-      class="char-portrait-image${locked ? ' locked' : ''}"
-      src="${src}"
-      alt="${char.name}角色肖像"
-      loading="eager"
-      decoding="async"
-      style="${locked ? 'filter: grayscale(1) brightness(0.4);' : ''}"
-    >
+    <svg viewBox="0 0 280 138" style="width: 100%; height: 100%; display: block; ${lockedStyle}" role="img" aria-label="${char.name}角色肖像">
+      <rect width="280" height="138" fill="${isMosquito ? '#2a1220' : isOldWang ? '#1e1c14' : isSlackerYu ? '#101c13' : '#101722'}"/>
+      <g opacity="0.26" stroke="${accent}" stroke-width="1">
+        <path d="M0 28 H280M0 56 H280M0 84 H280"/>
+        <path d="M38 0 V138M86 0 V138M134 0 V138M182 0 V138M230 0 V138"/>
+      </g>
+      <circle cx="230" cy="30" r="18" fill="${accent}" opacity="0.36"/>
+      ${skyline}
+      <rect x="0" y="120" width="280" height="18" fill="#0a0a0f"/>
+      <path d="M20 103 C62 70 88 111 124 82 C166 49 203 73 252 42" fill="none" stroke="${accent}" stroke-width="4" stroke-linecap="round" stroke-dasharray="11 8" opacity="0.88"/>
+      ${insect}
+      <rect x="14" y="12" width="58" height="24" fill="#15120d" stroke="${accent}" stroke-width="2"/>
+      <text x="43" y="29" text-anchor="middle" fill="${accent}" font-size="14" font-family="monospace">${label}</text>
+      <rect x="174" y="98" width="82" height="22" fill="#15120d" stroke="${accent}" stroke-width="2"/>
+      <text x="215" y="113" text-anchor="middle" fill="${accent}" font-size="9" font-family="monospace">${warning}</text>
+    </svg>
   `;
 }
 
@@ -7359,22 +7434,11 @@ function shortText(text, maxLength) {
 
 function buildCardVisual(card, causalPreview) {
   const category = card.category || 'think';
-  const images = {
-    work: 'output/assets/card-art-work.png',
-    meeting: 'output/assets/card-art-meeting.png',
-    slack: 'output/assets/card-art-slack.png',
-    social: 'output/assets/card-art-social.png',
-    phone: 'output/assets/card-art-phone.png',
-    think: 'output/assets/card-art-think.png',
-    ai: 'output/assets/card-art-ai.png',
-    disrupt: 'output/assets/card-art-disrupt.png'
-  };
-  const src = images[category] || images.think;
   const danger = causalPreview.callback || ['danger', 'lethal'].includes(causalPreview.risk.level);
+  const scene = getActionScene(card);
   return `
-    <div class="act-visual ${category} ${danger ? 'danger' : ''}" style="position: relative; width: 100%; height: 100%; display: block; overflow: hidden;" aria-hidden="true">
-      <img src="${src}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) brightness(0.95);">
-      ${danger ? `<div class="danger-cross-indicator" style="position: absolute; inset: 0; background: rgba(255, 45, 120, 0.18); border: 2.5px solid var(--neon-pink); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--neon-pink); font-family: var(--font-pixel); text-shadow: 0 0 10px var(--neon-pink); backdrop-filter: blur(2px);">☠️<span style="font-size: 0.6rem; margin-top: 4px; letter-spacing: 0.1em; font-family: var(--font-body); font-weight: bold; background: var(--bg-void); padding: 2px 6px; border-radius: 4px;">警告：致命旧账</span></div>` : ''}
+    <div class="act-visual ${category} ${danger ? 'danger' : ''}" aria-hidden="true">
+      ${buildActionSceneSvg(scene, card, danger)}
     </div>
   `;
 }
