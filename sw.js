@@ -1,5 +1,5 @@
 // Mayfly Philosophy - Service Worker
-const CACHE_NAME = 'mayfly-v5';
+const CACHE_NAME = 'mayfly-v6';
 // CACHE_NAME = 'mayfly-v4'
 
 const ASSETS_TO_CACHE = [
@@ -15,6 +15,17 @@ const ASSETS_TO_CACHE = [
   './output/assets/mayfly-title-hero.png',
   './output/assets/mayfly-character-banner.png',
   './output/assets/mayfly-death-postcard.png',
+  './output/assets/mosquito-character-banner.png',
+  './output/assets/old_wang-character-banner.png',
+  './output/assets/slacker_yu-character-banner.png',
+  './output/assets/card-art-work.png',
+  './output/assets/card-art-meeting.png',
+  './output/assets/card-art-slack.png',
+  './output/assets/card-art-social.png',
+  './output/assets/card-art-phone.png',
+  './output/assets/card-art-think.png',
+  './output/assets/card-art-ai.png',
+  './output/assets/card-art-disrupt.png',
   './manifest.json',
   './icons/icon-192.svg',
   './icons/icon-512.svg'
