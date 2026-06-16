@@ -28,7 +28,7 @@
     mayfly: {
       id: 'mayfly',
       name: '蜉蝣',
-      emoji: '🪰',
+      emoji: '🪽',
       subtitle: '朝生暮死，卷生卷死',
       baseStats: { spirit: 50, social: 30, health: 60, anxiety: 40 },
       timeLimit: 24,
@@ -1120,7 +1120,7 @@
       id: 'perfect-mayfly',
       title: '完美蜉蝣',
       rarity: 'SR',
-      emoji: '🪰',
+      emoji: '🌟',
       color: 'var(--neon-yellow)',
       condition: (state) => state.stats.spirit >= 80 && state.stats.health >= 80 && state.stats.social >= 80 && state.stats.anxiety >= 80,
       epitaph: '你是蜉蝣中的神。但神也只活一天。'

@@ -2,3 +2,6 @@
 node_modules/
 .playwright-cli/
 test-results/
+output/assets/_phase11-backup/
+output/phase12-validation/
+output/phase13-validation/

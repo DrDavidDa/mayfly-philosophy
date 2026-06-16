@@ -6,6 +6,10 @@ const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const manifest = fs.readFileSync(new URL('../manifest.json', import.meta.url), 'utf8');
 const serviceWorker = fs.readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
 const readme = fs.readFileSync(new URL('../README.md', import.meta.url), 'utf8');
+const gameCore = fs.readFileSync(new URL('../src/game-core.js', import.meta.url), 'utf8');
+const sharePoster = fs.readFileSync(new URL('../src/share-poster.js', import.meta.url), 'utf8');
+const icon192 = fs.readFileSync(new URL('../icons/icon-192.svg', import.meta.url), 'utf8');
+const icon512 = fs.readFileSync(new URL('../icons/icon-512.svg', import.meta.url), 'utf8');
 const playtestGuide = fs.existsSync(new URL('../docs/playtest-feedback.md', import.meta.url))
   ? fs.readFileSync(new URL('../docs/playtest-feedback.md', import.meta.url), 'utf8')
   : '';
@@ -72,7 +76,7 @@ test('PWA paths are relative so GitHub Pages subdirectory deploys work', () => {
 });
 
 test('service worker gets fresh navigations before falling back to cache', () => {
-  assert.match(serviceWorker, /CACHE_NAME\s*=\s*'mayfly-v4'/);
+  assert.match(serviceWorker, /CACHE_NAME\s*=\s*'mayfly-v8'/);
   assert.match(serviceWorker, /event\.request\.mode\s*===\s*'navigate'/);
   assert.match(serviceWorker, /fetch\(event\.request\)[\s\S]*caches\.match\(event\.request\)/);
 });
@@ -107,17 +111,57 @@ test('visual readability pass raises tiny type and touch targets', () => {
   assert.doesNotMatch(html, /font-size:\s*0\.38rem\s*!important/);
 });
 
-test('visual layout pass balances desktop columns and readable cards', () => {
+test('adaptive layout repair uses scroll-safe mobile flow and bounded desktop columns', () => {
+  assert.match(html, /Phase 13 Adaptive Layout Repair/);
   assert.match(
     html,
-    /#screen-game\.active\s*\{[\s\S]*grid-template-columns:\s*minmax\(280px,\s*0\.9fr\)\s*minmax\(430px,\s*1\.15fr\)\s*minmax\(320px,\s*0\.95fr\)/
+    /@media \(min-width:\s*1081px\)[\s\S]*#screen-game\.active\s*\{[\s\S]*grid-template-columns:\s*minmax\(240px,\s*0\.78fr\)\s*minmax\(430px,\s*1fr\)\s*minmax\(360px,\s*0\.92fr\)/
   );
-  assert.match(html, /#screen-game > \.activity-grid\s*\{[\s\S]*max-height:\s*calc\(100dvh - 48px\)/);
-  assert.match(html, /#screen-game > \.objective-panel\s*\{[\s\S]*max-height:\s*min\(430px,\s*calc\(100dvh - 330px\)\)/);
-  assert.match(html, /body\.first-run-mode \.game-stage\s*\{[\s\S]*display:\s*block !important/);
-  assert.match(html, /body\.first-run-mode #screen-game > \.game-stage\s*\{[\s\S]*flex:\s*0 0 150px !important/);
-  assert.match(html, /body\.first-run-mode #screen-game > \.activity-grid\s*\{[\s\S]*flex:\s*0 0 268px !important/);
-  assert.match(html, /body\.first-run-mode \.objective-panel\s*\{[\s\S]*max-height:\s*220px !important/);
+  assert.match(
+    html,
+    /@media \(min-width:\s*1081px\)[\s\S]*#screen-game \.objective-head\s*\{[\s\S]*grid-template-columns:\s*1fr !important/
+  );
+  assert.match(
+    html,
+    /@media \(min-width:\s*1081px\)[\s\S]*#screen-game > \.objective-panel\s*\{[\s\S]*max-height:\s*calc\(100dvh - 300px\) !important[\s\S]*overflow-y:\s*auto !important/
+  );
+  assert.match(
+    html,
+    /@media \(min-width:\s*1081px\)[\s\S]*body\.first-run-mode:not\(\.details-open\) #screen-game \.objective-steps,[\s\S]*body\.first-run-mode:not\(\.details-open\) #screen-game \.objective-chips,[\s\S]*body\.first-run-mode:not\(\.details-open\) #screen-game \.objective-pulse\s*\{[\s\S]*display:\s*none !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*#screen-game\.active\s*\{[\s\S]*display:\s*flex !important[\s\S]*flex-direction:\s*column !important[\s\S]*overflow-y:\s*auto !important/
+  );
+  assert.match(
+    html,
+    /@media \(min-width:\s*721px\) and \(max-width:\s*1080px\)[\s\S]*body:not\(\.details-open\) #screen-game\.active\s*\{[\s\S]*display:\s*grid !important[\s\S]*grid-template-columns:\s*minmax\(300px,\s*0\.88fr\)\s*minmax\(400px,\s*1fr\)/
+  );
+  assert.match(
+    html,
+    /body\.first-run-mode \.objective-head,[\s\S]*body:not\(\.details-open\) \.objective-head\s*\{[\s\S]*display:\s*grid !important[\s\S]*grid-template-columns:\s*1fr !important/
+  );
+  assert.match(
+    html,
+    /@media \(min-width:\s*721px\) and \(max-width:\s*1080px\)[\s\S]*body:has\(#screen-game\.active\) #btn-floating-settings\s*\{[\s\S]*width:\s*44px !important[\s\S]*height:\s*44px !important/
+  );
+  assert.match(
+    html,
+    /@media \(min-width:\s*721px\) and \(max-width:\s*1080px\)[\s\S]*body:has\(#screen-game\.active\):not\(\.details-open\) #screen-game > \.stats-container\s*\{[\s\S]*padding:\s*6px 58px 6px 10px !important/
+  );
+  assert.match(
+    html,
+    /@media \(min-width:\s*721px\) and \(max-width:\s*1080px\)[\s\S]*body\.first-run-mode:not\(\.details-open\) #screen-game \.objective-steps,[\s\S]*body\.first-run-mode:not\(\.details-open\) #screen-game \.objective-chips,[\s\S]*body\.first-run-mode:not\(\.details-open\) #screen-game \.objective-pulse\s*\{[\s\S]*display:\s*none !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*\.hud-bar\s*\{[\s\S]*padding-right:\s*58px !important[\s\S]*body:has\(#screen-game\.active\) #btn-floating-settings\s*\{[\s\S]*width:\s*44px !important/
+  );
+  assert.match(html, /#screen-game > \.activity-grid\s*\{[\s\S]*height:\s*auto !important[\s\S]*max-height:\s*none !important/);
+  assert.match(html, /body\.first-run-mode #screen-game > \.activity-grid\s*\{[\s\S]*height:\s*auto !important[\s\S]*max-height:\s*none !important/);
+  assert.match(html, /\.event-card,\s*\.death-card,\s*\.feedback-panel,\s*\.panel-floating-settings\s*\{[\s\S]*max-height:\s*calc\(100dvh - 24px\)[\s\S]*overflow-y:\s*auto/);
+  assert.doesNotMatch(html, /height:\s*352px !important/);
+  assert.doesNotMatch(html, /max-height:\s*352px !important/);
   assert.match(html, /\.activity-btn \.act-compact-note\s*\{[\s\S]*font-size:\s*var\(--readable-sm\)/);
   assert.match(html, /\.activity-btn \.act-impact-chip\s*\{[\s\S]*min-height:\s*26px/);
 });
@@ -130,6 +174,101 @@ test('card table pass introduces a clean card-face surface', () => {
   assert.match(html, /\.card-face-art/);
   assert.match(html, /\.card-face-temptation/);
   assert.match(html, /\.card-face-risk/);
+});
+
+test('action card deck pass makes cards aligned and readable before the art', () => {
+  assert.match(html, /Phase 14 Action Deck Alignment/);
+  assert.match(html, /class="card-face-front-copy"/);
+  assert.match(html, /class="card-face-player-intent"/);
+  assert.match(html, /class="card-face-outcome-line/);
+  const cardTemplateStart = html.indexOf('btn.innerHTML = `');
+  const cardTemplate = html.slice(cardTemplateStart, html.indexOf('<div class="card-face-art', cardTemplateStart));
+  assert.ok(
+    cardTemplate.indexOf('<div class="card-face-front-copy">') < cardTemplate.indexOf('<div class="card-face-topline">'),
+    'specific action title and meaning should appear before generic card type/cost labels'
+  );
+  assert.match(html, /setAttribute\('data-card-index',\s*`\$\{index\}`\)/);
+  assert.match(html, /setAttribute\('style',\s*`--deck-index:\s*\$\{index\};`\)/);
+  assert.match(html, /gameState\.currentCards\s*=\s*\[\.\.\.gameState\.currentCards\]\.sort/);
+  assert.match(html, /return rightRecommended - leftRecommended/);
+  assert.match(
+    html,
+    /\.card-face-front-copy\s*\{[\s\S]*display:\s*grid[\s\S]*\.card-face-player-intent\s*\{[\s\S]*grid-template-columns:\s*auto minmax\(0,\s*1fr\)/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) #screen-game > \.activity-grid\s*\{[\s\S]*display:\s*grid !important[\s\S]*gap:\s*0 !important[\s\S]*padding-bottom:\s*72px !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) #screen-game > \.activity-grid\s*\{[\s\S]*position:\s*relative !important[\s\S]*isolation:\s*isolate/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) #screen-game > \.activity-grid \.activity-btn\.card-table-face\s*\{[\s\S]*grid-area:\s*1 \/ 1 !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) #screen-game > \.activity-grid \.activity-btn\.card-table-face:nth-child\(n\+2\)\s*\{[\s\S]*margin-top:\s*0 !important[\s\S]*height:\s*214px !important[\s\S]*transform:\s*translateY\(calc\(132px \+ var\(--deck-index\) \* 24px\)\)/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) #screen-game > \.activity-grid \.activity-btn\.card-table-face:nth-child\(n\+2\)\s*\{[\s\S]*z-index:\s*calc\(32 \+ var\(--deck-index\)\) !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) #screen-game > \.activity-grid \.activity-btn\.card-table-face:nth-child\(n\+2\) \.card-face-art\s*\{[\s\S]*display:\s*none !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) #screen-game > \.activity-grid \.activity-btn\.card-table-face\s*\{[\s\S]*box-sizing:\s*border-box !important[\s\S]*width:\s*100% !important[\s\S]*max-width:\s*100% !important[\s\S]*margin-left:\s*0 !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) #screen-game > \.activity-grid \.activity-btn\.card-table-face:first-child\s*\{[\s\S]*transform:\s*none !important/
+  );
+});
+
+test('density responsive pass removes mobile clutter, overlap, and tiny right-corner prompts', () => {
+  assert.match(html, /Phase 15 Density And Responsive Repair/);
+  assert.match(html, /\.char-display\s*\{[\s\S]*display:\s*none !important/);
+  assert.match(
+    html,
+    /body:not\(\.details-open\) \.objective-copy,[\s\S]*body:not\(\.details-open\) \.objective-rhythm,[\s\S]*body:not\(\.details-open\) \.objective-steps,[\s\S]*body:not\(\.details-open\) \.objective-chips,[\s\S]*body:not\(\.details-open\) \.objective-pulse\s*\{[\s\S]*display:\s*none !important/
+  );
+  assert.match(html, /body:not\(\.details-open\) \.card-face-type\s*\{[\s\S]*display:\s*none !important/);
+  assert.match(
+    html,
+    /body:has\(#screen-game\.active\) #btn-floating-settings\s*\{[\s\S]*width:\s*52px !important[\s\S]*height:\s*52px !important/
+  );
+  assert.match(html, /\.activity-btn\.card-table-face\.recommended::before\s*\{[\s\S]*display:\s*none !important[\s\S]*content:\s*none !important/);
+  assert.match(
+    html,
+    /\.activity-btn\.card-table-face\.recommended \.act-cta\s*\{[\s\S]*order:\s*-4[\s\S]*border-radius:\s*999px !important[\s\S]*font-size:\s*0\.9rem !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:has\(#screen-game\.active\) #btn-floating-settings\s*\{[\s\S]*width:\s*68px !important[\s\S]*height:\s*42px !important[\s\S]*border-radius:\s*999px !important/
+  );
+  assert.match(html, /#btn-floating-settings::after\s*\{[\s\S]*content:\s*'设置'/);
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) \.objective-copy,[\s\S]*body:not\(\.details-open\) \.objective-rhythm,[\s\S]*body:not\(\.details-open\) \.objective-steps,[\s\S]*body:not\(\.details-open\) \.objective-chips,[\s\S]*body:not\(\.details-open\) \.objective-pulse\s*\{[\s\S]*display:\s*none !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) #screen-game > \.activity-grid,[\s\S]*body\.details-open #screen-game > \.activity-grid\s*\{[\s\S]*gap:\s*10px !important[\s\S]*position:\s*static !important[\s\S]*isolation:\s*auto !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) #screen-game > \.activity-grid \.activity-btn\.card-table-face\s*\{[\s\S]*grid-area:\s*auto !important[\s\S]*height:\s*auto !important[\s\S]*transform:\s*none !important[\s\S]*z-index:\s*auto !important/
+  );
+  assert.match(
+    html,
+    /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) \.card-face-temptation,[\s\S]*body:not\(\.details-open\) \.card-face-risk,[\s\S]*body:not\(\.details-open\) \.card-face-chips\s*\{[\s\S]*display:\s*none !important/
+  );
+  assert.match(html, /@media \(max-width:\s*720px\)[\s\S]*body:not\(\.details-open\) \.card-face-type\s*\{[\s\S]*display:\s*none !important/);
+  assert.match(html, /@media \(max-width:\s*720px\)[\s\S]*\.objective-map-card\.task \.objective-map-text\s*\{[\s\S]*display:\s*-webkit-box !important/);
 });
 
 test('choice rendering uses core card faces instead of a raw stat wall', () => {
@@ -151,20 +290,90 @@ test('card table layout makes action cards the main play area on desktop', () =>
   );
 });
 
-test('card table mobile first-run slot is tall enough for full action cards', () => {
+test('card table mobile first-run uses natural card flow instead of a clipped slot', () => {
   assert.match(
     html,
-    /body\.first-run-mode #screen-game > \.activity-grid\s*\{[\s\S]*flex:\s*0 0 352px !important[\s\S]*height:\s*352px !important[\s\S]*max-height:\s*352px !important/
+    /body\.first-run-mode #screen-game > \.activity-grid\s*\{[\s\S]*display:\s*grid !important[\s\S]*grid-template-columns:\s*1fr !important[\s\S]*overflow:\s*visible !important/
+  );
+  assert.match(
+    html,
+    /body:not\(\.details-open\) #screen-game > \.activity-grid,[\s\S]*body\.details-open #screen-game > \.activity-grid\s*\{[\s\S]*display:\s*grid !important[\s\S]*width:\s*100% !important[\s\S]*position:\s*static !important[\s\S]*margin:\s*0 !important[\s\S]*scroll-snap-type:\s*none !important/
   );
 });
 
-test('card table mobile compresses the objective panel into a brief strip', () => {
+test('card table mobile keeps the objective readable without hiding essential context', () => {
   assert.match(
     html,
-    /body\.first-run-mode \.objective-panel\s*\{[\s\S]*flex:\s*0 0 86px !important[\s\S]*max-height:\s*86px !important/
+    /body\.first-run-mode \.objective-panel\s*\{[\s\S]*height:\s*auto !important[\s\S]*max-height:\s*clamp\(174px,\s*34dvh,\s*220px\) !important[\s\S]*overflow-y:\s*auto !important/
+  );
+  assert.doesNotMatch(
+    html,
+    /body\.first-run-mode \.objective-copy,\s*body\.first-run-mode \.objective-rhythm,\s*body\.first-run-mode \.objective-steps,\s*body\.first-run-mode \.objective-chips,\s*body\.first-run-mode \.objective-pulse\s*\{\s*display:\s*none !important;\s*\}/
+  );
+});
+
+test('adaptive layout keeps daily challenge banner controls inside mobile viewport', () => {
+  assert.match(html, /\.daily-challenge-banner\s*\{[\s\S]*top:\s*-420px/);
+  assert.match(
+    html,
+    /\.daily-challenge-banner\s*\{[\s\S]*width:\s*min\(500px,\s*calc\(100vw - 20px\)\) !important[\s\S]*max-height:\s*calc\(100dvh - 20px\) !important[\s\S]*overflow-y:\s*auto !important/
   );
   assert.match(
     html,
-    /body\.first-run-mode \.objective-copy,[\s\S]*body\.first-run-mode \.objective-rhythm,[\s\S]*display:\s*none !important/
+    /@media \(max-width:\s*720px\)[\s\S]*\.daily-challenge-banner\s*\{[\s\S]*flex-direction:\s*column !important[\s\S]*align-items:\s*stretch !important/
   );
+  assert.match(html, /\.daily-challenge-banner \.banner-close-btn\s*\{[\s\S]*white-space:\s*nowrap !important/);
+  assert.match(html, /safeAnimateTo\(banner,\s*\{\s*top:\s*-420/);
+  assert.match(html, /safeAnimateFromTo\(banner,\s*\{\s*top:\s*-420/);
+});
+
+test('screen transitions reset scroll so mobile screens do not open mid-layout', () => {
+  assert.match(html, /function resetScreenScroll\(next\)/);
+  assert.match(html, /window\.scrollTo\(\{\s*top:\s*0,\s*left:\s*0,\s*behavior:\s*'auto'\s*\}\)/);
+  assert.match(html, /document\.querySelectorAll\('\.screen'\)\.forEach/);
+  assert.match(html, /if \(next\) next\.scrollTop = 0/);
+  assert.match(html, /resetScreenScroll\(next\)/);
+});
+
+test('phase 12 routes and collections use production image assets, not legacy SVG thumbnails', () => {
+  assert.match(html, /Phase 12 Premium Cute Card Visual Pack/);
+  assert.match(html, /function getIntentArtPath/);
+  assert.match(html, /class="intent-art-image"/);
+  assert.match(html, /class="collection-art-image"/);
+  assert.match(html, /output\/assets\/card-art-sunset\.webp/);
+  assert.match(serviceWorker, /card-art-sunset\.webp/);
+  assert.match(serviceWorker, /mayfly-character-portrait\.webp/);
+
+  const intentSceneSource = html.slice(
+    html.indexOf('function buildIntentScene'),
+    html.indexOf('function startRunWithIntent')
+  );
+  assert.doesNotMatch(intentSceneSource, /<svg|PPT|WC|LIKE|TRUTH|KPI/);
+});
+
+test('phase 12 removes legacy action SVG generators from the runtime card surface', () => {
+  assert.match(html, /function getActionArtPath/);
+  assert.match(html, /class="act-art-image"/);
+  assert.doesNotMatch(html, /function getActionScene/);
+  assert.doesNotMatch(html, /function buildActionSceneSvg/);
+  assert.doesNotMatch(html, /function buildActionObjectSvg/);
+  assert.doesNotMatch(html, /function buildTinyActionMayfly/);
+  assert.doesNotMatch(html, /act-scene-svg/);
+});
+
+test('production asset library has WebP runtime siblings for every PNG master', () => {
+  const assetDir = new URL('../output/assets/', import.meta.url);
+  const files = fs.readdirSync(assetDir);
+  const pngMasters = files.filter((file) => file.endsWith('.png')).sort();
+  const missingWebp = pngMasters.filter((file) => !files.includes(file.replace(/\.png$/, '.webp')));
+
+  assert.deepEqual(missingWebp, []);
+  assert.doesNotMatch(`${html}\n${serviceWorker}\n${manifest}`, /output\/assets\/[^'")\s]+\.png/);
+});
+
+test('cute mayfly identity avoids the old fly emoji and app icons use the no-tail mascot', () => {
+  assert.doesNotMatch(`${html}\n${gameCore}\n${sharePoster}\n${icon192}\n${icon512}`, /🪰/);
+  assert.match(icon192, /wing-left/);
+  assert.match(icon192, /body/);
+  assert.doesNotMatch(icon192, /tail|stinger|abdomen/i);
 });

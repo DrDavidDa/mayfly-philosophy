@@ -1825,14 +1825,6 @@ body.world-glitch-stutter .hud-turn {
     #d9edf0;
   box-shadow: inset 0 -10px 0 rgba(0,0,0,0.06);
 }
-.act-visual .act-scene-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 2;
-}
 .act-visual::before {
   content: '';
   position: absolute;
@@ -2340,7 +2332,7 @@ body.first-run-mode .turn-feed-line {
 }
 body.first-run-mode .objective-copy,
 body.first-run-mode .objective-steps {
-  display: none;
+  display: block;
 }
 body.first-run-mode .state-dock {
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -4401,7 +4393,7 @@ body:not(.details-open) .activity-btn:not(.simple-card) {
 /* 今日挑战横幅 */
 .daily-challenge-banner {
   position: fixed;
-  top: -150px;
+  top: -420px;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
@@ -5416,9 +5408,9 @@ body::after {
 
   body.first-run-mode #screen-game > .activity-grid {
     order: 4 !important;
-    flex: 0 0 268px !important;
-    height: 268px !important;
-    max-height: 268px !important;
+    flex: 0 0 auto !important;
+    height: auto !important;
+    max-height: none !important;
   }
 
   body.first-run-mode #screen-game > .details-toggle {
@@ -5865,16 +5857,16 @@ body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-f
   }
 
   body.first-run-mode #screen-game > .activity-grid {
-    flex: 0 0 352px !important;
-    height: 352px !important;
-    max-height: 352px !important;
+    flex: 0 0 auto !important;
+    height: auto !important;
+    max-height: none !important;
   }
 
   body.first-run-mode .objective-panel {
-    flex: 0 0 86px !important;
+    flex: 0 0 auto !important;
     min-height: 86px !important;
-    max-height: 86px !important;
-    overflow: hidden !important;
+    max-height: none !important;
+    overflow: visible !important;
     padding: 8px 10px !important;
   }
 
@@ -5883,7 +5875,7 @@ body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-f
   body.first-run-mode .objective-steps,
   body.first-run-mode .objective-chips,
   body.first-run-mode .objective-pulse {
-    display: none !important;
+    display: block !important;
   }
 
   body.first-run-mode .objective-head {
@@ -5919,6 +5911,2014 @@ body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-f
 
   .card-face-risk strong {
     font-size: 0.88rem;
+  }
+}
+
+/* ========== Phase 12 Premium Cute Card Visual Pack ========== */
+:root {
+  --bg-void: #fff7e8;
+  --bg-office: rgba(255, 247, 232, 0.9);
+  --bg-desk: rgba(255, 255, 255, 0.82);
+  --bg-sticky: rgba(248, 232, 200, 0.92);
+  --neon-pink: #c94f62;
+  --neon-cyan: #247e7e;
+  --neon-yellow: #b97820;
+  --neon-purple: #745b8f;
+  --neon-green: #4f875e;
+  --neon-orange: #bd5d2c;
+  --fluorescent: #5f6870;
+  --paper-white: #213040;
+  --postit-yellow: rgba(242, 184, 75, 0.2);
+  --postit-pink: rgba(239, 111, 97, 0.14);
+  --postit-green: rgba(139, 207, 159, 0.18);
+  --postit-blue: rgba(58, 166, 166, 0.14);
+  --stat-spirit: #c69222;
+  --stat-social: #d45d32;
+  --stat-health: #2f9b91;
+  --stat-anxiety: #d34d78;
+  --cute-cream: #fff7e8;
+  --cute-cream-2: #f8e8c8;
+  --cute-ink: #213040;
+  --cute-muted: #6e6256;
+  --cute-line: #d8bd8d;
+  --cute-shadow: rgba(82, 56, 28, 0.16);
+  --cute-yellow: #f2b84b;
+  --cute-coral: #ef6f61;
+  --cute-teal: #3aa6a6;
+  --cute-mint: #8bcf9f;
+  --cute-blue: #4d89b8;
+  --cute-pink: #ef7b99;
+  --card-paper: #fff7e8;
+  --card-paper-deep: #f8e4bd;
+  --card-ink: #213040;
+  --card-muted: #6e6256;
+  --card-line: #d8bd8d;
+  --card-shadow: rgba(82, 56, 28, 0.18);
+  --card-warning: #ef6f61;
+  --card-gold: #f2b84b;
+  --card-blue: #3f86a6;
+  --card-green: #6aa875;
+  --card-radius: 8px;
+}
+
+body {
+  background:
+    radial-gradient(circle at 14% 8%, rgba(242, 184, 75, 0.22), transparent 28%),
+    radial-gradient(circle at 92% 14%, rgba(58, 166, 166, 0.2), transparent 26%),
+    linear-gradient(180deg, #fff9ed 0%, #f8e8c8 58%, #f5ddaa 100%) !important;
+  color: var(--cute-ink) !important;
+  text-shadow: none !important;
+}
+
+body::after,
+.floating-glyph {
+  display: none !important;
+}
+
+.screen:not(.active),
+#screen-game.screen:not(.active) {
+  display: none !important;
+}
+
+.screen {
+  padding: clamp(12px, 2.2vw, 24px) !important;
+}
+
+.title-shell {
+  width: min(1120px, calc(100vw - 28px)) !important;
+  grid-template-columns: minmax(360px, 1.15fr) minmax(300px, 0.85fr) !important;
+  gap: clamp(18px, 3vw, 34px) !important;
+}
+
+.title-visual {
+  border: 2px solid rgba(216, 189, 141, 0.8) !important;
+  border-radius: 8px !important;
+  background: var(--cute-cream) !important;
+  box-shadow: 0 22px 44px var(--cute-shadow), inset 0 0 0 5px rgba(255, 255, 255, 0.42) !important;
+}
+
+.title-visual::after {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,247,232,0.18)),
+    radial-gradient(circle at 76% 16%, rgba(242,184,75,0.18), transparent 24%) !important;
+}
+
+.title-main {
+  color: var(--cute-ink) !important;
+  text-shadow: 0 3px 0 rgba(255,255,255,0.8), 0 14px 28px rgba(82,56,28,0.14) !important;
+}
+
+.title-sub {
+  color: var(--cute-coral) !important;
+  text-shadow: none !important;
+}
+
+.title-slogan,
+.title-version {
+  color: var(--cute-muted) !important;
+  opacity: 0.95 !important;
+  text-shadow: none !important;
+}
+
+.title-quick-goal {
+  border-left-color: var(--cute-yellow) !important;
+  background: rgba(242,184,75,0.18) !important;
+  color: var(--cute-ink) !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.title-chip,
+.collection-stat,
+.collection-card,
+.intent-card,
+.char-card {
+  border-color: rgba(216,189,141,0.9) !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.68), rgba(255,247,232,0.94)),
+    var(--cute-cream) !important;
+  color: var(--cute-ink) !important;
+  box-shadow: 0 12px 26px var(--cute-shadow), inset 0 0 0 3px rgba(255,255,255,0.36) !important;
+  text-shadow: none !important;
+}
+
+.title-chip span,
+.title-chip strong,
+.collection-title,
+.collection-sub,
+.collection-name,
+.collection-desc,
+.select-title,
+.select-sub,
+.intent-title,
+.intent-sub,
+.char-card .name,
+.char-card .subtitle,
+.char-card .desc,
+.intent-name,
+.intent-hook,
+.intent-risk {
+  color: var(--cute-ink) !important;
+  text-shadow: none !important;
+}
+
+.char-portrait {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: var(--cute-cream) !important;
+}
+
+.char-portrait-image {
+  filter: saturate(1.06) contrast(1.03) brightness(1.04);
+}
+
+.btn-neon,
+.details-toggle,
+.ev-close,
+.ev-response,
+.collection-chase {
+  min-height: 48px !important;
+  border: 2px solid rgba(33,48,64,0.18) !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  color: var(--cute-ink) !important;
+  box-shadow: 0 10px 22px rgba(82,56,28,0.16) !important;
+  text-shadow: none !important;
+}
+
+.btn-neon.primary-start,
+.btn-neon.cyan,
+.details-toggle,
+.ev-close {
+  background: linear-gradient(180deg, #ffd66f, var(--cute-yellow)) !important;
+  border-color: #c58d2e !important;
+  color: #251b0b !important;
+}
+
+#btn-start.btn-neon.primary-start {
+  background: linear-gradient(180deg, #ffd66f 0%, #f2b84b 100%) !important;
+  border-color: #b77c20 !important;
+  color: #251b0b !important;
+  box-shadow: 0 12px 24px rgba(183,124,32,0.24), inset 0 1px 0 rgba(255,255,255,0.7) !important;
+}
+
+.btn-neon.pink,
+.ev-response:hover,
+.collection-chase.active {
+  background: linear-gradient(180deg, #ff9b8d, var(--cute-coral)) !important;
+  border-color: #c94e43 !important;
+  color: #fffaf0 !important;
+}
+
+body:has(#screen-game.active) {
+  background:
+    radial-gradient(circle at 12% 10%, rgba(242,184,75,0.18), transparent 26%),
+    radial-gradient(circle at 88% 12%, rgba(58,166,166,0.18), transparent 24%),
+    linear-gradient(180deg, #fff9ed 0%, #f8e8c8 100%) !important;
+}
+
+#screen-game.active {
+  width: min(1220px, calc(100vw - 24px)) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--cute-ink) !important;
+}
+
+.hud-bar,
+.state-dock .dock-card,
+.game-stage,
+.objective-panel,
+.rookie-panel,
+.world-glitch-panel,
+.phase-panel,
+.rescue-panel,
+.route-panel,
+.npc-panel,
+.consequence-panel,
+.target-tracker-panel,
+.goals-panel,
+.legacy-panel,
+.stats-container,
+.turn-feed {
+  border: 1.5px solid rgba(216,189,141,0.86) !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.76), rgba(255,247,232,0.92)),
+    var(--cute-cream) !important;
+  color: var(--cute-ink) !important;
+  box-shadow: 0 10px 22px rgba(82,56,28,0.11), inset 0 0 0 3px rgba(255,255,255,0.28) !important;
+  text-shadow: none !important;
+}
+
+.hud-time,
+.hud-turn,
+.hud-label,
+.dock-label,
+.dock-value,
+.objective-title,
+.objective-copy,
+.rookie-title,
+.rookie-step-label,
+.rookie-step-text,
+.turn-feed-line,
+.phase-title,
+.phase-desc,
+.route-title,
+.route-copy,
+.npc-title,
+.npc-summary,
+.consequence-source,
+.consequence-preview,
+.target-title,
+.target-hook,
+.goal-label,
+.goal-progress {
+  color: var(--cute-ink) !important;
+  text-shadow: none !important;
+}
+
+.hud-time {
+  color: #2d6870 !important;
+}
+
+.stage-svg text {
+  text-shadow: none !important;
+}
+
+.activity-btn.card-table-face {
+  --card-accent: var(--cute-teal);
+  --card-accent-rgb: 58, 166, 166;
+  min-height: 386px !important;
+  border-color: rgba(216,189,141,0.96) !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,247,232,0.97)),
+    var(--card-paper) !important;
+  color: var(--card-ink) !important;
+  box-shadow: 0 18px 34px rgba(82,56,28,0.18), inset 0 0 0 4px rgba(255,255,255,0.42) !important;
+}
+
+.activity-btn.card-table-face.category-work,
+.activity-btn.card-table-face.category-meeting {
+  --card-accent: var(--cute-coral);
+  --card-accent-rgb: 239, 111, 97;
+}
+
+.activity-btn.card-table-face.category-slack {
+  --card-accent: var(--cute-mint);
+  --card-accent-rgb: 139, 207, 159;
+}
+
+.activity-btn.card-table-face.category-social,
+.activity-btn.card-table-face.category-phone {
+  --card-accent: var(--cute-yellow);
+  --card-accent-rgb: 242, 184, 75;
+}
+
+.activity-btn.card-table-face.category-ai {
+  --card-accent: var(--cute-teal);
+  --card-accent-rgb: 58, 166, 166;
+}
+
+.activity-btn.card-table-face.category-think {
+  --card-accent: #d99543;
+  --card-accent-rgb: 217, 149, 67;
+}
+
+.activity-btn.card-table-face.category-disrupt {
+  --card-accent: var(--cute-pink);
+  --card-accent-rgb: 239, 123, 153;
+}
+
+.activity-btn.card-table-face .card-face-title {
+  color: var(--cute-ink) !important;
+  font-size: clamp(1.22rem, 2vw, 1.46rem) !important;
+  text-shadow: none !important;
+}
+
+.card-face-type,
+.card-face-cost,
+.card-face-chips span,
+.act-impact-chip {
+  color: var(--cute-ink) !important;
+  background: rgba(var(--card-accent-rgb), 0.16) !important;
+  border-color: rgba(var(--card-accent-rgb), 0.42) !important;
+  text-shadow: none !important;
+}
+
+.card-face-art {
+  min-height: 164px !important;
+  border: 2px solid rgba(33,48,64,0.12) !important;
+  border-radius: 8px !important;
+  background: #fff2d4 !important;
+  box-shadow: inset 0 0 0 4px rgba(255,255,255,0.26), 0 8px 18px rgba(82,56,28,0.12) !important;
+}
+
+.card-face-art .act-visual {
+  position: relative;
+  min-height: 164px !important;
+  height: 164px !important;
+  background: transparent !important;
+}
+
+.act-art-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.015);
+}
+
+.act-art-glint {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.16), transparent 42%),
+    radial-gradient(circle at 82% 16%, rgba(255,255,255,0.34), transparent 12%);
+  pointer-events: none;
+}
+
+.act-art-risk-dot {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--cute-coral);
+  box-shadow: 0 0 0 4px rgba(239,111,97,0.22);
+}
+
+.card-face-icon {
+  background: rgba(var(--card-accent-rgb), 0.18) !important;
+  border-color: rgba(var(--card-accent-rgb), 0.5) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.card-face-temptation {
+  min-height: 46px !important;
+  color: var(--cute-ink) !important;
+  background: rgba(var(--card-accent-rgb), 0.12) !important;
+  border-color: rgba(var(--card-accent-rgb), 0.34) !important;
+  box-shadow: none !important;
+}
+
+.card-face-risk {
+  color: var(--cute-ink) !important;
+  background: rgba(239,111,97,0.1) !important;
+  border-color: rgba(239,111,97,0.42) !important;
+  box-shadow: none !important;
+}
+
+.card-face-risk span,
+.card-face-risk strong {
+  color: var(--cute-ink) !important;
+}
+
+.activity-btn.card-table-face::after {
+  background: var(--cute-yellow) !important;
+  border-color: #c58d2e !important;
+  color: #251b0b !important;
+}
+
+.activity-btn.card-table-face .act-cta {
+  border: 1px solid rgba(242,184,75,0.62) !important;
+  border-radius: 6px !important;
+  background: rgba(242,184,75,0.2) !important;
+  color: #6f4816 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.objective-tag,
+.route-tag,
+.goals-kicker,
+.phase-kicker,
+.objective-pulse-tag,
+.hud-daily-badge,
+.death-rarity,
+.collection-meta {
+  color: #5e4c34 !important;
+  background: rgba(242,184,75,0.16) !important;
+  border-color: rgba(216,189,141,0.72) !important;
+  text-shadow: none !important;
+}
+
+.objective-step,
+.objective-chip,
+.rookie-step,
+.consequence-item,
+.npc-item,
+.goal-item,
+.legacy-card,
+.death-verdict-row,
+.death-fatal-row,
+.death-receipt-row,
+.death-explain-step,
+.death-review-item,
+.memorial-comment {
+  color: var(--cute-ink) !important;
+  background: rgba(255,255,255,0.52) !important;
+  border-color: rgba(216,189,141,0.68) !important;
+  text-shadow: none !important;
+}
+
+.objective-step *,
+.objective-chip *,
+.rookie-step *,
+.consequence-item *,
+.npc-item *,
+.goal-item *,
+.legacy-card *,
+.death-verdict-row *,
+.death-fatal-row *,
+.death-receipt-row *,
+.death-explain-step *,
+.death-review-item *,
+.memorial-comment *,
+.death-stats *,
+.death-collection *,
+.death-report * {
+  text-shadow: none !important;
+}
+
+.mentor-bubble,
+.char-status,
+.objective-pulse-copy,
+.world-glitch-copy,
+.death-explain-summary,
+.death-review-summary,
+.death-review-debt-desc,
+.death-next-text,
+.death-next-risk,
+.death-legacy-text,
+.death-legacy-effect {
+  color: var(--cute-ink) !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+.event-overlay {
+  background: rgba(33,48,64,0.36) !important;
+  backdrop-filter: blur(9px) !important;
+}
+
+.event-card,
+.death-card,
+.feedback-panel,
+.panel-floating-settings {
+  border: 2px solid rgba(216,189,141,0.94) !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,247,232,0.97)),
+    var(--cute-cream) !important;
+  color: var(--cute-ink) !important;
+  box-shadow: 0 22px 48px rgba(82,56,28,0.22), inset 0 0 0 4px rgba(255,255,255,0.34) !important;
+  text-shadow: none !important;
+}
+
+.ev-comic,
+.death-postcard-art,
+.death-postcard-image {
+  border-radius: 8px !important;
+  background: var(--cute-cream-2) !important;
+}
+
+.ev-text,
+.ev-time,
+.ev-cause,
+.ev-effect,
+.death-title,
+.death-rarity,
+.death-epitaph,
+.death-review,
+.death-report,
+.death-next,
+.death-legacy,
+.death-share-tip,
+.feedback-title,
+.feedback-list,
+.setting-title,
+.setting-desc {
+  color: var(--cute-ink) !important;
+  text-shadow: none !important;
+}
+
+.ev-response {
+  background: rgba(255,255,255,0.66) !important;
+  color: var(--cute-ink) !important;
+  text-align: left !important;
+}
+
+.ev-response-title,
+.ev-response-text,
+.ev-response-impact {
+  color: inherit !important;
+}
+
+.death-postcard-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.intent-shell {
+  width: min(1040px, calc(100vw - 24px)) !important;
+  gap: 16px !important;
+}
+
+.intent-head {
+  width: min(760px, 100%) !important;
+  justify-self: center !important;
+  padding: 14px 16px !important;
+  border: 1.5px solid rgba(216,189,141,0.86) !important;
+  border-radius: 8px !important;
+  background: rgba(255,247,232,0.74) !important;
+  box-shadow: 0 10px 22px rgba(82,56,28,0.1) !important;
+}
+
+.intent-title {
+  color: var(--cute-ink) !important;
+  font-size: clamp(1.7rem, 4vw, 2.45rem) !important;
+  text-shadow: none !important;
+}
+
+.intent-sub {
+  color: var(--cute-muted) !important;
+  opacity: 1 !important;
+  font-size: clamp(0.94rem, 1.8vw, 1.08rem) !important;
+  line-height: 1.5 !important;
+}
+
+.intent-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  align-items: stretch !important;
+}
+
+.intent-card {
+  display: grid !important;
+  grid-template-rows: 158px auto auto auto auto !important;
+  min-height: 0 !important;
+  padding: 10px !important;
+  border: 2px solid rgba(216,189,141,0.96) !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,247,232,0.96)),
+    var(--cute-cream) !important;
+  color: var(--cute-ink) !important;
+  box-shadow: 0 16px 30px rgba(82,56,28,0.16), inset 0 0 0 4px rgba(255,255,255,0.34) !important;
+  text-shadow: none !important;
+}
+
+.intent-card::after {
+  content: '' !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(242,184,75,0.28), transparent 62%) !important;
+}
+
+.intent-card:hover,
+.intent-card.recommended {
+  border-color: var(--cute-yellow) !important;
+  background: #fffaf0 !important;
+  box-shadow: 0 22px 42px rgba(82,56,28,0.2), inset 0 0 0 4px rgba(255,255,255,0.5) !important;
+}
+
+.intent-scene {
+  height: 158px !important;
+  margin: 0 0 10px !important;
+  border: 2px solid rgba(33,48,64,0.12) !important;
+  border-radius: 8px !important;
+  background: var(--cute-cream-2) !important;
+  box-shadow: inset 0 0 0 4px rgba(255,255,255,0.25), 0 8px 18px rgba(82,56,28,0.12) !important;
+}
+
+.intent-scene svg {
+  display: none !important;
+}
+
+.intent-art-image,
+.collection-art-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.intent-art-orbit,
+.collection-art-shine {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.2), transparent 46%),
+    radial-gradient(circle at 82% 16%, rgba(255,255,255,0.36), transparent 14%);
+  pointer-events: none;
+}
+
+.intent-name {
+  margin-top: 0 !important;
+  color: var(--cute-ink) !important;
+  font-size: clamp(1.2rem, 2vw, 1.42rem) !important;
+  line-height: 1.18 !important;
+  text-shadow: none !important;
+}
+
+.intent-hook {
+  color: var(--cute-ink) !important;
+  font-size: 0.96rem !important;
+  line-height: 1.46 !important;
+  -webkit-line-clamp: 3 !important;
+}
+
+.intent-risk {
+  color: #9b4a38 !important;
+  font-size: 0.86rem !important;
+  line-height: 1.38 !important;
+  -webkit-line-clamp: 2 !important;
+}
+
+.intent-badge {
+  width: fit-content !important;
+  padding: 6px 9px !important;
+  border: 1px solid rgba(58,166,166,0.42) !important;
+  border-radius: 999px !important;
+  background: rgba(58,166,166,0.1) !important;
+  color: #2b7777 !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.82rem !important;
+  text-shadow: none !important;
+}
+
+.collection-art {
+  position: relative !important;
+  height: 116px !important;
+  border-bottom: 1px solid rgba(216,189,141,0.76) !important;
+  background: var(--cute-cream-2) !important;
+  overflow: hidden !important;
+}
+
+.collection-art svg {
+  display: none !important;
+}
+
+.collection-art-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.collection-art-frame.locked .collection-art-image {
+  filter: grayscale(1) brightness(0.76);
+}
+
+.collection-art-badge {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,247,232,0.9);
+  border: 2px solid rgba(33,48,64,0.12);
+  box-shadow: 0 6px 14px rgba(82,56,28,0.16);
+}
+
+.stage-art-shell,
+.event-art-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--cute-cream-2);
+}
+
+.stage-art-image,
+.event-art-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.stage-art-wash,
+.event-art-wash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), transparent 40%),
+    linear-gradient(0deg, rgba(33,48,64,0.42), transparent 36%);
+  pointer-events: none;
+}
+
+.stage-art-topline,
+.stage-art-bottomline {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stage-art-topline {
+  top: 12px;
+}
+
+.stage-art-bottomline {
+  bottom: 12px;
+  color: #fffdf7;
+  font-size: 0.86rem;
+  text-shadow: 0 2px 8px rgba(33,48,64,0.6);
+}
+
+.stage-route-chip,
+.stage-mood-chip,
+.event-art-label,
+.event-art-emoji,
+.event-art-alert {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid rgba(255,255,255,0.62);
+  border-radius: 999px;
+  background: rgba(255,247,232,0.88);
+  color: var(--cute-ink);
+  box-shadow: 0 8px 18px rgba(82,56,28,0.16);
+  text-shadow: none;
+}
+
+.stage-mood-chip {
+  border-color: var(--mood-color);
+}
+
+.stage-life-track {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 44px;
+  height: 10px;
+  border: 2px solid rgba(255,255,255,0.72);
+  border-radius: 999px;
+  background: rgba(33,48,64,0.34);
+  box-shadow: 0 4px 12px rgba(33,48,64,0.22);
+}
+
+.stage-life-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--cute-teal), var(--cute-yellow), var(--cute-coral));
+}
+
+.stage-life-dot {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff7e8;
+  border: 2px solid #d8bd8d;
+  font-size: 0.94rem;
+}
+
+.ev-comic {
+  height: 190px !important;
+  overflow: hidden !important;
+}
+
+.event-art-shell {
+  min-height: 190px;
+}
+
+.event-art-wash {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), transparent 46%),
+    linear-gradient(0deg, rgba(33,48,64,0.24), transparent 42%);
+}
+
+.event-art-label {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  border-color: var(--event-accent);
+  font-weight: 900;
+}
+
+.event-art-emoji {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  padding: 0;
+  font-size: 1.65rem;
+}
+
+.event-art-alert {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 36px;
+  height: 36px;
+  justify-content: center;
+  padding: 0;
+  border-color: var(--cute-coral);
+  background: var(--cute-coral);
+  color: #fffdf7;
+  font-weight: 900;
+}
+
+@media (min-width: 900px) {
+  #screen-game > .activity-grid .card-face-art,
+  #screen-game > .activity-grid .card-face-art .act-visual {
+    min-height: 132px !important;
+    height: 132px !important;
+  }
+
+  #screen-game > .activity-grid .activity-btn.card-table-face {
+    min-height: 344px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .title-shell {
+    grid-template-columns: 1fr !important;
+  }
+
+  .title-visual {
+    order: -1 !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face,
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face.simple-card {
+    min-height: 368px !important;
+  }
+
+  .intent-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .intent-card {
+    grid-template-rows: 176px auto auto auto auto !important;
+  }
+
+  .intent-scene {
+    height: 176px !important;
+  }
+
+  .stage-art-shell {
+    min-height: 180px;
+  }
+}
+
+/* ========== Phase 13 Adaptive Layout Repair ========== */
+html {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100dvh;
+  overflow-x: hidden !important;
+}
+
+.screen {
+  min-height: 100dvh !important;
+  height: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  justify-content: flex-start !important;
+}
+
+#screen-title.active,
+#screen-intent.active,
+#screen-character.active,
+#screen-collection.active,
+#screen-death.active {
+  align-items: center !important;
+}
+
+#screen-game.active {
+  box-sizing: border-box;
+  min-height: 100dvh !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+#screen-game > * {
+  min-width: 0 !important;
+}
+
+#screen-game > .activity-grid {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+body.first-run-mode #screen-game > .activity-grid {
+  height: auto !important;
+  max-height: none !important;
+}
+
+body.first-run-mode .objective-panel {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+body.first-run-mode .objective-copy,
+body.first-run-mode .objective-pulse {
+  display: block !important;
+}
+
+body.first-run-mode .objective-rhythm,
+body.first-run-mode .objective-steps {
+  display: grid !important;
+}
+
+body.first-run-mode .objective-chips {
+  display: flex !important;
+}
+
+.event-overlay,
+.feedback-overlay {
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}
+
+.event-card,
+.death-card,
+.feedback-panel,
+.panel-floating-settings {
+  width: min(680px, calc(100vw - 24px)) !important;
+  max-height: calc(100dvh - 24px) !important;
+  overflow-y: auto !important;
+}
+
+.event-card {
+  overscroll-behavior: contain;
+}
+
+.daily-challenge-banner {
+  width: min(500px, calc(100vw - 20px)) !important;
+  max-height: calc(100dvh - 20px) !important;
+  gap: 12px !important;
+  overflow-y: auto !important;
+}
+
+.daily-challenge-banner .banner-content {
+  min-width: 0 !important;
+  margin-right: 0 !important;
+}
+
+.daily-challenge-banner .banner-close-btn {
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+}
+
+@media (min-width: 1081px) {
+  body:has(#screen-game.active) {
+    overflow: hidden !important;
+  }
+
+  #screen-game.active {
+    display: grid !important;
+    grid-template-columns: minmax(240px, 0.78fr) minmax(430px, 1fr) minmax(360px, 0.92fr) !important;
+    grid-template-rows: auto auto minmax(0, 1fr) auto !important;
+    align-items: start !important;
+    justify-content: center !important;
+    width: min(1220px, calc(100vw - 32px)) !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    gap: 14px !important;
+    padding: 14px 16px 18px !important;
+    overflow: hidden !important;
+  }
+
+  #screen-game > .hud-bar {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  #screen-game > .objective-panel {
+    grid-column: 1 !important;
+    grid-row: 2 / span 2 !important;
+    max-height: calc(100dvh - 300px) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  #screen-game .objective-head {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    gap: 8px !important;
+  }
+
+  #screen-game .objective-title,
+  #screen-game .objective-tag {
+    white-space: normal !important;
+    word-break: keep-all !important;
+    line-height: 1.18 !important;
+  }
+
+  body.first-run-mode:not(.details-open) #screen-game .objective-steps,
+  body.first-run-mode:not(.details-open) #screen-game .objective-chips,
+  body.first-run-mode:not(.details-open) #screen-game .objective-pulse {
+    display: none !important;
+  }
+
+  #screen-game > .state-dock {
+    grid-column: 1 !important;
+    grid-row: 4 !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  #screen-game > .stats-container,
+  #screen-game > .rookie-panel,
+  #screen-game > .world-glitch-panel,
+  #screen-game > .phase-panel,
+  #screen-game > .rescue-panel,
+  #screen-game > .route-panel,
+  #screen-game > .npc-panel,
+  #screen-game > .consequence-panel,
+  #screen-game > .target-tracker-panel,
+  #screen-game > .goals-panel,
+  #screen-game > .legacy-panel {
+    grid-column: 1 !important;
+    max-height: 220px !important;
+    overflow-y: auto !important;
+  }
+
+  #screen-game > .game-stage {
+    grid-column: 2 / span 2 !important;
+    grid-row: 1 !important;
+    height: clamp(190px, 27dvh, 260px) !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+  }
+
+  .stage-art-shell {
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+
+  #screen-game > .activity-grid {
+    grid-column: 2 / span 2 !important;
+    grid-row: 2 / span 2 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+    align-content: start !important;
+    gap: 14px !important;
+    height: 100% !important;
+    max-height: calc(100dvh - 350px) !important;
+    padding: 2px 4px 10px !important;
+    overflow-y: auto !important;
+  }
+
+  #screen-game > .activity-grid .activity-btn.card-table-face {
+    min-height: 300px !important;
+  }
+
+  #screen-game > .turn-feed {
+    grid-column: 2 !important;
+    grid-row: 4 !important;
+    max-height: 96px !important;
+    overflow: hidden !important;
+  }
+
+  #screen-game > .details-toggle {
+    grid-column: 3 !important;
+    grid-row: 4 !important;
+    align-self: stretch !important;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1080px) {
+  #screen-game.active {
+    display: grid !important;
+    grid-template-columns: minmax(260px, 0.82fr) minmax(420px, 1fr) !important;
+    align-items: start !important;
+    width: min(920px, calc(100vw - 24px)) !important;
+    gap: 12px !important;
+    padding: 12px !important;
+    overflow-y: auto !important;
+  }
+
+  body:not(.details-open) #screen-game.active {
+    display: grid !important;
+    grid-template-columns: minmax(300px, 0.88fr) minmax(400px, 1fr) !important;
+    align-items: start !important;
+    justify-content: center !important;
+    height: auto !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  #screen-game > .hud-bar,
+  #screen-game > .objective-panel,
+  #screen-game > .state-dock,
+  #screen-game > .details-toggle {
+    grid-column: 1 !important;
+    width: 100% !important;
+  }
+
+  #screen-game > .game-stage,
+  #screen-game > .activity-grid,
+  #screen-game > .turn-feed {
+    grid-column: 2 !important;
+    width: 100% !important;
+  }
+
+  #screen-game > .game-stage {
+    height: clamp(170px, 26dvh, 230px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+  }
+
+  #screen-game > .game-stage .stage-svg,
+  #screen-game > .game-stage .stage-art-shell {
+    height: 100% !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+  }
+
+  #screen-game > .activity-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 0 !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid,
+  body.details-open #screen-game > .activity-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    gap: 12px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  body.first-run-mode .objective-panel {
+    max-height: clamp(260px, 42dvh, 390px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  body.first-run-mode:not(.details-open) #screen-game .objective-steps,
+  body.first-run-mode:not(.details-open) #screen-game .objective-chips,
+  body.first-run-mode:not(.details-open) #screen-game .objective-pulse {
+    display: none !important;
+  }
+
+  body.first-run-mode .objective-head,
+  body:not(.details-open) .objective-head {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    gap: 7px !important;
+  }
+
+  body.first-run-mode .objective-title,
+  body:not(.details-open) .objective-title {
+    white-space: normal !important;
+    word-break: keep-all !important;
+    line-height: 1.18 !important;
+  }
+
+  body.first-run-mode .objective-tag,
+  body:not(.details-open) .objective-tag {
+    white-space: normal !important;
+    line-height: 1.25 !important;
+  }
+
+  #screen-game > .activity-grid .activity-btn.card-table-face {
+    min-height: 320px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+    scroll-snap-align: none !important;
+  }
+
+  body:has(#screen-game.active) #btn-floating-settings {
+    width: 44px !important;
+    height: 44px !important;
+    top: 16px !important;
+    right: 16px !important;
+    font-size: 1.08rem !important;
+  }
+
+  body:has(#screen-game.active):not(.details-open) #screen-game > .stats-container {
+    padding: 6px 58px 6px 10px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .screen {
+    padding: 10px max(10px, env(safe-area-inset-left)) calc(14px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right)) !important;
+  }
+
+  #screen-game.active {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    max-width: 480px !important;
+    min-height: 100dvh !important;
+    height: auto !important;
+    gap: 10px !important;
+    padding: 10px max(10px, env(safe-area-inset-left)) calc(16px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right)) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  body:not(.details-open) #screen-game.active {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    height: auto !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  #screen-game > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  #screen-game > .hud-bar { order: 1 !important; }
+  #screen-game > .objective-panel { order: 2 !important; }
+  #screen-game > .game-stage { order: 3 !important; }
+  #screen-game > .activity-grid { order: 4 !important; }
+  #screen-game > .state-dock { order: 5 !important; }
+  #screen-game > .details-toggle { order: 6 !important; }
+  #screen-game > .rookie-panel { order: 7 !important; }
+  #screen-game > .turn-feed { order: 8 !important; }
+
+  .hud-bar {
+    min-height: 64px !important;
+    padding: 9px 10px !important;
+    padding-right: 58px !important;
+    gap: 8px !important;
+  }
+
+  body:has(#screen-game.active) #btn-floating-settings {
+    width: 44px !important;
+    height: 44px !important;
+    top: 12px !important;
+    right: 10px !important;
+    font-size: 1.05rem !important;
+  }
+
+  .objective-panel {
+    padding: 10px 12px !important;
+    height: auto !important;
+    max-height: clamp(174px, 34dvh, 220px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .objective-copy {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden !important;
+    line-height: 1.45 !important;
+  }
+
+  .objective-map,
+  .objective-steps,
+  .objective-chips {
+    margin-top: 8px !important;
+  }
+
+  #screen-game > .game-stage {
+    flex: 0 0 auto !important;
+    height: clamp(128px, 34vw, 160px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+  }
+
+  #screen-game > .game-stage .stage-svg,
+  #screen-game > .game-stage .stage-art-shell {
+    height: 100% !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+  }
+
+  #screen-game > .activity-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    flex: 0 0 auto !important;
+    height: auto !important;
+    max-height: none !important;
+    gap: 12px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid,
+  body.details-open #screen-game > .activity-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    position: static !important;
+    bottom: auto !important;
+    z-index: auto !important;
+    gap: 12px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  body.first-run-mode #screen-game > .activity-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    flex: 0 0 auto !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  body.first-run-mode .objective-panel {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    max-height: clamp(174px, 34dvh, 220px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  body.first-run-mode .objective-copy {
+    display: -webkit-box !important;
+  }
+
+  body.first-run-mode .objective-pulse {
+    display: block !important;
+  }
+
+  body.first-run-mode .objective-rhythm,
+  body.first-run-mode .objective-steps {
+    display: grid !important;
+  }
+
+  body.first-run-mode .objective-chips {
+    display: flex !important;
+  }
+
+  #screen-game > .activity-grid .activity-btn.card-table-face,
+  #screen-game > .activity-grid .activity-btn.card-table-face.simple-card {
+    flex: 0 0 auto !important;
+    scroll-snap-align: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 10px !important;
+    gap: 8px !important;
+    overflow: visible !important;
+  }
+
+  #screen-game > .activity-grid .card-face-art,
+  #screen-game > .activity-grid .card-face-art .act-visual {
+    height: clamp(132px, 41vw, 172px) !important;
+    min-height: 0 !important;
+  }
+
+  .card-face-temptation,
+  .card-face-risk {
+    min-height: 0 !important;
+  }
+
+  .card-face-chips {
+    padding-bottom: 38px !important;
+  }
+
+  .state-dock {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  .dock-card {
+    min-height: 58px !important;
+    padding: 6px !important;
+  }
+
+  .intent-shell,
+  .select-shell,
+  .collection-shell,
+  .death-shell {
+    width: min(480px, calc(100vw - 20px)) !important;
+  }
+
+  .intent-head {
+    padding: 12px !important;
+  }
+
+  .intent-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .intent-card {
+    grid-template-rows: auto auto auto auto auto !important;
+    min-height: 0 !important;
+    padding: 10px !important;
+  }
+
+  .intent-scene {
+    height: clamp(132px, 45vw, 176px) !important;
+  }
+
+  .event-overlay,
+  .feedback-overlay {
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 12px !important;
+  }
+
+  .event-card,
+  .death-card,
+  .feedback-panel,
+  .panel-floating-settings {
+    width: calc(100vw - 24px) !important;
+    max-height: calc(100dvh - 24px) !important;
+  }
+
+  .daily-challenge-banner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 12px !important;
+  }
+
+  .daily-challenge-banner .banner-close-btn {
+    width: 100% !important;
+  }
+}
+
+/* ========== Phase 14 Action Deck Alignment ========== */
+#screen-game > .activity-grid .activity-btn.card-table-face {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.card-face-front-copy {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+
+.card-face-player-intent {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding: 8px 10px;
+  border: 1px solid rgba(var(--card-accent-rgb), 0.28);
+  border-radius: 7px;
+  background: rgba(var(--card-accent-rgb), 0.08);
+  color: var(--cute-ink);
+}
+
+.card-face-outcome-line {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding: 7px 10px;
+  border: 1px solid rgba(216,189,141,0.62);
+  border-radius: 7px;
+  background: rgba(255,248,231,0.82);
+  color: var(--cute-ink);
+}
+
+.card-face-outcome-line.negative,
+.card-face-outcome-line.danger {
+  border-color: rgba(239,111,97,0.45);
+  background: rgba(239,111,97,0.1);
+}
+
+.card-face-player-intent span,
+.card-face-outcome-line span {
+  color: rgba(23,33,43,0.64);
+  font-size: 0.82rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.card-face-player-intent strong,
+.card-face-outcome-line strong {
+  min-width: 0;
+  color: var(--cute-ink);
+  font-size: 0.98rem;
+  line-height: 1.26;
+}
+
+@media (max-width: 720px) {
+  body:not(.details-open) #screen-game > .activity-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    padding-bottom: 72px !important;
+    overflow: visible !important;
+    position: relative !important;
+    isolation: isolate;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face {
+    box-sizing: border-box !important;
+    grid-area: 1 / 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    position: relative !important;
+    z-index: calc(30 - var(--deck-index));
+    transform-origin: center top;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:first-child {
+    min-height: 0 !important;
+    transform: none !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2) {
+    margin-top: 0 !important;
+    height: 214px !important;
+    max-height: 214px !important;
+    min-height: 214px !important;
+    overflow: hidden !important;
+    z-index: calc(32 + var(--deck-index)) !important;
+    transform: translateY(calc(132px + var(--deck-index) * 24px)) scale(calc(1 - var(--deck-index) * 0.018)) !important;
+    box-shadow: 0 14px 26px rgba(82,56,28,0.2), inset 0 0 0 4px rgba(255,255,255,0.36) !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2) .card-face-art {
+    display: none !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2) .card-face-temptation,
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2) .card-face-risk strong,
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2) .card-face-player-intent strong,
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2) .card-face-outcome-line strong {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2) .card-face-chips {
+    display: none !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2)::after {
+    bottom: 10px !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2) .card-face-title-row {
+    grid-template-columns: 34px minmax(0, 1fr) !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2) .card-face-icon {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 1.05rem !important;
+  }
+}
+
+/* ========== Phase 15 Density And Responsive Repair ========== */
+.char-display {
+  display: none !important;
+}
+
+body:has(#screen-game.active) #btn-floating-settings {
+  width: 52px !important;
+  height: 52px !important;
+  border: 2px solid rgba(255,255,255,0.74) !important;
+  box-shadow: 0 10px 22px rgba(33,48,64,0.24), inset 0 1px 0 rgba(255,255,255,0.24) !important;
+}
+
+body:not(.details-open) .objective-copy,
+body:not(.details-open) .objective-rhythm,
+body:not(.details-open) .objective-steps,
+body:not(.details-open) .objective-chips,
+body:not(.details-open) .objective-pulse {
+  display: none !important;
+}
+
+body:not(.details-open) .card-face-type {
+  display: none !important;
+}
+
+.activity-btn.card-table-face.recommended::before {
+  display: none !important;
+  content: none !important;
+}
+
+.activity-btn.card-table-face.recommended .act-cta {
+  order: -4;
+  align-self: flex-end;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 34px;
+  padding: 6px 12px !important;
+  border: 2px solid #c58d2e !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, #ffe18b, #f2b84b) !important;
+  color: #251b0b !important;
+  font-family: var(--font-title) !important;
+  font-size: 0.9rem !important;
+  font-weight: 900 !important;
+  line-height: 1.1 !important;
+  box-shadow: 0 8px 18px rgba(183, 124, 32, 0.24), inset 0 1px 0 rgba(255,255,255,0.65) !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 720px) {
+  body:has(#screen-game.active) #btn-floating-settings {
+    width: 68px !important;
+    height: 42px !important;
+    border-radius: 999px !important;
+    gap: 3px !important;
+    font-size: 1rem !important;
+    background: linear-gradient(180deg, #314154, #1f2b38) !important;
+    border: 2px solid rgba(255,255,255,0.72) !important;
+    box-shadow: 0 10px 22px rgba(33,48,64,0.28), inset 0 1px 0 rgba(255,255,255,0.26) !important;
+  }
+
+  body:has(#screen-game.active) #btn-floating-settings::after {
+    content: '设置';
+    font-family: var(--font-title);
+    font-size: 0.74rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .hud-bar {
+    min-height: 56px !important;
+    padding: 7px 84px 7px 10px !important;
+  }
+
+  .hud-time {
+    font-size: clamp(1.18rem, 6.2vw, 1.58rem) !important;
+  }
+
+  .hud-turn {
+    font-size: 0.72rem !important;
+    line-height: 1.25 !important;
+  }
+
+  #screen-game > .game-stage {
+    height: clamp(108px, 28vw, 132px) !important;
+    max-height: 132px !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+  }
+
+  #screen-game > .game-stage .stage-svg,
+  #screen-game > .game-stage .stage-art-shell {
+    height: 100% !important;
+    max-height: 132px !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+  }
+
+  .objective-panel {
+    max-height: none !important;
+    padding: 8px 9px !important;
+    overflow: visible !important;
+  }
+
+  body:not(.details-open) .objective-copy,
+  body:not(.details-open) .objective-rhythm,
+  body:not(.details-open) .objective-steps,
+  body:not(.details-open) .objective-chips,
+  body:not(.details-open) .objective-pulse {
+    display: none !important;
+  }
+
+  .objective-head {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 5px !important;
+  }
+
+  .objective-title {
+    font-size: 1.12rem !important;
+    line-height: 1.08 !important;
+  }
+
+  .objective-tag {
+    width: fit-content;
+    max-width: 100%;
+    padding: 4px 8px !important;
+    border: 1px solid rgba(216,189,141,0.7) !important;
+    border-radius: 999px !important;
+    font-family: var(--font-title) !important;
+    font-size: 0.72rem !important;
+    line-height: 1 !important;
+    white-space: normal !important;
+  }
+
+  .objective-map {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    margin-top: 8px !important;
+  }
+
+  .objective-map-card {
+    min-height: 46px !important;
+    padding: 6px 5px !important;
+  }
+
+  .objective-map-icon {
+    font-size: 0.98rem !important;
+  }
+
+  .objective-map-label {
+    margin-top: 2px !important;
+    font-size: 0.82rem !important;
+    line-height: 1.08 !important;
+  }
+
+  .objective-map-text {
+    margin-top: 2px !important;
+    font-size: 0.66rem !important;
+    line-height: 1.18 !important;
+    display: none !important;
+    -webkit-line-clamp: 1 !important;
+  }
+
+  .objective-map-card.task .objective-map-text {
+    display: -webkit-box !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid,
+  body.details-open #screen-game > .activity-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    padding: 0 !important;
+    position: static !important;
+    isolation: auto !important;
+    overflow: visible !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face {
+    grid-area: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    transform: none !important;
+    z-index: auto !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:first-child,
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face:nth-child(n+2) {
+    margin-top: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    transform: none !important;
+    z-index: auto !important;
+    box-shadow: 0 12px 22px rgba(82,56,28,0.15), inset 0 0 0 3px rgba(255,255,255,0.34) !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .card-face-art,
+  body:not(.details-open) #screen-game > .activity-grid .card-face-art .act-visual {
+    height: clamp(76px, 22vw, 96px) !important;
+    min-height: 0 !important;
+  }
+
+  body:not(.details-open) .card-face-front-copy {
+    gap: 6px !important;
+  }
+
+  body:not(.details-open) .card-face-title-row {
+    grid-template-columns: 36px minmax(0, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  body:not(.details-open) .card-face-icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.08rem !important;
+  }
+
+  body:not(.details-open) .activity-btn.card-table-face .card-face-title {
+    font-size: 1.2rem !important;
+    line-height: 1.08 !important;
+  }
+
+  body:not(.details-open) .card-face-player-intent,
+  body:not(.details-open) .card-face-outcome-line {
+    grid-template-columns: 52px minmax(0, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px 8px !important;
+  }
+
+  body:not(.details-open) .card-face-player-intent span,
+  body:not(.details-open) .card-face-outcome-line span {
+    font-size: 0.76rem !important;
+  }
+
+  body:not(.details-open) .card-face-player-intent strong,
+  body:not(.details-open) .card-face-outcome-line strong {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    font-size: 0.9rem !important;
+    line-height: 1.22 !important;
+  }
+
+  body:not(.details-open) .card-face-topline {
+    justify-content: flex-start !important;
+    gap: 6px !important;
+  }
+
+  body:not(.details-open) .card-face-type,
+  body:not(.details-open) .card-face-cost,
+  body:not(.details-open) .act-impact-chip {
+    min-height: 22px !important;
+    padding: 2px 8px !important;
+    font-size: 0.72rem !important;
+  }
+
+  body:not(.details-open) .card-face-type {
+    display: none !important;
+  }
+
+  body:not(.details-open) .card-face-temptation,
+  body:not(.details-open) .card-face-risk,
+  body:not(.details-open) .card-face-chips {
+    display: none !important;
+  }
+
+  body:not(.details-open) .activity-btn.card-table-face::after {
+    right: 10px !important;
+    bottom: 10px !important;
+    padding: 5px 10px !important;
+    font-size: 0.84rem !important;
+  }
+
+  body:not(.details-open) .activity-btn.card-table-face.recommended .act-cta {
+    min-height: 32px !important;
+    max-width: calc(100% - 2px) !important;
+    padding: 5px 10px !important;
+    font-size: 0.84rem !important;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1080px) {
+  body:not(.details-open) .objective-copy,
+  body:not(.details-open) .objective-steps,
+  body:not(.details-open) .objective-chips,
+  body:not(.details-open) .objective-pulse {
+    display: none !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face {
+    min-height: 0 !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .card-face-art,
+  body:not(.details-open) #screen-game > .activity-grid .card-face-art .act-visual {
+    height: clamp(118px, 20vw, 150px) !important;
+    min-height: 0 !important;
+  }
+}
+
+@media (min-width: 1081px) {
+  body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-face {
+    min-height: 276px !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .card-face-art,
+  body:not(.details-open) #screen-game > .activity-grid .card-face-art .act-visual {
+    height: 118px !important;
+    min-height: 0 !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .card-face-temptation {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden !important;
+  }
+
+  body:not(.details-open) #screen-game > .activity-grid .card-face-risk,
+  body:not(.details-open) #screen-game > .activity-grid .card-face-chips {
+    display: none !important;
   }
 }
 </style>
@@ -5977,7 +7977,7 @@ body:not(.details-open) #screen-game > .activity-grid .activity-btn.card-table-f
 <section id="screen-title" class="screen active">
   <div class="title-shell">
     <div class="title-visual" aria-hidden="true">
-      <img class="title-scene-svg" src="output/assets/mayfly-title-hero.png" alt="" loading="eager" decoding="async">
+      <img class="title-scene-svg" src="output/assets/mayfly-title-hero.webp" alt="" loading="eager" decoding="async">
     </div>
     <div class="title-copy">
       <div class="title-main" id="title-text">蜉蝣哲学</div>
@@ -6465,7 +8465,7 @@ function initSettings() {
       e.stopPropagation();
       const banner = document.getElementById('daily-challenge-banner');
       if (banner) {
-        safeAnimateTo(banner, { top: -200, duration: 0.4, ease: 'power2.in' });
+        safeAnimateTo(banner, { top: -420, duration: 0.4, ease: 'power2.in' });
       }
     });
   }
@@ -6583,7 +8583,7 @@ function showDailyChallengeBanner(mutator) {
   desc.textContent = mutator.description;
 
   safeAnimateFromTo(banner, {
-    top: -200
+    top: -420
   }, {
     top: 16,
     duration: 0.6,
@@ -6772,6 +8772,20 @@ function showFakeNotif() {
 
 // ========== 屏幕切换 ==========
 
+function resetScreenScroll(next) {
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  document.querySelectorAll('.screen').forEach((screen) => {
+    screen.scrollTop = 0;
+  });
+  if (next) next.scrollTop = 0;
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    if (next) next.scrollTop = 0;
+  });
+}
+
 function switchScreen(target) {
   const current = document.querySelector('.screen.active');
   const next = document.getElementById('screen-' + target);
@@ -6785,8 +8799,11 @@ function switchScreen(target) {
   if (target !== 'game') {
     document.body.classList.remove('world-glitch-warped', 'world-glitch-corrupted', 'world-glitch-stutter');
   }
+  const banner = document.getElementById('daily-challenge-banner');
+  if (banner) banner.style.top = '-420px';
   if (target === 'title') updateTitleControls();
   next.classList.add('active');
+  resetScreenScroll(next);
   safeAnimateFromTo(next, { opacity: 0 }, { opacity: 1, duration: 0.3 });
 }
 
@@ -6900,32 +8917,17 @@ function buildCollectionArt(kind, item, revealed) {
   const text = shortText(item.displayTitle || item.displayType || item.title || '未归档', 9);
   const emoji = item.emoji || (kind === 'legacy' ? '🌀' : kind === 'personality' ? '🧾' : '💀');
   const locked = !revealed;
-  const colors = {
-    postcard: { bg: '#29394d', accent: '#ff2d78', paper: '#fff3b0', floor: '#15202d' },
-    personality: { bg: '#101722', accent: '#00f5d4', paper: '#bae1ff', floor: '#050912' },
-    legacy: { bg: '#21142e', accent: '#b537f2', paper: '#fee440', floor: '#100a16' }
-  }[kind] || { bg: '#101722', accent: '#00f5d4', paper: '#fff3b0', floor: '#050912' };
-  const stamp = locked ? '?' : emoji;
-  const front = kind === 'legacy'
-    ? `<path d="M74 58 C90 34 112 78 132 43 C145 21 166 38 177 19" fill="none" stroke="${colors.paper}" stroke-width="6" stroke-linecap="round" opacity="0.88"/>`
-    : kind === 'personality'
-      ? `<path d="M58 65 L88 38 L120 58 L153 29" fill="none" stroke="${colors.paper}" stroke-width="6" stroke-linecap="round"/>`
-      : `<rect x="54" y="28" width="112" height="48" fill="${colors.paper}" stroke="#15120d" stroke-width="4" transform="rotate(-4 110 52)"/>`;
+  const src = kind === 'postcard'
+    ? 'output/assets/mayfly-death-postcard.webp'
+    : kind === 'legacy'
+      ? 'output/assets/card-art-disrupt.webp'
+      : 'output/assets/card-art-sunset.webp';
   return `
-    <svg viewBox="0 0 220 94" role="img" aria-label="${text}收藏插图">
-      <rect width="220" height="94" fill="${colors.bg}"/>
-      <g opacity="0.24" stroke="${colors.accent}" stroke-width="1">
-        <path d="M0 22 H220M0 46 H220M0 70 H220"/>
-        <path d="M32 0 V94M76 0 V94M120 0 V94M164 0 V94M208 0 V94"/>
-      </g>
-      <rect x="0" y="74" width="220" height="20" fill="${colors.floor}"/>
-      ${front}
-      <circle cx="174" cy="27" r="21" fill="${locked ? '#1b1b24' : colors.accent}" stroke="#15120d" stroke-width="4"/>
-      <text x="174" y="35" text-anchor="middle" font-size="25">${stamp}</text>
-      <rect x="12" y="10" width="86" height="20" fill="#15120d" stroke="${colors.accent}" stroke-width="2"/>
-      <text x="20" y="24" fill="${colors.accent}" font-size="9" font-family="monospace">${locked ? 'LOCKED' : shortText(kind.toUpperCase(), 9)}</text>
-      <text x="110" y="86" text-anchor="middle" fill="${locked ? 'rgba(255,255,255,0.42)' : '#f0f0e8'}" font-size="10" font-family="sans-serif">${text}</text>
-    </svg>
+    <div class="collection-art-frame ${locked ? 'locked' : ''}" aria-label="${text}收藏插图">
+      <img class="collection-art-image" src="${src}" alt="" loading="lazy" decoding="async">
+      <span class="collection-art-badge">${locked ? '?' : emoji}</span>
+      <span class="collection-art-shine"></span>
+    </div>
   `;
 }
 
@@ -6939,10 +8941,10 @@ function setCollectionTarget(kind, target) {
 
 function buildCharacterPortrait(char, locked) {
   const images = {
-    mayfly: 'output/assets/mayfly-character-banner.png',
-    mosquito: 'output/assets/mosquito-character-banner.png',
-    old_wang: 'output/assets/old_wang-character-banner.png',
-    slacker_yu: 'output/assets/slacker_yu-character-banner.png'
+    mayfly: 'output/assets/mayfly-character-banner.webp',
+    mosquito: 'output/assets/mosquito-character-banner.webp',
+    old_wang: 'output/assets/old_wang-character-banner.webp',
+    slacker_yu: 'output/assets/slacker_yu-character-banner.webp'
   };
 
   const src = images[char.id] || images.mayfly;
@@ -7041,38 +9043,24 @@ function setupIntentScreen() {
 }
 
 function buildIntentScene(intent) {
-  const scenes = {
-    work: { bg: '#9bc7d9', floor: '#34425a', accent: '#ff2d78', icon: '📊', label: 'KPI', prop: 'PPT' },
-    slack: { bg: '#baffc9', floor: '#153b32', accent: '#00f5d4', icon: '🐟', label: '偷回时间', prop: 'WC' },
-    social: { bg: '#ffd3d8', floor: '#5b3041', accent: '#fee440', icon: '🧋', label: '人情过热', prop: 'LIKE' },
-    ai: { bg: '#101722', floor: '#050912', accent: '#00f5d4', icon: '🤖', label: '外包本人', prop: 'AI' },
-    disrupt: { bg: '#fee9a8', floor: '#4b3328', accent: '#ff2d78', icon: '⚡', label: '现实卡顿', prop: 'TRUTH' }
-  };
-  const scene = scenes[intent.id] || scenes.work;
-  const dark = scene.bg === '#101722';
-  const text = dark ? '#f0f0e8' : '#15120d';
+  const src = getIntentArtPath(intent.id);
   return `
-    <div class="intent-scene" aria-hidden="true">
-      <svg viewBox="0 0 220 82" role="img" aria-label="${intent.title}路线图">
-        <rect width="220" height="82" fill="${scene.bg}"/>
-        <g opacity="${dark ? '0.32' : '0.24'}" stroke="${scene.accent}" stroke-width="1">
-          ${Array.from({ length: 7 }).map((_, i) => `<path d="M${i * 36 - 10} 0 V82"/>`).join('')}
-          ${Array.from({ length: 4 }).map((_, i) => `<path d="M0 ${i * 20 + 8} H220"/>`).join('')}
-        </g>
-        <path d="M21 58 C62 33 91 65 121 43 C148 25 174 39 199 25" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="8" stroke-linecap="round"/>
-        <path d="M21 58 C62 33 91 65 121 43 C148 25 174 39 199 25" fill="none" stroke="${scene.accent}" stroke-width="4" stroke-linecap="round"/>
-        <rect x="0" y="62" width="220" height="20" fill="${scene.floor}"/>
-        <g transform="translate(64 43)">
-          <circle r="24" fill="${dark ? '#111827' : '#fff3b0'}" stroke="${scene.accent}" stroke-width="4"/>
-          <text x="0" y="9" text-anchor="middle" font-size="27">${scene.icon}</text>
-        </g>
-        <rect x="126" y="17" width="58" height="28" fill="rgba(255,255,255,0.18)" stroke="${text}" stroke-width="2" transform="rotate(5 155 31)"/>
-        <text x="155" y="35" fill="${text}" text-anchor="middle" font-size="10" font-family="monospace">${scene.prop}</text>
-        <rect x="10" y="9" width="82" height="18" fill="#15120d"/>
-        <text x="18" y="22" fill="${scene.accent}" font-size="10" font-family="monospace">${shortText(scene.label, 10)}</text>
-      </svg>
+    <div class="intent-scene phase12-art-scene" aria-hidden="true">
+      <img class="intent-art-image" src="${src}" alt="" loading="lazy" decoding="async">
+      <span class="intent-art-orbit"></span>
     </div>
   `;
+}
+
+function getIntentArtPath(intentId) {
+  const assets = {
+    work: 'output/assets/card-art-work.webp',
+    slack: 'output/assets/card-art-slack.webp',
+    social: 'output/assets/card-art-social.webp',
+    ai: 'output/assets/card-art-ai.webp',
+    disrupt: 'output/assets/card-art-disrupt.webp'
+  };
+  return assets[intentId] || 'output/assets/card-art-sunset.webp';
 }
 
 function startRunWithIntent(intentId) {
@@ -7154,6 +9142,11 @@ function renderChoiceCards() {
   const firstRunSimple = gameState.firstRun && gameState.turnCount < 3;
   gameState.currentCards = CORE.drawCardOptions(gameState, seed, choiceCount);
   const recommendedIds = getRecommendedCardIds(gameState.currentCards);
+  gameState.currentCards = [...gameState.currentCards].sort((left, right) => {
+    const leftRecommended = recommendedIds.includes(left.id) ? 1 : 0;
+    const rightRecommended = recommendedIds.includes(right.id) ? 1 : 0;
+    return rightRecommended - leftRecommended;
+  });
   grid.innerHTML = '';
 
   gameState.currentCards.forEach((card, index) => {
@@ -7177,22 +9170,34 @@ function renderChoiceCards() {
     btn.className = `activity-btn card-table-face category-${card.category}${firstRunSimple ? ' simple-card' : ''}${recommended ? ' recommended' : ''}${card.isMutant ? ' mutant' : ''}`;
     const readability = buildCardReadability(card, causalPreview);
     const recommendationReason = buildRecommendationReason(card, causalPreview, chain);
+    btn.setAttribute('data-card-index', `${index}`);
+    btn.setAttribute('style', `--deck-index: ${index};`);
     btn.setAttribute(
       'aria-label',
       `${face.title}，${face.costChip}。${face.temptation} ${face.riskWhisper}。详情：${face.detail.effectText}`
     );
     btn.innerHTML = `
       ${card.isMutant ? `<div class="act-mutant-badge">✦ 因果之遗 · 变异卡</div>` : ''}
+      <div class="card-face-front-copy">
+        <div class="card-face-title-row">
+          <span class="card-face-icon" aria-hidden="true">${face.icon}</span>
+          <div class="act-name card-face-title">${face.title}</div>
+        </div>
+        <div class="card-face-player-intent">
+          <span>我会做</span>
+          <strong>${readability.action}</strong>
+        </div>
+        <div class="card-face-outcome-line ${readability.tone}">
+          <span>点后看</span>
+          <strong>${readability.result}</strong>
+        </div>
+      </div>
       <div class="card-face-topline">
         <span class="card-face-type">${face.typeLabel}</span>
         <span class="card-face-cost">${face.costChip}</span>
       </div>
       <div class="card-face-art card-face-art-${face.artMood}">
         ${buildCardVisual(card, causalPreview)}
-      </div>
-      <div class="card-face-title-row">
-        <span class="card-face-icon" aria-hidden="true">${face.icon}</span>
-        <div class="act-name card-face-title">${face.title}</div>
       </div>
       <div class="card-face-temptation">${face.temptation}</div>
       <div class="card-face-risk">
@@ -7359,189 +9364,54 @@ function shortText(text, maxLength) {
 function buildCardVisual(card, causalPreview) {
   const category = card.category || 'think';
   const danger = causalPreview.callback || ['danger', 'lethal'].includes(causalPreview.risk.level);
-  const scene = getActionScene(card);
+  const artSrc = getActionArtPath(card);
+  const mood = danger ? 'risk' : (card.id === 'window-sunset' ? 'peace' : 'action');
   return `
-    <div class="act-visual ${category} ${danger ? 'danger' : ''}" aria-hidden="true">
-      ${buildActionSceneSvg(scene, card, danger)}
+    <div class="act-visual ${category} ${danger ? 'danger' : ''} card-art-ready" data-mood="${mood}" aria-hidden="true">
+      <img class="act-art-image" src="${artSrc}" alt="" loading="lazy" decoding="async">
+      <span class="act-art-glint"></span>
+      ${danger ? '<span class="act-art-risk-dot"></span>' : ''}
     </div>
   `;
 }
 
-function getActionScene(card) {
+function getActionArtPath(card) {
   const byId = {
-    'voluntary-overtime': { bg: '#0d0b18', floor: '#2a1a3a', accent: '#ff2d78', center: '💻', left: '📎', right: '☕', label: 'OVERTIME' },
-    'final-ppt': { bg: '#0b1626', floor: '#1a3050', accent: '#fee440', center: '📊', left: '🗂', right: '🔥', label: 'FINAL_v17' },
-    'meeting-silence': { bg: '#0e0b1a', floor: '#221a38', accent: '#b537f2', center: '🗣', left: '👥', right: '📋', label: 'MEETING' },
-    'write-minutes': { bg: '#081216', floor: '#142c36', accent: '#00f5d4', center: '📝', left: '💬', right: '🔁', label: 'MINUTES' },
-    'toilet-slack': { bg: '#051812', floor: '#103c2a', accent: '#00f5d4', center: '🚽', left: '🐟', right: '🚪', label: 'SAFE ROOM' },
-    'fake-ide': { bg: '#08101a', floor: '#12243c', accent: '#39ff14', center: '⌨️', left: '码', right: '🍱', label: 'FAKE IDE' },
-    'milk-tea-social': { bg: '#1a0b12', floor: '#3a1828', accent: '#fee440', center: '🧋', left: '❤', right: '💬', label: 'SOCIAL' },
-    'like-boss-post': { bg: '#1a0b12', floor: '#3c1424', accent: '#ff2d78', center: '👍', left: '📱', right: '👔', label: 'BOSS LIKE' },
-    'doom-scroll': { bg: '#051810', floor: '#123824', accent: '#39ff14', center: '📱', left: '5法', right: '▶', label: 'SCROLL' },
-    'notification-dnd': { bg: '#051812', floor: '#103c2a', accent: '#00f5d4', center: '🔕', left: '99+', right: '🌙', label: 'DND' },
-    'old-post': { bg: '#160812', floor: '#2c0c20', accent: '#ff2d78', center: '🕳', left: '📷', right: '😬', label: 'BLACK HISTORY' },
-    'calculate-wage': { bg: '#181208', floor: '#382810', accent: '#ff6b35', center: '🧮', left: '¥', right: '？', label: 'MATH HURTS' },
-    'ai-weekly-report': { bg: '#080c16', floor: '#101a30', accent: '#00f5d4', center: '🤖', left: '周报', right: '⌘', label: 'PROMPT' },
-    'ai-deep-research': { bg: '#080c16', floor: '#101a30', accent: '#00f5d4', center: '🐋', left: 'PDF', right: '???', label: 'RESEARCH' },
-    'ai-meeting-bot': { bg: '#080c16', floor: '#101a30', accent: '#00f5d4', center: '🎙️', left: 'BOT', right: '📋', label: 'PROXY' },
-    'ai-comfort-bot': { bg: '#0a0816', floor: '#181036', accent: '#b537f2', center: '🧸', left: 'OK?', right: '☑', label: 'COMFORT' },
-    'boundary-statement': { bg: '#180a10', floor: '#3c1224', accent: '#ff2d78', center: '✋', left: 'NO', right: '👀', label: 'BOUNDARY' },
-    'speak-truth': { bg: '#180a10', floor: '#3c1224', accent: '#ff2d78', center: '⚡', left: '🎤', right: '😶', label: 'TRUTH' },
-    'wrong-emoji': { bg: '#140818', floor: '#2a103c', accent: '#b537f2', center: '🙃', left: '群', right: '撤回', label: 'OOPS' },
-    'solo-slack': { bg: '#051812', floor: '#103c2a', accent: '#00f5d4', center: '🛋', left: '🐟', right: '🫥', label: 'SOLO' },
-    'return-favor': { bg: '#1a180a', floor: '#383210', accent: '#fee440', center: '🤝', left: '账', right: '🧋', label: 'FAVOR' },
-    'reschedule-meeting': { bg: '#16180a', floor: '#323610', accent: '#fee440', center: '📅', left: '↻', right: '⏰', label: 'MOVE IT' },
-    'window-sunset': { bg: '#0f1826', floor: '#1a2b40', accent: '#fee440', center: '🌇', left: '窗', right: '1s', label: 'SUNSET' }
+    'voluntary-overtime': 'output/assets/card-art-work.webp',
+    'final-ppt': 'output/assets/card-art-work.webp',
+    'write-minutes': 'output/assets/card-art-work.webp',
+    'meeting-silence': 'output/assets/card-art-meeting.webp',
+    'reschedule-meeting': 'output/assets/card-art-meeting.webp',
+    'toilet-slack': 'output/assets/card-art-slack.webp',
+    'fake-ide': 'output/assets/card-art-slack.webp',
+    'solo-slack': 'output/assets/card-art-slack.webp',
+    'milk-tea-social': 'output/assets/card-art-social.webp',
+    'like-boss-post': 'output/assets/card-art-social.webp',
+    'old-post': 'output/assets/card-art-social.webp',
+    'doom-scroll': 'output/assets/card-art-phone.webp',
+    'notification-dnd': 'output/assets/card-art-phone.webp',
+    'calculate-wage': 'output/assets/card-art-think.webp',
+    'ai-weekly-report': 'output/assets/card-art-ai.webp',
+    'ai-deep-research': 'output/assets/card-art-ai.webp',
+    'ai-meeting-bot': 'output/assets/card-art-ai.webp',
+    'ai-comfort-bot': 'output/assets/card-art-ai.webp',
+    'boundary-statement': 'output/assets/card-art-disrupt.webp',
+    'speak-truth': 'output/assets/card-art-disrupt.webp',
+    'wrong-emoji': 'output/assets/card-art-disrupt.webp',
+    'return-favor': 'output/assets/card-art-disrupt.webp',
+    'window-sunset': 'output/assets/card-art-sunset.webp'
   };
   const byCategory = {
-    work: { bg: '#0a0b16', floor: '#1a1a36', accent: '#ff2d78', center: '💻', left: '📎', right: '☕', label: 'WORK' },
-    meeting: { bg: '#0d0b1a', floor: '#221a38', accent: '#b537f2', center: '🗣', left: '👥', right: '📋', label: 'MEETING' },
-    slack: { bg: '#051812', floor: '#103c2a', accent: '#00f5d4', center: '🐟', left: '🚪', right: '📱', label: 'SLACK' },
-    social: { bg: '#1a0b12', floor: '#3a1828', accent: '#fee440', center: '🧋', left: '❤', right: '💬', label: 'SOCIAL' },
-    phone: { bg: '#051810', floor: '#123824', accent: '#39ff14', center: '📱', left: '▶', right: '99+', label: 'PHONE' },
-    think: { bg: '#181208', floor: '#382810', accent: '#ff6b35', center: '🧠', left: '？', right: '!', label: 'THINK' },
-    ai: { bg: '#080c16', floor: '#101a30', accent: '#00f5d4', center: '🤖', left: 'AI', right: '⌘', label: 'AI' },
-    disrupt: { bg: '#180a10', floor: '#3c1224', accent: '#ff2d78', center: '⚡', left: '🎤', right: '!', label: 'DISRUPT' }
+    work: 'output/assets/card-art-work.webp',
+    meeting: 'output/assets/card-art-meeting.webp',
+    slack: 'output/assets/card-art-slack.webp',
+    social: 'output/assets/card-art-social.webp',
+    phone: 'output/assets/card-art-phone.webp',
+    think: 'output/assets/card-art-think.webp',
+    ai: 'output/assets/card-art-ai.webp',
+    disrupt: 'output/assets/card-art-disrupt.webp'
   };
   return byId[card.id] || byCategory[card.category] || byCategory.think;
-}
-
-function buildActionSceneSvg(scene, card, danger) {
-  const objectSvg = buildActionObjectSvg(card, scene);
-  return `
-    <svg class="act-scene-svg" viewBox="0 0 320 88" role="img" aria-label="${card.name}小场景">
-      <defs>
-        <filter id="neon-glow-${card.id}" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="3" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      <rect width="320" height="88" fill="${scene.bg}"/>
-      <g opacity="0.15" stroke="${scene.accent}" stroke-width="1">
-        ${Array.from({ length: 9 }).map((_, i) => `<path d="M${i * 40 - 12} 0 V88"/>`).join('')}
-        ${Array.from({ length: 4 }).map((_, i) => `<path d="M0 ${i * 22 + 10} H320"/>`).join('')}
-      </g>
-      <circle cx="272" cy="20" r="13" fill="${scene.accent}" opacity="0.3" filter="url(#neon-glow-${card.id})"/>
-      <rect x="0" y="63" width="320" height="25" fill="${scene.floor}"/>
-      <path d="M0 64 H320" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-dasharray="8 7"/>
-      <g transform="translate(36 47)">
-        <rect x="-20" y="-18" width="40" height="31" fill="rgba(255,255,255,0.05)" stroke="${scene.accent}" stroke-width="1.5" transform="rotate(-6)" opacity="0.8"/>
-        <text x="0" y="5" text-anchor="middle" font-size="${String(scene.left).length > 2 ? '10' : '18'}" fill="#f3e8ee" font-family="sans-serif">${scene.left}</text>
-      </g>
-      <g transform="translate(282 47)">
-        <rect x="-20" y="-22" width="40" height="36" fill="rgba(255,255,255,0.05)" stroke="${scene.accent}" stroke-width="1.5" transform="rotate(6)" opacity="0.8"/>
-        <text x="0" y="5" text-anchor="middle" font-size="${String(scene.right).length > 2 ? '10' : '18'}" fill="#f3e8ee" font-family="sans-serif">${scene.right}</text>
-      </g>
-      <g transform="translate(142 49)">
-        ${buildTinyActionMayfly(scene.accent, danger)}
-      </g>
-      <g transform="translate(210 47)" filter="url(#neon-glow-${card.id})">
-        ${objectSvg}
-        ${danger ? `<path d="M-31 -29 L31 29 M31 -29 L-31 29" stroke="#ff2d78" stroke-width="4" stroke-linecap="round" opacity="0.8"/>` : ''}
-      </g>
-      <rect x="10" y="9" width="86" height="20" fill="#06050b" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-      <text x="19" y="23" fill="${scene.accent}" font-size="10" font-family="monospace" font-weight="bold">${shortText(scene.label, 12)}</text>
-    </svg>
-  `;
-}
-
-function buildTinyActionMayfly(accent, danger) {
-  const mouth = danger ? 'M-7 1 Q0 7 7 1' : 'M-7 -1 Q0 5 8 -1';
-  const pupilY = danger ? -12 : -10;
-  return `
-    <g>
-      <ellipse cx="-18" cy="-15" rx="25" ry="12" fill="rgba(0, 245, 212, 0.25)" opacity="0.8" stroke="#f3e8ee" stroke-width="1.5"/>
-      <ellipse cx="18" cy="-15" rx="25" ry="12" fill="rgba(0, 245, 212, 0.25)" opacity="0.8" stroke="#f3e8ee" stroke-width="1.5"/>
-      <ellipse cx="0" cy="8" rx="12" ry="21" fill="#a67c2c" stroke="#f3e8ee" stroke-width="2"/>
-      <circle cx="0" cy="-8" r="16" fill="#d9aa34" stroke="#f3e8ee" stroke-width="2"/>
-      <circle cx="-7" cy="-11" r="6.3" fill="#fff8d8" stroke="#15120d" stroke-width="1.5"/>
-      <circle cx="8" cy="-11" r="6.3" fill="#fff8d8" stroke="#15120d" stroke-width="1.5"/>
-      <circle cx="${danger ? -9 : -6}" cy="${pupilY}" r="1.8" fill="#15120d"/>
-      <circle cx="${danger ? 5 : 9}" cy="${pupilY}" r="1.8" fill="#15120d"/>
-      <path d="${mouth}" fill="none" stroke="#15120d" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="-13" cy="-2" r="2.7" fill="#ddb0a3" opacity="0.6"/>
-      <circle cx="13" cy="-2" r="2.7" fill="#ddb0a3" opacity="0.6"/>
-      <path d="M-3 11 L0 15 L3 11" fill="none" stroke="#15120d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M-4 7 L0 11 L4 7 L0 4 Z" fill="#c35b4d" stroke="#f3e8ee" stroke-width="1"/>
-      <path d="M-8 24 L-22 33 M0 26 L0 37 M8 24 L22 33" stroke="#f3e8ee" stroke-width="1.5" stroke-linecap="round"/>
-      <circle cx="0" cy="4" r="25" fill="none" stroke="${accent}" stroke-width="2" opacity="0.5"/>
-    </g>
-  `;
-}
-
-function buildActionObjectSvg(card, scene) {
-  const stroke = '#f3e8ee';
-  const fill = 'rgba(0, 0, 0, 0.4)';
-  const accent = scene.accent;
-  const category = card.category || 'think';
-  if (category === 'work' || card.id === 'final-ppt') {
-    return `
-      <g>
-        <rect x="-30" y="-24" width="60" height="40" rx="4" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
-        <rect x="-19" y="-14" width="18" height="14" fill="${accent}"/>
-        <path d="M6 4 L21 -12" stroke="${stroke}" stroke-width="3" stroke-linecap="round"/>
-        <rect x="-18" y="20" width="36" height="5" fill="${stroke}" opacity="0.72"/>
-      </g>`;
-  }
-  if (category === 'meeting') {
-    return `
-      <g>
-        <rect x="-28" y="-18" width="56" height="34" rx="5" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
-        <circle cx="-12" cy="-2" r="7" fill="${accent}"/>
-        <circle cx="8" cy="-2" r="7" fill="${accent}" opacity="0.7"/>
-        <path d="M-18 14 H20" stroke="${stroke}" stroke-width="3" stroke-linecap="round"/>
-      </g>`;
-  }
-  if (category === 'slack') {
-    return `
-      <g>
-        <path d="M-26 -14 h44 v24 q0 16 -18 16 h-9 q-18 0 -18 -16 v-11" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
-        <path d="M21 -11 q21 10 0 28" fill="none" stroke="${accent}" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="-7" cy="1" r="5" fill="${accent}"/>
-      </g>`;
-  }
-  if (category === 'phone' || card.id === 'doom-scroll') {
-    return `
-      <g>
-        <rect x="-18" y="-30" width="36" height="60" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
-        <path d="M-8 -12 L9 0 L-8 12 Z" fill="${accent}"/>
-        <circle cx="0" cy="22" r="3" fill="${stroke}"/>
-      </g>`;
-  }
-  if (category === 'social') {
-    return `
-      <g>
-        <rect x="-32" y="-22" width="64" height="44" rx="8" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
-        <path d="M-9 0 C-22 -13 -2 -24 0 -9 C5 -24 24 -13 9 0 L0 12 Z" fill="${accent}" stroke="${stroke}" stroke-width="1.5"/>
-        <circle cx="23" cy="-17" r="8" fill="#ff2d78" stroke="${stroke}" stroke-width="2"/>
-      </g>`;
-  }
-  if (category === 'ai') {
-    return `
-      <g>
-        <rect x="-31" y="-25" width="62" height="50" rx="9" fill="${fill}" stroke="${accent}" stroke-width="3"/>
-        <circle cx="-12" cy="-3" r="8" fill="${accent}"/>
-        <circle cx="13" cy="-3" r="8" fill="${accent}" opacity="0.82"/>
-        <path d="M-16 16 H18" stroke="${accent}" stroke-width="3" stroke-linecap="round"/>
-        <path d="M-21 -25 V-35 M21 -25 V-35" stroke="${accent}" stroke-width="2" stroke-linecap="round"/>
-      </g>`;
-  }
-  if (category === 'disrupt') {
-    return `
-      <g>
-        <rect x="-28" y="-22" width="56" height="44" rx="5" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
-        <path d="M-18 9 L-2 -17 L2 1 L19 -12" fill="none" stroke="${accent}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>`;
-  }
-  return `
-    <g>
-      <circle r="28" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
-      <path d="M-14 2 Q0 -18 14 2 Q4 18 -14 2 Z" fill="${accent}" opacity="0.92"/>
-      <circle cx="0" cy="2" r="6" fill="${stroke}"/>
-    </g>`;
 }
 
 function buildQuickImpactChips(card, causalPreview) {
@@ -7691,15 +9561,12 @@ function renderGameStage() {
   const stage = document.getElementById('game-stage');
   if (!stage) return;
   const route = CORE.buildRouteStatus(gameState);
-  const theme = getStageTheme(route);
   const mood = getStageMood();
   const chain = getCurrentRouteTaskChainStatus();
   const pending = (gameState.pendingConsequences || []).length;
   const due = CORE.getDueConsequences(gameState).length;
   const limit = gameState.character && gameState.character.timeLimit ? gameState.character.timeLimit : 24;
   const elapsedPct = Math.max(0, Math.min(1, (limit - gameState.timeLeft) / limit));
-  const flyX = Math.round(66 + elapsedPct * 388);
-  const flyY = Math.round(172 - Math.sin(elapsedPct * Math.PI) * 34 + Math.min(20, (gameState.stats.anxiety || 0) / 6));
   const lifePct = Math.round(elapsedPct * 100);
   const intentTitle = gameState.runIntent && gameState.runIntent.title;
   const focusLabel = chain && !chain.complete
@@ -7712,55 +9579,39 @@ function renderGameStage() {
     : pending
       ? `${pending}个旧账排队`
       : `焦虑 ${gameState.stats.anxiety || 0}`;
-  const debtClouds = Array.from({ length: Math.min(4, pending + due) }).map((_, index) => {
-    const x = 330 + index * 34;
-    const y = 58 + (index % 2) * 14;
-    const color = due ? '#ff2d78' : '#fee440';
-    return `<g opacity="0.82">
-      <circle cx="${x}" cy="${y}" r="9" fill="${color}"/>
-      <circle cx="${x + 9}" cy="${y + 2}" r="7" fill="${color}"/>
-      <circle cx="${x - 9}" cy="${y + 3}" r="6" fill="${color}"/>
-    </g>`;
-  }).join('');
-  const routeColor = route.active ? theme.accent : '#fee440';
+  const artSrc = getStageArtPath(route);
   stage.innerHTML = `
-    <svg class="stage-svg" viewBox="0 0 520 300" role="img" aria-label="蜉蝣在压缩人生城市中飞行">
-      <defs>
-        <linearGradient id="stageSky" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="${theme.sky[0]}"/>
-          <stop offset="0.58" stop-color="${theme.sky[1]}"/>
-          <stop offset="1" stop-color="${theme.sky[2]}"/>
-        </linearGradient>
-        <linearGradient id="stageGround" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="${theme.ground[0]}"/>
-          <stop offset="1" stop-color="${theme.ground[1]}"/>
-        </linearGradient>
-      </defs>
-      <rect width="520" height="248" fill="url(#stageSky)"/>
-      <circle cx="432" cy="46" r="31" fill="${theme.moon}" opacity="0.92"/>
-      <circle cx="454" cy="36" r="31" fill="${theme.sky[0]}" opacity="0.78"/>
-      <g opacity="0.32" fill="${theme.accent}">
-        <circle cx="48" cy="44" r="2.4"/><circle cx="112" cy="28" r="1.8"/><circle cx="198" cy="58" r="2.4"/>
-        <circle cx="282" cy="34" r="1.9"/><circle cx="396" cy="86" r="2.1"/>
-      </g>
-      <path d="M34 205 C124 116 209 232 285 156 C356 82 416 136 488 88" fill="none" stroke="rgba(255,255,255,0.17)" stroke-width="12" stroke-linecap="round"/>
-      <path d="M34 205 C124 116 209 232 285 156 C356 82 416 136 488 88" fill="none" stroke="${routeColor}" stroke-width="7" stroke-linecap="round" pathLength="100" stroke-dasharray="${lifePct} 100"/>
-      <g transform="translate(0 100)">${buildStageSkyline(theme)}</g>
-      <g transform="translate(0 116)">${buildStageRouteProps(theme)}</g>
-      ${debtClouds}
-      ${buildStageAvatar(flyX, flyY, mood, theme)}
-      <rect x="0" y="246" width="520" height="54" fill="url(#stageGround)"/>
-      <path d="M0 249 H520" stroke="rgba(254,228,64,0.3)" stroke-width="3" stroke-dasharray="12 10"/>
-      <rect x="16" y="18" width="128" height="30" rx="3" fill="#15120d" stroke="${theme.accent}" stroke-width="2"/>
-      <text class="stage-stageLabel" x="28" y="38" fill="${theme.accent}" font-size="11">${shortText(theme.label, 12)}</text>
-      <rect x="374" y="204" width="112" height="30" rx="3" fill="#15120d" stroke="${mood.color}" stroke-width="2"/>
-      <text class="stage-stageLabel" x="430" y="224" text-anchor="middle" fill="${mood.color}" font-size="10">${shortText(mood.label, 10)}</text>
-    </svg>
-    <div class="stage-caption">
-      <div class="stage-pill">${shortText(focusLabel, 14)}</div>
-      <div class="stage-pill warning">${shortText(warningLabel, 12)}</div>
+    <div class="stage-art-shell" role="img" aria-label="蜉蝣本局生命舞台">
+      <img class="stage-art-image" src="${artSrc}" alt="" loading="eager" decoding="async">
+      <span class="stage-art-wash"></span>
+      <div class="stage-art-topline">
+        <span class="stage-route-chip">${shortText(focusLabel, 14)}</span>
+        <span class="stage-mood-chip" style="--mood-color:${mood.color}">${shortText(mood.label, 10)}</span>
+      </div>
+      <div class="stage-life-track" aria-label="本局生命进度 ${lifePct}%">
+        <span class="stage-life-fill" style="width:${lifePct}%"></span>
+        <span class="stage-life-dot" style="left:${lifePct}%">🪽</span>
+      </div>
+      <div class="stage-art-bottomline">
+        <strong>已活 ${lifePct}%</strong>
+        <span>${shortText(warningLabel, 14)}</span>
+      </div>
     </div>
   `;
+}
+
+function getStageArtPath(route) {
+  const routeId = route.active
+    ? route.id
+    : gameState.runIntent && gameState.runIntent.routeId;
+  const assets = {
+    work: 'output/assets/card-art-work.webp',
+    slack: 'output/assets/card-art-slack.webp',
+    social: 'output/assets/card-art-social.webp',
+    ai: 'output/assets/card-art-ai.webp',
+    disrupt: 'output/assets/card-art-disrupt.webp'
+  };
+  return assets[routeId] || 'output/assets/mayfly-title-hero.webp';
 }
 
 function getStageTheme(route) {
@@ -7853,7 +9704,8 @@ function buildStageRouteProps(theme) {
         <rect x="0" y="0" width="68" height="42" fill="#fff3b0" stroke="#15120d" stroke-width="3"/>
         <rect x="10" y="10" width="20" height="18" fill="#ff2d78"/>
         <path d="M38 29 L57 13" stroke="#15120d" stroke-width="3"/>
-        <text x="34" y="38" text-anchor="middle" font-size="9" font-family="monospace">PPT</text>
+        <circle cx="48" cy="15" r="4" fill="#3aa6a6"/>
+        <circle cx="56" cy="24" r="3" fill="#f2b84b"/>
       </g>`,
     wc: `
       <g transform="translate(386 90)">
@@ -7864,21 +9716,21 @@ function buildStageRouteProps(theme) {
     like: `
       <g transform="translate(382 88) rotate(4)">
         <rect x="0" y="0" width="70" height="45" rx="6" fill="#ffd3d8" stroke="#15120d" stroke-width="3"/>
-        <text x="34" y="26" text-anchor="middle" font-size="22">👍</text>
-        <text x="35" y="39" text-anchor="middle" font-size="9" font-family="monospace">BOSS</text>
+        <path d="M26 25 C14 12 32 6 35 18 C40 6 58 12 44 25 L35 35 Z" fill="#ef6f61" stroke="#15120d" stroke-width="2"/>
+        <circle cx="15" cy="12" r="4" fill="#f2b84b"/>
       </g>`,
     ai: `
       <g transform="translate(386 84)">
         <rect x="0" y="0" width="72" height="48" rx="6" fill="#101722" stroke="#00f5d4" stroke-width="3"/>
         <circle cx="25" cy="23" r="10" fill="#00f5d4"/>
         <circle cx="45" cy="23" r="10" fill="#00f5d4"/>
-        <text x="35" y="42" text-anchor="middle" fill="#00f5d4" font-size="9" font-family="monospace">BOT LOOP</text>
+        <path d="M24 39 H48" stroke="#00f5d4" stroke-width="3" stroke-linecap="round"/>
       </g>`,
     truth: `
       <g transform="translate(386 86) rotate(-4)">
         <rect x="0" y="0" width="74" height="48" rx="5" fill="#fee9a8" stroke="#15120d" stroke-width="3"/>
         <path d="M18 34 L34 12 L38 29 L55 18" fill="none" stroke="#ff2d78" stroke-width="5" stroke-linecap="round"/>
-        <text x="38" y="43" text-anchor="middle" font-size="9" font-family="monospace">TRUTH</text>
+        <circle cx="58" cy="34" r="4" fill="#3aa6a6"/>
       </g>`,
     city: ''
   };
@@ -7893,7 +9745,8 @@ function buildStageAvatar(x, y, mood, theme) {
     <g class="stage-mayfly${jitter}" transform="translate(${x} ${y})">
       <ellipse class="stage-wing" cx="-17" cy="-13" rx="26" ry="13" fill="#d8f7ff" opacity="0.74" stroke="#ffffff" stroke-width="2"/>
       <ellipse class="stage-wing" cx="17" cy="-13" rx="26" ry="13" fill="#d8f7ff" opacity="0.74" stroke="#ffffff" stroke-width="2"/>
-      <ellipse cx="0" cy="9" rx="13" ry="22" fill="#c38a35" stroke="#15110b" stroke-width="3"/>
+      <ellipse cx="0" cy="9" rx="18" ry="18" fill="#f0b54a" stroke="#15110b" stroke-width="3"/>
+      <path d="M-13 5 C-8 16 8 16 14 5 L13 18 C7 25 -7 25 -13 18 Z" fill="#f8edd2" stroke="#15110b" stroke-width="2"/>
       <circle cx="0" cy="-8" r="16" fill="#f1bf56" stroke="#15110b" stroke-width="3"/>
       <circle cx="-6" cy="-11" r="5.8" fill="#fff8d8" stroke="#15110b" stroke-width="2"/>
       <circle cx="7" cy="-11" r="5.8" fill="#fff8d8" stroke="#15110b" stroke-width="2"/>
@@ -7903,7 +9756,7 @@ function buildStageAvatar(x, y, mood, theme) {
       <circle cx="12" cy="-2" r="2.6" fill="#ddb0a3" opacity="0.6"/>
       <path d="M-3 12 L0 16 L3 12" fill="none" stroke="#15110b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M-4 7 L0 11 L4 7 L0 4 Z" fill="#c35b4d" stroke="#15110b" stroke-width="1.5"/>
-      <path d="M-9 23 L-22 32 M0 25 L0 36 M9 23 L22 32" stroke="#15110b" stroke-width="2" stroke-linecap="round"/>
+      <path d="M-9 22 L-20 30 M9 22 L20 30" stroke="#15110b" stroke-width="2" stroke-linecap="round"/>
       <circle cx="0" cy="8" r="19" fill="none" stroke="${theme.accent}" stroke-width="2" opacity="0.28"/>
     </g>
   `;
@@ -8443,43 +10296,35 @@ function renderEventComic(event, mode = 'event') {
     || (event.absurdDebt || 0) > 0;
   const isAi = /AI|助手|提示词|模型|机器人|圆宝|深思|会议精灵|周报/.test(`${event.text || ''}${event.sourceCardName || ''}`);
   const isSocial = /朋友圈|同事|老板|群|点赞|社交|奶茶|关系/.test(`${event.text || ''}${event.sourceCardName || ''}`);
-  const sky = isAi ? '#101722' : isBad ? '#351427' : isSocial ? '#f0b5bd' : '#dcecf0';
-  const accent = isAi ? '#00f5d4' : isBad ? '#ff2d78' : isSocial ? '#fee440' : '#39ff14';
+  const accent = isAi ? '#3aa6a6' : isBad ? '#ef6f61' : isSocial ? '#ef7b99' : '#6aa875';
+  const artSrc = getEventArtPath(event, mode);
   const panelText = mode === 'rescue'
-    ? 'DEATH?'
+    ? '临终抢救'
     : mode === 'debt'
-      ? 'OLD DEBT'
-      : 'EVENT';
+      ? '旧账回访'
+      : '突发事件';
   comic.innerHTML = `
-    <svg viewBox="0 0 392 138" role="img" aria-label="事件漫画分镜">
-      <rect width="392" height="138" fill="${sky}"/>
-      <g opacity="0.22" stroke="${accent}" stroke-width="1">
-        ${Array.from({ length: 12 }).map((_, i) => `<path d="M${i * 36 - 20} 0 V138"/>`).join('')}
-        ${Array.from({ length: 5 }).map((_, i) => `<path d="M0 ${i * 30 + 16} H392"/>`).join('')}
-      </g>
-      <rect x="12" y="14" width="84" height="26" fill="#15120d"/>
-      <text x="23" y="32" fill="${accent}" font-size="12" font-family="monospace">${panelText}</text>
-      <g transform="translate(70 75)">
-        <ellipse cx="-18" cy="-14" rx="24" ry="11" fill="#d8f7ff" opacity="0.7" stroke="#15120d" stroke-width="2"/>
-        <ellipse cx="18" cy="-14" rx="24" ry="11" fill="#d8f7ff" opacity="0.7" stroke="#15120d" stroke-width="2"/>
-        <ellipse cx="0" cy="7" rx="11" ry="20" fill="#c38a35" stroke="#15120d" stroke-width="3"/>
-        <circle cx="0" cy="-8" r="15" fill="#f1bf56" stroke="#15120d" stroke-width="3"/>
-        <circle cx="-6" cy="-11" r="5" fill="#fff8d8" stroke="#15120d" stroke-width="2"/>
-        <circle cx="7" cy="-11" r="5" fill="#fff8d8" stroke="#15120d" stroke-width="2"/>
-        <circle cx="-5" cy="-10" r="1.8" fill="#15120d"/><circle cx="8" cy="-10" r="1.8" fill="#15120d"/>
-      </g>
-      <g transform="translate(218 72)">
-        <rect x="-40" y="-36" width="80" height="64" rx="8" fill="#f5ebd6" stroke="#15120d" stroke-width="4"/>
-        <text x="0" y="8" text-anchor="middle" font-size="34">${emoji}</text>
-      </g>
-      <path d="M125 76 C151 54 162 55 179 63" fill="none" stroke="${accent}" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 8"/>
-      <g transform="translate(323 78)">
-        <path d="M-26 -28 H28 L39 -4 H20 V31 H-18 V-4 H-38 Z" fill="${isBad ? '#ff2d78' : '#fee440'}" stroke="#15120d" stroke-width="4"/>
-        <text x="0" y="6" text-anchor="middle" font-size="24">${mode === 'rescue' ? '!' : isAi ? 'AI' : isSocial ? '❤' : '!'}</text>
-      </g>
-      <rect x="0" y="115" width="392" height="23" fill="rgba(21,18,13,0.22)"/>
-    </svg>
+    <div class="event-art-shell" role="img" aria-label="${panelText}插图" style="--event-accent:${accent}">
+      <img class="event-art-image" src="${artSrc}" alt="" loading="eager" decoding="async">
+      <span class="event-art-wash"></span>
+      <span class="event-art-label">${panelText}</span>
+      <span class="event-art-emoji">${emoji}</span>
+      ${isBad ? '<span class="event-art-alert">!</span>' : ''}
+    </div>
   `;
+}
+
+function getEventArtPath(event, mode) {
+  const text = `${event.text || ''}${event.sourceCardName || ''}`;
+  if (mode === 'rescue') return 'output/assets/mayfly-death-postcard.webp';
+  if (/AI|助手|提示词|模型|机器人|圆宝|深思|会议精灵|周报/.test(text)) return 'output/assets/card-art-ai.webp';
+  if (/会议|纪要|汇报|PPT/.test(text)) return 'output/assets/card-art-meeting.webp';
+  if (/朋友圈|同事|老板|群|点赞|社交|奶茶|相亲/.test(text)) return 'output/assets/card-art-social.webp';
+  if (/手机|短视频|通知|消息|黑历史/.test(text)) return 'output/assets/card-art-phone.webp';
+  if (/摸鱼|厕所|休息|下班/.test(text)) return 'output/assets/card-art-slack.webp';
+  if (/反抗|边界|说真话|搅局/.test(text)) return 'output/assets/card-art-disrupt.webp';
+  if (/账单|工资|投资|焦虑|意义/.test(text)) return 'output/assets/card-art-think.webp';
+  return 'output/assets/card-art-work.webp';
 }
 
 function renderEventEffect(event, risk) {
@@ -8903,7 +10748,7 @@ function buildDeathPostcardArt(postcard, report) {
   return `
     <img
       class="death-postcard-image"
-      src="output/assets/mayfly-death-postcard.png"
+      src="output/assets/mayfly-death-postcard.webp"
       alt=""
       loading="eager"
       decoding="async"
