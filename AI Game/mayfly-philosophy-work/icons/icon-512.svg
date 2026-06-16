@@ -1,4 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <rect width="512" height="512" fill="#0a0a0f" rx="64"/>
-  <text x="256" y="288" font-size="280" text-anchor="middle" dominant-baseline="central">🪰</text>
+  <rect width="512" height="512" rx="96" fill="#fff7e8"/>
+  <circle cx="256" cy="270" r="174" fill="#f8e8c8" stroke="#d8bd8d" stroke-width="14"/>
+  <ellipse id="wing-left" cx="164" cy="208" rx="92" ry="54" transform="rotate(-28 164 208)" fill="#e9fbff" stroke="#3aa6a6" stroke-width="12"/>
+  <ellipse id="wing-right" cx="348" cy="208" rx="92" ry="54" transform="rotate(28 348 208)" fill="#e9fbff" stroke="#3aa6a6" stroke-width="12"/>
+  <ellipse id="body" cx="256" cy="304" rx="105" ry="98" fill="#f2b84b" stroke="#213040" stroke-width="14"/>
+  <circle cx="256" cy="214" r="94" fill="#ffd66f" stroke="#213040" stroke-width="14"/>
+  <path d="M214 139 C193 96 174 92 160 103" fill="none" stroke="#213040" stroke-width="14" stroke-linecap="round"/>
+  <path d="M298 139 C319 96 338 92 352 103" fill="none" stroke="#213040" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="160" cy="103" r="14" fill="#f2b84b" stroke="#213040" stroke-width="8"/>
+  <circle cx="352" cy="103" r="14" fill="#f2b84b" stroke="#213040" stroke-width="8"/>
+  <circle cx="218" cy="206" r="35" fill="#fffdf7" stroke="#213040" stroke-width="11"/>
+  <circle cx="294" cy="206" r="35" fill="#fffdf7" stroke="#213040" stroke-width="11"/>
+  <circle cx="226" cy="212" r="11" fill="#213040"/>
+  <circle cx="286" cy="212" r="11" fill="#213040"/>
+  <path d="M224 258 Q256 290 288 258" fill="none" stroke="#213040" stroke-width="14" stroke-linecap="round"/>
+  <path d="M190 304 C216 350 296 350 322 304 L316 376 C284 408 228 408 196 376 Z" fill="#fffdf7" stroke="#213040" stroke-width="12"/>
+  <circle cx="392" cy="372" r="26" fill="#ef6f61"/>
+  <path d="M383 370 L394 381 L414 354" fill="none" stroke="#fffdf7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

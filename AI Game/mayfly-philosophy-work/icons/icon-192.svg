@@ -1,4 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
-  <rect width="192" height="192" fill="#0a0a0f" rx="24"/>
-  <text x="96" y="112" font-size="100" text-anchor="middle" dominant-baseline="central">🪰</text>
+  <rect width="192" height="192" rx="36" fill="#fff7e8"/>
+  <circle cx="96" cy="100" r="64" fill="#f8e8c8" stroke="#d8bd8d" stroke-width="5"/>
+  <ellipse id="wing-left" cx="62" cy="78" rx="34" ry="20" transform="rotate(-28 62 78)" fill="#e9fbff" stroke="#3aa6a6" stroke-width="4"/>
+  <ellipse id="wing-right" cx="130" cy="78" rx="34" ry="20" transform="rotate(28 130 78)" fill="#e9fbff" stroke="#3aa6a6" stroke-width="4"/>
+  <ellipse id="body" cx="96" cy="112" rx="39" ry="36" fill="#f2b84b" stroke="#213040" stroke-width="5"/>
+  <circle cx="96" cy="79" r="35" fill="#ffd66f" stroke="#213040" stroke-width="5"/>
+  <path d="M80 51 C72 35 65 34 60 38" fill="none" stroke="#213040" stroke-width="5" stroke-linecap="round"/>
+  <path d="M112 51 C120 35 127 34 132 38" fill="none" stroke="#213040" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="60" cy="38" r="5" fill="#f2b84b" stroke="#213040" stroke-width="3"/>
+  <circle cx="132" cy="38" r="5" fill="#f2b84b" stroke="#213040" stroke-width="3"/>
+  <circle cx="82" cy="76" r="13" fill="#fffdf7" stroke="#213040" stroke-width="4"/>
+  <circle cx="110" cy="76" r="13" fill="#fffdf7" stroke="#213040" stroke-width="4"/>
+  <circle cx="85" cy="78" r="4" fill="#213040"/>
+  <circle cx="107" cy="78" r="4" fill="#213040"/>
+  <path d="M84 95 Q96 107 108 95" fill="none" stroke="#213040" stroke-width="5" stroke-linecap="round"/>
+  <path d="M72 112 C82 129 110 129 120 112 L118 139 C106 151 86 151 74 139 Z" fill="#fffdf7" stroke="#213040" stroke-width="4"/>
+  <circle cx="146" cy="138" r="9" fill="#ef6f61"/>
+  <path d="M143 137 L147 141 L154 132" fill="none" stroke="#fffdf7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

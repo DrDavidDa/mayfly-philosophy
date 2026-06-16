@@ -1,5 +1,5 @@
 // Mayfly Philosophy - Service Worker
-const CACHE_NAME = 'mayfly-v6';
+const CACHE_NAME = 'mayfly-v8';
 // CACHE_NAME = 'mayfly-v4'
 
 const ASSETS_TO_CACHE = [
@@ -12,20 +12,22 @@ const ASSETS_TO_CACHE = [
   './fonts/ZCOOLQingKeHuangYou.ttf',
   './fonts/ZCOOLKuaiLe.ttf',
   './fonts/PressStart2P.ttf',
-  './output/assets/mayfly-title-hero.png',
-  './output/assets/mayfly-character-banner.png',
-  './output/assets/mayfly-death-postcard.png',
-  './output/assets/mosquito-character-banner.png',
-  './output/assets/old_wang-character-banner.png',
-  './output/assets/slacker_yu-character-banner.png',
-  './output/assets/card-art-work.png',
-  './output/assets/card-art-meeting.png',
-  './output/assets/card-art-slack.png',
-  './output/assets/card-art-social.png',
-  './output/assets/card-art-phone.png',
-  './output/assets/card-art-think.png',
-  './output/assets/card-art-ai.png',
-  './output/assets/card-art-disrupt.png',
+  './output/assets/mayfly-title-hero.webp',
+  './output/assets/mayfly-character-banner.webp',
+  './output/assets/mayfly-character-portrait.webp',
+  './output/assets/mayfly-death-postcard.webp',
+  './output/assets/mosquito-character-banner.webp',
+  './output/assets/old_wang-character-banner.webp',
+  './output/assets/slacker_yu-character-banner.webp',
+  './output/assets/card-art-work.webp',
+  './output/assets/card-art-meeting.webp',
+  './output/assets/card-art-slack.webp',
+  './output/assets/card-art-social.webp',
+  './output/assets/card-art-phone.webp',
+  './output/assets/card-art-think.webp',
+  './output/assets/card-art-ai.webp',
+  './output/assets/card-art-disrupt.webp',
+  './output/assets/card-art-sunset.webp',
   './manifest.json',
   './icons/icon-192.svg',
   './icons/icon-512.svg'

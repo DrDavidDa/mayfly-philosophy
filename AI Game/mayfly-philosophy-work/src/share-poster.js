@@ -7,29 +7,29 @@
 
   // ===== 配色常量 =====
   const COLORS = {
-    bg1: '#1a1520',
-    bg2: '#2d1f3d',
-    bg3: '#12100b',
-    gold: '#d9a431',
-    paper: '#ead8b0',
-    muted: 'rgba(234,216,176,0.6)',
-    dimmed: 'rgba(234,216,176,0.35)',
-    pink: '#b34a3c',
-    cyan: '#5cb8b2',
-    purple: '#7b5c91',
-    green: '#7fa07a',
-    divider: 'rgba(217,164,49,0.4)'
+    bg1: '#fff9ed',
+    bg2: '#f8e8c8',
+    bg3: '#f5ddaa',
+    gold: '#d99543',
+    paper: '#213040',
+    muted: 'rgba(33,48,64,0.72)',
+    dimmed: 'rgba(33,48,64,0.46)',
+    pink: '#ef6f61',
+    cyan: '#3aa6a6',
+    purple: '#8b76a8',
+    green: '#6aa875',
+    divider: 'rgba(216,189,141,0.78)'
   };
 
   const CATEGORY_COLORS = {
-    work: '#c35b4d',
-    meeting: '#d9a431',
-    slack: '#5cb8b2',
-    phone: '#7b5c91',
-    social: '#ddb0a3',
-    ai: '#5cb8b2',
-    disrupt: '#b34a3c',
-    think: '#7fa07a'
+    work: '#ef6f61',
+    meeting: '#d99543',
+    slack: '#6aa875',
+    phone: '#f2b84b',
+    social: '#ef7b99',
+    ai: '#3aa6a6',
+    disrupt: '#d95768',
+    think: '#d99543'
   };
 
   const CATEGORY_NAMES = {
@@ -39,8 +39,8 @@
 
   const RARITY_COLORS = {
     N: '#888888',
-    R: '#5cb8b2',
-    SR: '#d9a431'
+    R: '#3aa6a6',
+    SR: '#f2b84b'
   };
 
   // ===== 工具函数 =====
@@ -100,7 +100,7 @@
     ctx.fillRect(0, 0, W, H);
 
     // 网格纹理
-    ctx.strokeStyle = 'rgba(234,216,176,0.03)';
+    ctx.strokeStyle = 'rgba(82,56,28,0.035)';
     ctx.lineWidth = 1;
     for (let y = 0; y < H; y += 24) {
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
@@ -133,7 +133,7 @@
     // — 死亡 Emoji —
     ctx.font = '120px serif';
     ctx.textAlign = 'center';
-    ctx.fillText(opts.deathEmoji || '🪰', W / 2, curY + 110);
+    ctx.fillText(opts.deathEmoji || '🪽', W / 2, curY + 110);
     curY += 150;
 
     // — 人格类型名 —
@@ -160,8 +160,8 @@
     curY += 40;
 
     // — 死亡信息卡 —
-    fillRoundRect(ctx, 80, curY, W - 160, 220, 12, 'rgba(179,74,60,0.15)');
-    ctx.strokeStyle = 'rgba(179,74,60,0.4)';
+    fillRoundRect(ctx, 80, curY, W - 160, 220, 12, 'rgba(255,255,255,0.62)');
+    ctx.strokeStyle = 'rgba(239,111,97,0.44)';
     drawRoundRect(ctx, 80, curY, W - 160, 220, 12);
     ctx.stroke();
 
@@ -169,7 +169,7 @@
     const rarityColor = RARITY_COLORS[opts.deathRarity] || RARITY_COLORS.N;
     fillRoundRect(ctx, 110, curY + 18, 48, 28, 6, rarityColor);
     ctx.font = '16px "Press Start 2P", monospace';
-    ctx.fillStyle = '#12100b';
+    ctx.fillStyle = '#213040';
     ctx.textAlign = 'center';
     ctx.fillText(opts.deathRarity || 'N', 134, curY + 39);
 
@@ -220,7 +220,7 @@
       const barX = 100;
       const barW = W - 200;
       const barH = 32;
-      fillRoundRect(ctx, barX, curY, barW, barH, 8, 'rgba(0,0,0,0.3)');
+      fillRoundRect(ctx, barX, curY, barW, barH, 8, 'rgba(33,48,64,0.12)');
 
       let offsetX = barX;
       entries.forEach(([cat, count]) => {
@@ -282,7 +282,7 @@
 
     // 版本号
     ctx.font = '14px "Press Start 2P", monospace';
-    ctx.fillStyle = 'rgba(234,216,176,0.2)';
+    ctx.fillStyle = 'rgba(33,48,64,0.28)';
     ctx.fillText('MAYFLY PHILOSOPHY v0.2', W / 2, H - 30);
 
     return new Promise((resolve) => {
@@ -301,18 +301,18 @@
     const ctx = canvas.getContext('2d');
 
     // 背景
-    ctx.fillStyle = '#1a1218';
+    ctx.fillStyle = '#fff7e8';
     ctx.fillRect(0, 0, W, H);
 
     // 纸质纹理
-    ctx.strokeStyle = 'rgba(234,216,176,0.02)';
+    ctx.strokeStyle = 'rgba(82,56,28,0.035)';
     ctx.lineWidth = 1;
     for (let y = 0; y < H; y += 18) {
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
     }
 
     // 边框（双线）
-    ctx.strokeStyle = 'rgba(217,164,49,0.3)';
+    ctx.strokeStyle = 'rgba(216,189,141,0.86)';
     ctx.lineWidth = 3;
     drawRoundRect(ctx, 20, 20, W - 40, H - 40, 16);
     ctx.stroke();
@@ -326,16 +326,16 @@
     const rarityColor = RARITY_COLORS[opts.deathRarity] || RARITY_COLORS.N;
     fillRoundRect(ctx, 70, curY, 64, 36, 8, rarityColor);
     ctx.font = '20px "Press Start 2P", monospace';
-    ctx.fillStyle = '#12100b';
+    ctx.fillStyle = '#213040';
     ctx.textAlign = 'center';
     ctx.fillText(opts.deathRarity || 'N', 102, curY + 26);
 
     // 邮票区域
-    ctx.strokeStyle = 'rgba(179,74,60,0.5)';
+    ctx.strokeStyle = 'rgba(239,111,97,0.55)';
     ctx.lineWidth = 2;
     ctx.strokeRect(W - 140, curY, 80, 100);
     ctx.font = '48px serif';
-    ctx.fillText(opts.deathEmoji || '🪰', W - 100, curY + 68);
+    ctx.fillText(opts.deathEmoji || '🪽', W - 100, curY + 68);
     curY += 140;
 
     // 死法名
@@ -347,7 +347,7 @@
 
     // Emoji 大图
     ctx.font = '200px serif';
-    ctx.fillText(opts.deathEmoji || '🪰', W / 2, curY + 200);
+    ctx.fillText(opts.deathEmoji || '🪽', W / 2, curY + 200);
     curY += 260;
 
     // 分隔线
@@ -359,14 +359,14 @@
     curY += 50;
 
     // 墓志铭引用块
-    fillRoundRect(ctx, 60, curY, W - 120, 240, 10, 'rgba(217,164,49,0.06)');
-    ctx.strokeStyle = 'rgba(217,164,49,0.2)';
+    fillRoundRect(ctx, 60, curY, W - 120, 240, 10, 'rgba(255,255,255,0.62)');
+    ctx.strokeStyle = 'rgba(216,189,141,0.72)';
     drawRoundRect(ctx, 60, curY, W - 120, 240, 10);
     ctx.stroke();
 
     // 引用标记
     ctx.font = '72px "ZCOOL QingKe HuangYou", sans-serif';
-    ctx.fillStyle = 'rgba(217,164,49,0.15)';
+    ctx.fillStyle = 'rgba(217,149,67,0.24)';
     ctx.textAlign = 'left';
     ctx.fillText('"', 80, curY + 60);
 
@@ -384,7 +384,7 @@
     ctx.textAlign = 'center';
 
     if (opts.personalityType) {
-      fillRoundRect(ctx, W / 2 - 130, curY, 260, 40, 8, 'rgba(92,184,178,0.15)');
+      fillRoundRect(ctx, W / 2 - 130, curY, 260, 40, 8, 'rgba(58,166,166,0.14)');
       ctx.font = '22px "ZCOOL KuaiLe", sans-serif';
       ctx.fillStyle = COLORS.cyan;
       ctx.fillText(`人格：${opts.personalityType}`, W / 2, curY + 28);
@@ -392,7 +392,7 @@
     }
 
     if (opts.routeTitle) {
-      fillRoundRect(ctx, W / 2 - 100, curY, 200, 36, 8, 'rgba(217,164,49,0.12)');
+      fillRoundRect(ctx, W / 2 - 100, curY, 200, 36, 8, 'rgba(242,184,75,0.2)');
       ctx.font = '20px "ZCOOL KuaiLe", sans-serif';
       ctx.fillStyle = COLORS.gold;
       ctx.fillText(`路线：${opts.routeTitle}`, W / 2, curY + 25);
@@ -401,7 +401,7 @@
 
     // 底部版本
     ctx.font = '12px "Press Start 2P", monospace';
-    ctx.fillStyle = 'rgba(234,216,176,0.15)';
+    ctx.fillStyle = 'rgba(33,48,64,0.24)';
     ctx.fillText('MAYFLY PHILOSOPHY', W / 2, H - 50);
 
     return new Promise((resolve) => {
