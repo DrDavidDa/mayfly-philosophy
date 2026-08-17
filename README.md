@@ -1,32 +1,28 @@
-<p align="center">
-  <img src="https://drdavidda.github.io/mayfly-philosophy/output/assets/mayfly-title-hero.webp" alt="蜉蝣哲学" width="920">
-</p>
+# 蜉蝣哲学
 
-<h1 align="center">蜉蝣哲学</h1>
-<p align="center"><strong>活不过一天也要搅局</strong></p>
-<p align="center">刚出生就下班，死前才开始摸鱼。</p>
+**活不过一天也要搅局**
 
-<p align="center">
-  <a href="https://drdavidda.github.io/mayfly-philosophy/"><strong>现在开玩 →</strong></a>
-  &nbsp;·&nbsp;
-  <a href="https://aifellow.cc/mayfly">介绍页</a>
-</p>
+刚出生就下班，死前才开始摸鱼。
+
+**[现在开玩 →](https://drdavidda.github.io/mayfly-philosophy/)** · [介绍页](https://aifellow.cc/mayfly)
 
 你是一只只能活一天的蜉蝣。先选死前目标，再点行动看后果。一局大约三分钟。寿命用完，留下一张荒诞明信片，带着遗产再活一次。
 
 浏览器打开就能玩。手机、电脑都行。不用安装，不用账号。
 
-## 截图
+## 游戏画面
 
-<p align="center">
-  <img src="https://drdavidda.github.io/mayfly-philosophy/output/title-after-visual-redesign.png" alt="标题画面" width="920">
-</p>
-<p align="center">
-  <img src="https://drdavidda.github.io/mayfly-philosophy/output/game-desktop-paper-redesign-v3.png" alt="对局画面" width="920">
-</p>
-<p align="center">
-  <img src="https://drdavidda.github.io/mayfly-philosophy/output/assets/mayfly-character-portrait.webp" alt="蜉蝣主角" width="560">
-</p>
+对局：两张行动卡，点一张看后果。寿命、精神、焦虑都在边上。
+
+![对局](docs/screens/play.jpg)
+
+标题页。点「开始搅局」进游戏。
+
+![标题](docs/screens/title.jpg)
+
+选一只短命主角。寿命压力和死法倾向不一样。
+
+![选角](docs/screens/select.jpg)
 
 ## 这一局
 
